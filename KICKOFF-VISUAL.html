@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escollanos · Kickoff Reunión 1 · Salud y Bienestar</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Source+Serif+4:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: dark; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Geist', system-ui, sans-serif; background: #0a0a0a; color: #e4e4e7; -webkit-font-smoothing: antialiased; }
+  .font-mono { font-family: 'Geist Mono', ui-monospace, monospace; }
+  .serif-italic { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; }
+  .grain::before {
+    content:''; position: fixed; inset: 0; pointer-events: none; opacity: 0.03; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 6px; font-size: 11px; font-family: 'Geist Mono', monospace; line-height: 1.5; }
+  .pill-violet { background: rgba(139,92,246,.15); border:1px solid rgba(139,92,246,.3); color:#c4b5fd; }
+  .pill-cyan { background: rgba(6,182,212,.15); border:1px solid rgba(6,182,212,.3); color:#a5f3fc; }
+  .pill-emerald { background: rgba(16,185,129,.15); border:1px solid rgba(16,185,129,.3); color:#a7f3d0; }
+  .pill-amber { background: rgba(245,158,11,.15); border:1px solid rgba(245,158,11,.3); color:#fcd34d; }
+  .pill-rose { background: rgba(244,63,94,.18); border:1px solid rgba(244,63,94,.4); color:#fda4af; }
+
+  .card { background: rgba(9,9,11,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 26px; transition: border-color .2s, transform .2s; }
+  .card:hover { border-color: rgba(255,255,255,.14); }
+  .card-rose { background: rgba(40,10,18,.4); border-color: rgba(244,63,94,.3); }
+  .card-amber { background: rgba(40,28,8,.35); border-color: rgba(245,158,11,.3); }
+  .card-violet { border-color: rgba(139,92,246,.3); }
+  .card-emerald { border-color: rgba(16,185,129,.3); }
+  .card-cyan { border-color: rgba(6,182,212,.3); }
+
+  .hero-grad { background: radial-gradient(ellipse 80% 70% at 50% 0%, rgba(139,92,246,.2), transparent 50%), radial-gradient(ellipse 60% 60% at 75% 35%, rgba(16,185,129,.12), transparent 55%), radial-gradient(ellipse 50% 50% at 25% 50%, rgba(6,182,212,.1), transparent 60%); }
+  .hero-title { background: linear-gradient(180deg, #fafafa 0%, #a1a1aa 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+  /* Side nav */
+  .toc-link { padding: 6px 14px; display: block; font-size: 13px; color: #a1a1aa; border-left: 2px solid transparent; transition: all .15s; }
+  .toc-link:hover, .toc-link.active { color: #fff; border-left-color: #8b5cf6; }
+  .toc-num { font-family: 'Geist Mono', monospace; font-size: 11px; color: #71717a; margin-right: 10px; }
+
+  /* Ecuador map */
+  .city-dot { fill: #8b5cf6; stroke: #fff; stroke-width: 2; }
+  .city-dot.partial { fill: #fcd34d; }
+
+  /* Flow steps */
+  .flow-step {
+    flex: 1; min-width: 160px;
+    background: rgba(9,9,11,.55); border:1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 18px;
+    position: relative;
+  }
+  .flow-arrow { color: #52525b; font-size: 24px; display: flex; align-items: center; flex-shrink: 0; }
+
+  /* Timeline */
+  .tl-item { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.05); }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-dot { flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%; margin-top: 7px; }
+
+  @media (max-width: 1024px) {
+    .sidebar { position: fixed; inset: 0 auto 0 0; transform: translateX(-100%); transition: transform .25s; z-index: 50; width: 260px; background: #0a0a0a; }
+    .sidebar.open { transform: translateX(0); }
+    .menu-btn { display: inline-flex !important; }
+    .main { margin-left: 0 !important; }
+  }
+  .menu-btn { display: none; }
+</style>
+</head>
+<body class="grain">
+
+<!-- Mobile menu -->
+<button class="menu-btn fixed top-4 left-4 z-[60] bg-zinc-900/80 border border-white/10 rounded-lg p-2" onclick="document.querySelector('.sidebar').classList.toggle('open')">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+</button>
+
+<!-- Sidebar -->
+<aside class="sidebar fixed top-0 left-0 h-screen w-[240px] border-r border-white/5 overflow-y-auto py-8 z-40">
+  <div class="px-6 mb-8">
+    <div class="font-mono text-[10px] tracking-widest text-zinc-500 mb-1">ESCOLLANOS</div>
+    <div class="text-sm font-medium text-white leading-tight">Kickoff R1</div>
+    <div class="text-[11px] text-zinc-500 mt-1">21 may 2026</div>
+  </div>
+  <nav>
+    <a class="toc-link" href="#sec-empresa"><span class="toc-num">01</span>Quiénes son</a>
+    <a class="toc-link" href="#sec-cobertura"><span class="toc-num">02</span>Cobertura</a>
+    <a class="toc-link" href="#sec-productos"><span class="toc-num">03</span>Productos clave</a>
+    <a class="toc-link" href="#sec-flujo"><span class="toc-num">04</span>Flujo del cliente</a>
+    <a class="toc-link" href="#sec-criticos"><span class="toc-num">05</span>Casos críticos</a>
+    <a class="toc-link" href="#sec-etica"><span class="toc-num">06</span>Guardrails éticos</a>
+    <a class="toc-link" href="#sec-cronograma"><span class="toc-num">07</span>Cronograma</a>
+    <a class="toc-link" href="#sec-equipos"><span class="toc-num">08</span>Equipos</a>
+  </nav>
+</aside>
+
+<main class="main relative z-10" style="margin-left: 240px;">
+
+<!-- HERO -->
+<section class="hero-grad px-8 lg:px-16 pt-24 pb-20 border-b border-white/5">
+  <div class="max-w-5xl">
+    <div class="flex items-center gap-3 mb-6 flex-wrap">
+      <span class="pill pill-violet">Reunión 1 · Kickoff</span>
+      <span class="pill pill-cyan">Ecuador</span>
+      <span class="pill pill-emerald">B2C farmacéutico</span>
+      <span class="pill pill-amber">21 mayo 2026</span>
+    </div>
+    <h1 class="hero-title text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05] mb-5">
+      Escollanos<br>Salud y Bienestar
+    </h1>
+    <p class="text-xl text-zinc-400 max-w-3xl leading-relaxed serif-italic">
+      Distribuidor exclusivo en Ecuador de líneas homeopáticas y naturales con registro sanitario. Un bot único de Conversation AI, 24/7, sobre WhatsApp API oficial.
+    </p>
+  </div>
+</section>
+
+<!-- 01 — Quiénes son -->
+<section id="sec-empresa" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-3">01 / Quiénes son</div>
+    <h2 class="text-3xl font-semibold text-white mb-10 tracking-tight">Un distribuidor con monopolio de hecho.</h2>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="card card-violet">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-3">Rubro</div>
+        <p class="text-zinc-300 leading-relaxed text-sm">
+          Distribuidores exclusivos en Ecuador de líneas de productos <span class="text-white">homeopáticos y naturales</span> con registro sanitario. No fabrican ni hacen magistral — comercializan productos terminados. Si lo compran a Escollanos o a otro, ese otro se lo compró a Escollanos.
+        </p>
+      </div>
+
+      <div class="card card-cyan">
+        <div class="font-mono text-[11px] tracking-widest text-cyan-300 uppercase mb-3">Productos</div>
+        <p class="text-zinc-300 leading-relaxed text-sm">
+          Aprox. <span class="text-white">22 productos de libre venta</span> + grupo de productos NO publicables en redes (ej. Gripfectan), que solo se mencionan en conversación interna como complementarios. Web con fotos de todos los productos como referencia visual.
+        </p>
+      </div>
+
+      <div class="card card-emerald">
+        <div class="font-mono text-[11px] tracking-widest text-emerald-300 uppercase mb-3">Equipo — modelo pool</div>
+        <p class="text-zinc-300 leading-relaxed text-sm">
+          <span class="text-white">6 personas</span> atendiendo WhatsApp: 4 asesores + Gaby + Mela. Turnos rotativos mañana/tarde/noche. Modelo <span class="text-white">pool</span>: el que está disponible toma la conversación. <span class="text-white">24/7, 365 días.</span> Reciben mensajes hasta las 3-4 AM.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — Cobertura Ecuador -->
+<section id="sec-cobertura" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-3">02 / Cobertura geográfica</div>
+    <h2 class="text-3xl font-semibold text-white mb-3 tracking-tight">3 ciudades con mensajero propio.</h2>
+    <p class="text-zinc-400 max-w-3xl mb-10 leading-relaxed">Resto del país vía Servientrega previo pago, con envío gratis cubierto por Escollanos.</p>
+
+    <div class="grid lg:grid-cols-5 gap-8 items-center">
+      <!-- Mapa estilizado Ecuador -->
+      <div class="lg:col-span-2 card flex justify-center">
+        <svg viewBox="0 0 300 380" width="100%" style="max-width: 280px;">
+          <!-- País shape estilizada -->
+          <path d="M70 60 L230 60 L255 110 L260 180 L240 250 L230 320 L170 350 L100 340 L60 290 L50 220 L55 150 Z"
+                fill="rgba(139,92,246,0.06)" stroke="rgba(139,92,246,0.4)" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+          <!-- Quito -->
+          <circle cx="155" cy="125" r="9" class="city-dot"/>
+          <text x="170" y="130" fill="#fafafa" font-family="Geist" font-size="14" font-weight="500">Quito</text>
+          <text x="170" y="146" fill="#a7f3d0" font-family="Geist Mono" font-size="9">cobertura total</text>
+
+          <!-- Guayaquil -->
+          <circle cx="90" cy="240" r="9" class="city-dot partial"/>
+          <text x="105" y="245" fill="#fafafa" font-family="Geist" font-size="14" font-weight="500">Guayaquil*</text>
+          <text x="105" y="260" fill="#fcd34d" font-family="Geist Mono" font-size="9">por zonas</text>
+
+          <!-- Cuenca -->
+          <circle cx="170" cy="265" r="9" class="city-dot"/>
+          <text x="185" y="270" fill="#fafafa" font-family="Geist" font-size="14" font-weight="500">Cuenca</text>
+          <text x="185" y="285" fill="#a7f3d0" font-family="Geist Mono" font-size="9">cobertura total</text>
+
+          <text x="150" y="370" text-anchor="middle" fill="#71717a" font-family="Geist Mono" font-size="10">Ecuador</text>
+        </svg>
+      </div>
+
+      <div class="lg:col-span-3 grid gap-4">
+        <div class="card card-emerald">
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-white font-medium">Quito + Cuenca</div>
+            <span class="pill pill-emerald">total</span>
+          </div>
+          <p class="text-sm text-zinc-300 leading-relaxed">Cobertura completa con mensajeros propios. Pago contra entrega aceptado.</p>
+        </div>
+
+        <div class="card card-amber">
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-white font-medium">Guayaquil</div>
+            <span class="pill pill-amber">por zonas</span>
+          </div>
+          <p class="text-sm text-zinc-300 leading-relaxed">
+            Cobertura por zonas. Existe un listado de zonas SIN cobertura que tiene <span class="text-white">Blanquita</span> — pendiente que lo pase. Si la zona no se sabe → frase tipo "voy a confirmar con el área de entregas" + handoff.
+          </p>
+        </div>
+
+        <div class="card card-cyan">
+          <div class="flex items-center justify-between mb-2">
+            <div class="text-white font-medium">Resto del país</div>
+            <span class="pill pill-cyan">Servientrega</span>
+          </div>
+          <p class="text-sm text-zinc-300 leading-relaxed">Previo pago, con envío <span class="text-white">gratis</span> cubierto por Escollanos. Servientrega no presta cobranza, por eso no aplica contra entrega.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — Productos clave -->
+<section id="sec-productos" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-3">03 / Productos clave</div>
+    <h2 class="text-3xl font-semibold text-white mb-3 tracking-tight">Productos mencionados en R1.</h2>
+    <p class="text-zinc-400 max-w-3xl mb-10 leading-relaxed">Mela completa el catálogo maestro de los 22 antes del 5 de junio (precio, descripción, uso, complementarios, frase ética aplicable).</p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="card">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">R14</div>
+        <div class="text-white text-lg font-medium mb-2">Estrés · insomnio · ansiedad</div>
+        <p class="text-sm text-zinc-400 leading-relaxed">Coincide con publicidad de madrugada (clientes con insomnio escriben 2-4 AM).</p>
+      </div>
+      <div class="card">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Renovella</div>
+        <div class="text-white text-lg font-medium mb-2">Menopausia · sofocos</div>
+        <p class="text-sm text-zinc-400 leading-relaxed">Variantes por uso (sofoco, ciclo, ánimo). Tiene plantillas Meta ya configuradas.</p>
+      </div>
+      <div class="card">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Tolerance</div>
+        <div class="text-white text-lg font-medium mb-2">Estreñimiento · dolores · gastritis</div>
+        <p class="text-sm text-zinc-400 leading-relaxed">Cross-sell típico con Jarabe de Caléndula para casos de gastritis.</p>
+      </div>
+      <div class="card card-rose">
+        <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-2">Gripfectan</div>
+        <div class="text-white text-lg font-medium mb-2">Gripe — NO publicable</div>
+        <p class="text-sm text-zinc-400 leading-relaxed">Solo se menciona internamente como complementario, nunca en mensajes salientes proactivos ni plantillas Meta.</p>
+      </div>
+      <div class="card">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Jarabe Caléndula</div>
+        <div class="text-white text-lg font-medium mb-2">Complementario</div>
+        <p class="text-sm text-zinc-400 leading-relaxed">Bump natural en flujos digestivos / Tolerance.</p>
+      </div>
+      <div class="card">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Atroce</div>
+        <div class="text-white text-lg font-medium mb-2">Variantes y diagnóstico</div>
+        <p class="text-sm text-zinc-400 leading-relaxed">Plantillas Meta configuradas. Variantes a confirmar con Mela.</p>
+      </div>
+      <div class="card">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Vitalidad masculina</div>
+        <div class="text-white text-lg font-medium mb-2">Producto sensible</div>
+        <p class="text-sm text-zinc-400 leading-relaxed">Clientes preguntan "cualquier barbaridad". Bot mantiene tono profesional sin engancharse.</p>
+      </div>
+      <div class="card card-amber">
+        <div class="font-mono text-[11px] tracking-widest text-amber-300 uppercase mb-2">+ 15 productos</div>
+        <div class="text-white text-lg font-medium mb-2">Pendiente · Mela</div>
+        <p class="text-sm text-zinc-400 leading-relaxed">Listado completo de 22 publicables + Gripfectan + complementarios con precios y fichas técnicas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — Flujo del cliente -->
+<section id="sec-flujo" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-3">04 / Flujo del cliente</div>
+    <h2 class="text-3xl font-semibold text-white mb-3 tracking-tight">De Meta Ads a la entrega.</h2>
+    <p class="text-zinc-400 max-w-3xl mb-10 leading-relaxed">El bot opera en los pasos 3-4. El resto sigue funcionando como ya está configurado en GHL.</p>
+
+    <div class="flex flex-wrap gap-3 items-stretch">
+      <div class="flow-step" style="border-color: rgba(139,92,246,.3);">
+        <div class="font-mono text-[10px] tracking-widest text-violet-300 uppercase mb-2">01 · entrada</div>
+        <div class="text-white font-medium mb-1">Meta Ads</div>
+        <p class="text-xs text-zinc-400 leading-relaxed">Campaña Facebook / Instagram → WhatsApp, o nº directo.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color: rgba(6,182,212,.3);">
+        <div class="font-mono text-[10px] tracking-widest text-cyan-300 uppercase mb-2">02 · CRM</div>
+        <div class="text-white font-medium mb-1">Plantilla saludo</div>
+        <p class="text-xs text-zinc-400 leading-relaxed">Saludo + protección de datos obligatorio (ley Ecuador).</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color: rgba(139,92,246,.4); background: rgba(40,30,60,.4);">
+        <div class="font-mono text-[10px] tracking-widest text-violet-300 uppercase mb-2">03 · bot 24/7</div>
+        <div class="text-white font-medium mb-1">Bot Escollanos</div>
+        <p class="text-xs text-zinc-400 leading-relaxed">Info producto, precio, complementarios, zonas, métodos de pago. Datos transfer Pichincha directos.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color: rgba(59,130,246,.3);">
+        <div class="font-mono text-[10px] tracking-widest text-blue-300 uppercase mb-2">04 · asesor</div>
+        <div class="text-white font-medium mb-1">Pool · cierre</div>
+        <p class="text-xs text-zinc-400 leading-relaxed">Verifica pago, genera link Datafast, carga SO en sistema interno.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color: rgba(16,185,129,.3);">
+        <div class="font-mono text-[10px] tracking-widest text-emerald-300 uppercase mb-2">05 · logística</div>
+        <div class="text-white font-medium mb-1">Envío</div>
+        <p class="text-xs text-zinc-400 leading-relaxed">Mensajero propio (Q/G/C) o Servientrega gratis.</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step" style="border-color: rgba(16,185,129,.3);">
+        <div class="font-mono text-[10px] tracking-widest text-emerald-300 uppercase mb-2">06 · post-venta</div>
+        <div class="text-white font-medium mb-1">Encuesta + remarketing</div>
+        <p class="text-xs text-zinc-400 leading-relaxed">Automatizado fuera del bot — ya operativo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — Casos críticos -->
+<section id="sec-criticos" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-3">05 / Casos críticos</div>
+    <h2 class="text-3xl font-semibold text-white mb-3 tracking-tight">Cuatro situaciones donde el bot deriva.</h2>
+    <p class="text-zinc-400 max-w-3xl mb-10 leading-relaxed">Volumen bajo individualmente, alto impacto si se manejan mal. En todos: <span class="text-white">handoff atómico al pool de 6 asesores</span>.</p>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="card card-rose">
+        <div class="flex items-center gap-2 mb-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fda4af" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase">Receta médica</div>
+        </div>
+        <p class="text-sm text-zinc-300 leading-relaxed">El cliente envía imagen de receta o texto "me recetó el doctor". Las recetas se manejan en <span class="text-white">otro número de WhatsApp dedicado</span>. Bot deriva sin procesar la imagen — la letra de médico es ilegible.</p>
+      </div>
+
+      <div class="card card-rose">
+        <div class="flex items-center gap-2 mb-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fda4af" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="9" x2="18" y2="9"/></svg>
+          <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase">Pago link · Datafast / Deuna</div>
+        </div>
+        <p class="text-sm text-zinc-300 leading-relaxed">Datafast genera <span class="text-white">link personalizado por compra</span> y Deuna requiere coordinación humana. Bot transfiere al pool y el asesor envía el link manual. Por transferencia bancaria Pichincha el bot sí cierra solo.</p>
+      </div>
+
+      <div class="card card-rose">
+        <div class="flex items-center gap-2 mb-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fda4af" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase">Caso clínico</div>
+        </div>
+        <p class="text-sm text-zinc-300 leading-relaxed">Cliente menciona lupus, embarazo, diabetes, hipertensión, o pide reemplazar un psicotrópico. Bot da la frase ética literal + deriva URGENT al pool. <span class="text-white">Nunca diagnostica ni recomienda dosis.</span></p>
+      </div>
+
+      <div class="card card-rose">
+        <div class="flex items-center gap-2 mb-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fda4af" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase">Imagen no identificada</div>
+        </div>
+        <p class="text-sm text-zinc-300 leading-relaxed">Imagen que no es producto del catálogo ni receta. Política R1: bot no procesa imágenes con detalle, deriva directo. Excepción: foto clarísima de producto del catálogo de la web.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 — Guardrails éticos -->
+<section id="sec-etica" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-3">06 / Guardrails éticos farmacéuticos</div>
+    <h2 class="text-3xl font-semibold text-white mb-3 tracking-tight">Las dos frases que no se negocian.</h2>
+    <p class="text-zinc-400 max-w-3xl mb-10 leading-relaxed">Hardcodeadas en Custom Bot Responses. El LLM no las puede variar. <span class="text-white">Compliance bloqueante para go-live.</span></p>
+
+    <div class="grid lg:grid-cols-2 gap-5">
+      <div class="card card-rose">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="pill pill-rose">psicotrópicos · literal</span>
+        </div>
+        <div class="text-xs font-mono text-zinc-500 mb-2">Trigger</div>
+        <p class="text-sm text-zinc-400 mb-4 leading-relaxed">"puedo dejar mi alprazolam / clonazepam / sertralina / antidepresivo / ansiolítico / pastilla para dormir y reemplazarlo con su producto?"</p>
+        <div class="text-xs font-mono text-zinc-500 mb-2">Respuesta literal</div>
+        <p class="serif-italic text-zinc-100 text-base leading-relaxed border-l-2 border-rose-400/50 pl-4">
+          Para dejar un medicamento debe hacerlo de la mano con su médico, siempre bajo su supervisión. Nuestro producto puede acompañar su tratamiento como adyuvante.
+        </p>
+        <div class="text-[11px] text-rose-300 mt-4">→ Bot Transfer "Caso Clínico"</div>
+      </div>
+
+      <div class="card card-rose">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="pill pill-rose">enfermedad puntual · literal</span>
+        </div>
+        <div class="text-xs font-mono text-zinc-500 mb-2">Trigger</div>
+        <p class="text-sm text-zinc-400 mb-4 leading-relaxed">cliente menciona embarazo, lactancia, lupus, diabetes, hipertensión, hipotiroidismo, cáncer, enfermedad autoinmune.</p>
+        <div class="text-xs font-mono text-zinc-500 mb-2">Respuesta literal</div>
+        <p class="serif-italic text-zinc-100 text-base leading-relaxed border-l-2 border-rose-400/50 pl-4">
+          Nuestro medicamento no tiene contraindicaciones. Sin embargo, en casos como el suyo siempre recomendamos consultar con su médico si puede incorporar nuestro medicamento a su tratamiento.
+        </p>
+        <div class="text-[11px] text-rose-300 mt-4">Si insiste → Bot Transfer "Caso Clínico"</div>
+      </div>
+    </div>
+
+    <div class="card card-amber mt-6">
+      <div class="font-mono text-[11px] tracking-widest text-amber-300 uppercase mb-2">También bloqueado por política</div>
+      <ul class="text-sm text-zinc-300 space-y-1.5 leading-relaxed">
+        <li>· NO dar diagnóstico, NO recomendar dosis, NO reemplazar al médico — bajo ninguna circunstancia.</li>
+        <li>· NO comprometerse con cobertura Guayaquil sin confirmar — frase "voy a confirmar con el área de entregas" + handoff.</li>
+        <li>· NO mencionar Gripfectan proactivamente en mensajes salientes ni plantillas Meta.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 07 — Cronograma -->
+<section id="sec-cronograma" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-3">07 / Cronograma</div>
+    <h2 class="text-3xl font-semibold text-white mb-3 tracking-tight">De hoy a go-live.</h2>
+    <p class="text-zinc-400 max-w-3xl mb-10 leading-relaxed">15 días hábiles de implementación a partir del 5 de junio.</p>
+
+    <div class="card">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#22c55e;"></div>
+        <div class="flex-1">
+          <div class="flex items-baseline justify-between flex-wrap gap-2 mb-1">
+            <div class="text-white font-medium">21 mayo · Kickoff R1</div>
+            <span class="pill pill-emerald">completo</span>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">Reunión 1 con Gaby + Mela + Montserrat. Discovery completo. Tareas del cliente para arrancar.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#fcd34d;"></div>
+        <div class="flex-1">
+          <div class="flex items-baseline justify-between flex-wrap gap-2 mb-1">
+            <div class="text-white font-medium">22 may → 4 jun · Cliente entrega info</div>
+            <span class="pill pill-amber">en curso</span>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">Catálogo 22 productos · datos bancarios · frases éticas · nº recetas · zonas GYE sin cobertura · correo de salida · plantillas WhatsApp.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#8b5cf6;"></div>
+        <div class="flex-1">
+          <div class="flex items-baseline justify-between flex-wrap gap-2 mb-1">
+            <div class="text-white font-medium">5 junio · Arranque oficial implementación</div>
+            <span class="pill pill-violet">milestone</span>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">Conexión API · Pipeline · Custom Fields + Values + Tags. Configuración base GHL.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#a78bfa;"></div>
+        <div class="flex-1">
+          <div class="flex items-baseline justify-between flex-wrap gap-2 mb-1">
+            <div class="text-white font-medium">8-13 junio · Bot · KBs · Workflows · Templates Meta</div>
+            <span class="pill pill-violet">desarrollo</span>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">Bot Conversation AI + 3 KBs + 8 Workflows + 6 plantillas WhatsApp API.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#7dd3fc;"></div>
+        <div class="flex-1">
+          <div class="flex items-baseline justify-between flex-wrap gap-2 mb-1">
+            <div class="text-white font-medium">14-17 junio · Pruebas pre-launch + QA Mela</div>
+            <span class="pill pill-cyan">QA</span>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">Bot en modo Suggestive · 9 smoke tests críticos · validación de guardrails éticos · Mela aprueba.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#22c55e;"></div>
+        <div class="flex-1">
+          <div class="flex items-baseline justify-between flex-wrap gap-2 mb-1">
+            <div class="text-white font-medium">~20 junio · Go-live</div>
+            <span class="pill pill-emerald">live</span>
+          </div>
+          <p class="text-sm text-zinc-400 leading-relaxed">Capacitación 6 asesores. Bot pasa de Suggestive → Autopilot. Mela + Gaby de guardia primeras 24h.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 — Equipos -->
+<section id="sec-equipos" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-3">08 / Equipos</div>
+    <h2 class="text-3xl font-semibold text-white mb-10 tracking-tight">Quiénes mueven el proyecto.</h2>
+
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="card card-violet">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-4">Escollanos</div>
+        <div class="space-y-3">
+          <div>
+            <div class="text-white font-medium">María Gabriela Febres · Gaby</div>
+            <div class="text-xs text-zinc-400">Owner · referente comercial · aprobación final</div>
+          </div>
+          <div>
+            <div class="text-white font-medium">Mela</div>
+            <div class="text-xs text-zinc-400">QA bot + plantillas + producto</div>
+          </div>
+          <div>
+            <div class="text-white font-medium">Montserrat</div>
+            <div class="text-xs text-zinc-400">Apoyo coordinación · comunicación formal</div>
+          </div>
+          <div>
+            <div class="text-white font-medium">Blanquita</div>
+            <div class="text-xs text-zinc-400">Zonas Guayaquil</div>
+          </div>
+          <div>
+            <div class="text-white font-medium">4 asesores</div>
+            <div class="text-xs text-zinc-400">Pool de atención WhatsApp (Pantosa + 3)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-cyan">
+        <div class="font-mono text-[11px] tracking-widest text-cyan-300 uppercase mb-4">Inflect · ALConsulting</div>
+        <div class="space-y-3">
+          <div>
+            <div class="text-white font-medium">Andrés Linares</div>
+            <div class="text-xs text-zinc-400">Owner del proyecto · diseño + implementación GHL</div>
+          </div>
+          <div>
+            <div class="text-white font-medium">Montserrat (del lado AL)</div>
+            <div class="text-xs text-zinc-400">Coordinación · entrega formal de documentos</div>
+          </div>
+        </div>
+        <hr class="my-5 border-white/10">
+        <div class="font-mono text-[11px] tracking-widest text-zinc-500 uppercase mb-2">Canales de trabajo</div>
+        <ul class="text-sm text-zinc-300 space-y-1.5 leading-relaxed">
+          <li>· Chat del grupo — iteración rápida</li>
+          <li>· Google Docs vivo — repositorio de información</li>
+          <li>· Correo formal — entrega consolidada</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card card-emerald mt-8 text-center">
+      <div class="serif-italic text-zinc-200 text-xl mb-3">"Escollanos, salud y bienestar."</div>
+      <p class="text-sm text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+        Bot único, 24/7, con guardrails éticos farmacéuticos. Compliance primero, conversión después.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="px-8 lg:px-16 py-12 text-center">
+  <div class="text-xs font-mono text-zinc-600">ESCOLLANOS · KICKOFF R1 · 21 may 2026</div>
+  <div class="text-[11px] text-zinc-700 mt-2">Inflect · ALConsulting</div>
+</footer>
+
+</main>
+
+<script>
+const sections = document.querySelectorAll('section[id]');
+const tocLinks = document.querySelectorAll('.toc-link');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+
+document.querySelectorAll('.toc-link').forEach(l => l.addEventListener('click', () => {
+  document.querySelector('.sidebar').classList.remove('open');
+}));
+</script>
+
+</body>
+</html>
