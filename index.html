@@ -322,7 +322,6 @@
           <div class="desc">Bot entrega ficha de producto, precio y sugiere complementario (cross-sell).</div>
           <div class="chips">
             <span class="pill pill-cyan">Productos Adicionales</span>
-            <span class="pill pill-cyan">Última Plantilla</span>
           </div>
         </div>
       </div>
@@ -338,9 +337,7 @@
           </div>
           <div class="desc">Etapa más densa — aquí entran las frases éticas farmacéuticas.</div>
           <div class="chips">
-            <span class="pill pill-cyan">Objeción Detectada</span>
             <span class="pill pill-cyan">Caso Clínico</span>
-            <span class="pill pill-cyan">Frase Ética Usada</span>
           </div>
         </div>
       </div>
@@ -422,7 +419,6 @@
           </div>
           <div class="desc">Flujo automatizado externo al bot (ya operativo en GHL).</div>
           <div class="chips">
-            <span class="pill pill-cyan">Es Cliente Recurrente</span>
             <span class="pill pill-cyan">Fecha Último Contacto</span>
           </div>
         </div>
@@ -437,7 +433,7 @@
 <section id="sec-3" class="px-8 lg:px-16 py-20 border-b border-white/5">
   <div class="max-w-6xl">
     <div class="sec-num mb-3">03 / CUSTOM FIELDS</div>
-    <h2 class="sec-title mb-3">15 campos · 1 carpeta · todos TEXT</h2>
+    <h2 class="sec-title mb-3">9 campos · 1 carpeta · todos TEXT</h2>
     <p class="text-zinc-400 max-w-3xl mb-8 leading-relaxed">
       Todos los CFs son <span class="text-white">Single Line Text</span>, agrupados en la carpeta <span class="font-mono text-cyan-200">Bot Escollanos</span>, con naming con espacios (los asesores los ven en la UI del contacto). El bot los llena vía <span class="font-mono">Add Contact Info</span> a medida que avanza la conversación.
     </p>
@@ -455,14 +451,8 @@
           <tr><td>Zona Envío</td><td><code>Zona Envío</code></td><td>Sub-zona o barrio (sobre todo Guayaquil).</td><td><code>Samborondón</code> · <code>Durán</code> · <code>Urdesa</code> · <code>Norte de Quito</code></td></tr>
           <tr><td>Método Pago Preferido</td><td><code>Método Pago Preferido</code></td><td>Forma de pago elegida.</td><td><code>transferencia</code> · <code>link</code> · <code>deuna</code> · <code>contra_entrega</code></td></tr>
           <tr><td>Tipo Envío</td><td><code>Tipo Envío</code></td><td>Modalidad logística según ciudad.</td><td><code>mensajero propio</code> · <code>Servientrega</code></td></tr>
-          <tr><td>Objeción Detectada</td><td><code>Objeción Detectada</code></td><td>Tipo de objeción explícita del cliente.</td><td><code>precio</code> · <code>receta</code> · <code>caso clinico</code> · <code>psicotropico</code> · <code>cobertura guayaquil</code></td></tr>
-          <tr><td>Motivo Handoff</td><td><code>Motivo Handoff</code></td><td>Motivo por el cual se disparó Bot Transfer.</td><td><code>pago_link</code> · <code>receta</code> · <code>caso_clinico</code> · <code>imagen</code> · <code>fuera_campana</code> · <code>zona_guayaquil</code></td></tr>
           <tr><td>Caso Clínico Mencionado</td><td><code>Caso Clínico Mencionado</code></td><td>Descripción literal de la condición clínica que el cliente mencionó.</td><td><code>embarazo 6 meses</code> · <code>diabetes tipo 2</code> · <code>toma alprazolam</code> · <code>lupus</code></td></tr>
-          <tr><td>Frase Ética Usada</td><td><code>Frase Ética Usada</code></td><td>Qué disclaimer ético aplicó el bot (auditoría compliance).</td><td><code>psicotropico</code> · <code>enfermedad puntual</code> · <code>registro sanitario</code> · <code>derivacion receta</code></td></tr>
-          <tr><td>Es Cliente Recurrente</td><td><code>Es Cliente Recurrente</code></td><td>Indica si ya compró antes.</td><td><code>si</code> · <code>no</code> · <code>primera vez</code></td></tr>
           <tr><td>Fecha Último Contacto</td><td><code>Fecha Último Contacto</code></td><td>Formato <span class="font-mono">YYYY-MM-DD HH:MM</span>.</td><td><code>2026-05-21 14:30</code> · <code>2026-05-22 03:15</code></td></tr>
-          <tr><td>Notas Bot Conversacion</td><td><code>Notas Bot Conversacion</code></td><td>Resumen 1-3 frases para que el asesor humano sepa contexto.</td><td><i class="text-zinc-400">Cliente preguntó Tolerance, mencionó embarazo, se le dio frase ética y se transfiere.</i></td></tr>
-          <tr><td>Última Plantilla Enviada</td><td><code>Última Plantilla Enviada</code></td><td>Nombre de la última plantilla Meta enviada (tracking ventana 24h).</td><td><code>plantilla_renovella_sofoco</code> · <code>plantilla_saludo_proteccion_datos</code></td></tr>
         </tbody>
       </table>
     </div>
@@ -483,7 +473,6 @@
         <ul class="text-sm text-zinc-300 space-y-1.5 leading-relaxed">
           <li>· Producto Consultado → listado final de 22 productos (Mela)</li>
           <li>· Caso Clínico → lista de condiciones recurrentes (Mela)</li>
-          <li>· Frase Ética → textos finales oficiales (Gaby/Mela)</li>
         </ul>
       </div>
     </div>
@@ -509,15 +498,7 @@
           <tr><td><code>numero_recetas</code></td><td>nº WhatsApp dedicado a recetas</td><td>Bot deriva automáticamente</td><td><span class="pill pill-amber">⏳ Gaby/Mela</span></td></tr>
           <tr><td><code>datos_bancarios_pichincha</code></td><td>Bloque con cuenta · titular · RUC · email</td><td>Bot envía directo en flujo transferencia</td><td><span class="pill pill-amber">⏳ Gaby</span></td></tr>
           <tr><td><code>link_pagina_web</code></td><td>URL web con fotos de productos</td><td>Bot + plantillas — referencia visual</td><td><span class="pill pill-amber">⏳ Gaby</span></td></tr>
-          <tr><td><code>horario_atencion</code></td><td>24/7 los 365 días del año</td><td>Bot prompt + FAQs</td><td><span class="pill pill-emerald">listo</span></td></tr>
-          <tr><td><code>zonas_guayaquil_sin_cobertura</code></td><td>Listado de zonas sin mensajero propio</td><td>Bot — validación cobertura GYE</td><td><span class="pill pill-amber">⏳ Blanquita</span></td></tr>
-          <tr><td><code>frase_registro_sanitario</code></td><td>Frase oficial de legalidad / ARCSA</td><td>Bot — respuesta a "es legal?"</td><td><span class="pill pill-amber">⏳ Gaby</span></td></tr>
-          <tr><td><code>frase_etica_psicotropico</code></td><td>Texto oficial cuando cliente pide dejar medicación</td><td>Bot — cliente menciona psicotrópico</td><td><span class="pill pill-amber">⏳ Gaby/Mela</span></td></tr>
-          <tr><td><code>frase_etica_enfermedad_puntual</code></td><td>Texto oficial cuando cliente menciona enfermedad</td><td>Bot — lupus/embarazo/diabetes</td><td><span class="pill pill-amber">⏳ Gaby/Mela</span></td></tr>
-          <tr><td><code>mensaje_no_cobertura_guayaquil</code></td><td>"Voy a confirmar con el área de entregas si cubrimos su zona…"</td><td>Bot — zona dudosa GYE</td><td><span class="pill pill-emerald">listo (placeholder)</span></td></tr>
-          <tr><td><code>mensaje_pago_contra_entrega_otro</code></td><td>Explicación Servientrega previo pago + envío gratis</td><td>Bot — cliente fuera Q/G/C pide contra entrega</td><td><span class="pill pill-emerald">listo</span></td></tr>
           <tr><td><code>mensaje_proteccion_datos</code></td><td>(plantilla actual del cliente, no se reemplaza)</td><td>Plantilla saludo inicial</td><td><span class="pill pill-emerald">existente</span></td></tr>
-          <tr><td><code>telefono_pool</code></td><td>Nº WhatsApp API principal</td><td>Footer + Internal Notifications</td><td><span class="pill pill-amber">⏳ Gaby</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -525,7 +506,7 @@
     <div class="card card-amber mt-6">
       <div class="font-mono text-[11px] tracking-widest text-amber-300 uppercase mb-2">Pendientes críticos para arranque 5 de junio</div>
       <p class="text-sm text-zinc-300 leading-relaxed">
-        <span class="text-white">correo_de_salida · numero_recetas · datos_bancarios_pichincha · frase_registro_sanitario · frase_etica_psicotropico · frase_etica_enfermedad_puntual · zonas_guayaquil_sin_cobertura</span> son bloqueantes de go-live. Sin esto, compliance farmacéutico no se cumple y el bot no puede cerrar ventas por transferencia (medio de pago principal).
+        <span class="text-white">correo_de_salida · numero_recetas · datos_bancarios_pichincha</span> son bloqueantes de go-live. Sin esto el bot no puede cerrar ventas por transferencia (medio de pago principal).
       </p>
     </div>
   </div>
@@ -554,73 +535,12 @@
       <div class="card-tight">
         <div class="font-mono text-[11px] tracking-widest text-cyan-300 uppercase mb-3">Producto consultado</div>
         <div class="flex flex-wrap gap-2">
-          <span class="pill pill-cyan">producto_r14</span>
-          <span class="pill pill-cyan">producto_renovella_sofoco</span>
-          <span class="pill pill-cyan">producto_tolerance</span>
-          <span class="pill pill-cyan">producto_atroce</span>
-          <span class="pill pill-cyan">producto_gripfectan</span>
-          <span class="pill pill-cyan">producto_&lt;otro&gt;</span>
-        </div>
-      </div>
-      <div class="card-tight">
-        <div class="font-mono text-[11px] tracking-widest text-amber-300 uppercase mb-3">Objeciones</div>
-        <div class="flex flex-wrap gap-2">
-          <span class="pill pill-amber">objecion_precio</span>
-          <span class="pill pill-amber">objecion_receta</span>
-          <span class="pill pill-amber">objecion_contra_entrega</span>
-          <span class="pill pill-amber">objecion_legalidad</span>
-          <span class="pill pill-amber">objecion_cobertura_guayaquil</span>
-          <span class="pill pill-amber">objecion_caso_clinico</span>
-          <span class="pill pill-amber">objecion_psicotropico</span>
-        </div>
-      </div>
-      <div class="card-tight">
-        <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-3">Handoff (motivo)</div>
-        <div class="flex flex-wrap gap-2">
-          <span class="pill pill-rose">handoff_pago_link</span>
-          <span class="pill pill-rose">handoff_pago_deuna</span>
-          <span class="pill pill-rose">handoff_receta</span>
-          <span class="pill pill-rose">handoff_imagen</span>
-          <span class="pill pill-rose">handoff_caso_clinico</span>
-          <span class="pill pill-rose">handoff_psicotropico</span>
-          <span class="pill pill-rose">handoff_fuera_campana</span>
-          <span class="pill pill-rose">handoff_cobertura_guayaquil</span>
-          <span class="pill pill-rose">handoff_cliente_pesado</span>
-          <span class="pill pill-rose">handoff_so_carga</span>
-        </div>
-      </div>
-      <div class="card-tight">
-        <div class="font-mono text-[11px] tracking-widest text-blue-300 uppercase mb-3">Caso clínico · auditoría</div>
-        <div class="flex flex-wrap gap-2">
-          <span class="pill pill-blue">caso_clinico</span>
-          <span class="pill pill-blue">caso_embarazo</span>
-          <span class="pill pill-blue">caso_lactancia</span>
-          <span class="pill pill-blue">caso_diabetes</span>
-          <span class="pill pill-blue">caso_lupus</span>
-          <span class="pill pill-blue">caso_hipertension</span>
-          <span class="pill pill-blue">caso_psicotropico</span>
-          <span class="pill pill-blue">frase_etica_psicotropico_aplicada</span>
-          <span class="pill pill-blue">frase_etica_enfermedad_aplicada</span>
-        </div>
-      </div>
-      <div class="card-tight">
-        <div class="font-mono text-[11px] tracking-widest text-emerald-300 uppercase mb-3">Estado proceso / ciudad / pago</div>
-        <div class="flex flex-wrap gap-2">
-          <span class="pill pill-emerald">ciudad_quito</span>
-          <span class="pill pill-emerald">ciudad_guayaquil</span>
-          <span class="pill pill-emerald">ciudad_cuenca</span>
-          <span class="pill pill-emerald">zona_gye_sin_cobertura</span>
-          <span class="pill pill-emerald">pago_transferencia</span>
-          <span class="pill pill-emerald">pago_link</span>
-          <span class="pill pill-emerald">pago_deuna</span>
-          <span class="pill pill-emerald">pago_contra_entrega</span>
-          <span class="pill pill-emerald">info_enviada</span>
-          <span class="pill pill-emerald">pago_confirmado</span>
-          <span class="pill pill-emerald">so_cargada</span>
-          <span class="pill pill-emerald">cliente_recurrente</span>
-          <span class="pill pill-emerald">no_responde</span>
-          <span class="pill pill-emerald">ganado</span>
-          <span class="pill pill-emerald">perdido</span>
+          <span class="pill pill-cyan">r14</span>
+          <span class="pill pill-cyan">renovella_sofoco</span>
+          <span class="pill pill-cyan">tolerance</span>
+          <span class="pill pill-cyan">atroce</span>
+          <span class="pill pill-cyan">gripfectan</span>
+          <span class="pill pill-cyan">&lt;otro&gt;</span>
         </div>
       </div>
     </div>
@@ -640,9 +560,9 @@
 <section id="sec-6" class="px-8 lg:px-16 py-20 border-b border-white/5">
   <div class="max-w-6xl">
     <div class="sec-num mb-3">06 / WORKFLOWS</div>
-    <h2 class="sec-title mb-3">8 flujos · doble entrega (UI + AI Builder)</h2>
+    <h2 class="sec-title mb-3">7 flujos · doble entrega (UI + AI Builder)</h2>
     <p class="text-zinc-400 max-w-3xl mb-8 leading-relaxed">
-      Los workflows <span class="text-white">orquestan al bot</span> — por eso van antes del bot en este blueprint. Cada uno con instrucciones manuales UI + prompt para pegar en el <span class="font-mono">Workflow AI Builder</span> de GHL. Carpetas: <span class="font-mono text-violet-200">Bot</span> (WF 01-06) y <span class="font-mono text-emerald-200">Proceso comercial</span> (WF 07-08).
+      Los workflows <span class="text-white">orquestan al bot</span> — por eso van antes del bot en este blueprint. Cada uno con instrucciones manuales UI + prompt para pegar en el <span class="font-mono">Workflow AI Builder</span> de GHL. Carpetas: <span class="font-mono text-violet-200">Bot</span> (WF 01-06) y <span class="font-mono text-emerald-200">Proceso comercial</span> (WF 08). El follow-up 24h se resuelve dentro de WF 01 vía If/Else — no hay WF separado de remarketing.
     </p>
 
     <!-- WF 01 -->
@@ -670,8 +590,9 @@
             <li>Send WhatsApp Template <code>saludo_inicial_proteccion_datos</code> · {{1}}={{contact.first_name}} · {{2}}={{custom_values.nombre_negocio}}</li>
             <li>Wait for Contact Reply · Reply To = WhatsApp · timeout 24h</li>
             <li>Branch SÍ → Trigger Bot Conversation AI</li>
-            <li>Branch NO → Add Tag <code>no_responde</code> + stage "Lead frío" + End</li>
+            <li>Branch NO (timeout 24h sin respuesta) → Send WhatsApp Template <code>follow_up_24h</code> (ventana cerrada) · {{1}}=first_name · {{2}}=producto_consultado · luego Add Tag <code>no_responde</code> + stage "Lead frío" + End</li>
           </ol>
+          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">El follow-up 24h vive dentro de este WF — no hay workflow separado de remarketing.</p>
         </div>
         <div>
           <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Prompt Workflow AI Builder</div>
@@ -695,7 +616,7 @@ Paso 6: Wait for Contact Reply con Reply To = WhatsApp explícito. Timeout 24 ho
 
 Paso 7: Branch SÍ respondió → Trigger Bot del Conversation AI principal de Escollanos. El bot toma la conversación desde la respuesta del cliente.
 
-Paso 8: Branch NO respondió (timeout) → Add Tag no_responde + Update Opportunity stage Lead frío + End.
+Paso 8: Branch NO respondió (timeout 24h) → Send WhatsApp Template follow_up_24h (categoría Utility, ventana cerrada). Mapear 1 = contact.first_name, 2 = contact.producto_consultado. Luego Add Tag no_responde + Update Opportunity stage Lead frío + End. Este paso reemplaza al WF de remarketing separado: el follow-up 24h se resuelve dentro de este mismo WF.
 
 No incluir asignación a asesores individuales — el modelo es pool puro. No incluir notificación por email en este WF — eso lo hacen los WFs de handoff.</div>
           </div>
@@ -932,53 +853,6 @@ Este WF es crítico por compliance farmacéutico. La velocidad de respuesta del 
       </div>
     </details>
 
-    <!-- WF 07 -->
-    <details class="wf">
-      <summary>
-        <div class="flex items-center gap-3"><span class="font-mono text-sm text-emerald-300">WF 07</span><span class="text-white text-base font-medium">Follow-up 24h (Remarketing)</span></div>
-        <div class="flex gap-2 flex-wrap"><span class="pill pill-emerald">Tag no_responde</span><span class="pill pill-amber">If/Else ventana 24h</span></div>
-      </summary>
-      <div class="wf-body">
-        <div>
-          <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-2">Instrucciones manuales UI</div>
-          <ol class="text-sm text-zinc-300 space-y-1.5 leading-relaxed list-decimal pl-5">
-            <li>Trigger A: Tag Added <code>no_responde</code> · Trigger B (alt): Stage Changed "Info enviada" + Wait 24h</li>
-            <li>If/Else: <code>Time since last inbound message &gt; 24 hours</code></li>
-            <li>Branch SÍ (ventana cerrada) → Send WhatsApp Template <code>follow_up_24h</code> · {{1}}=first_name · {{2}}=producto_consultado</li>
-            <li>Branch NO (ventana abierta) → Send WhatsApp libre <i class="text-zinc-400">"Hola {{first_name}}, queríamos saber si tiene alguna inquietud sobre {{producto_consultado}}. Estamos prestos a ayudarle…"</i></li>
-            <li>Add Tag <code>follow_up_24h_enviado</code></li>
-            <li>Wait for Contact Reply · Reply To = WhatsApp · timeout 48h</li>
-            <li>Branch SÍ → Trigger Bot · Branch NO → Update stage "Lead frío" + End</li>
-          </ol>
-        </div>
-        <div>
-          <div class="font-mono text-[11px] tracking-widest text-emerald-300 uppercase mb-2">Prompt Workflow AI Builder</div>
-          <div class="copy-wrap">
-            <button class="copy-btn" data-copy>copy</button>
-            <div class="prompt-block">Crea un workflow de follow-up 24h para Escollanos. Se dispara cuando un cliente recibió información de producto pero no respondió. El objetivo es remarketing suave para reactivar.
-
-Trigger: Tag Added "no_responde" (que el WF-01 o el bot aplican cuando el cliente queda en silencio). Alternativa: Pipeline Stage Changed a "Info enviada" con espera de 24h.
-
-Paso 1: If/Else con condición "Time since last inbound message > 24 hours". Esto distingue si la ventana conversacional de WhatsApp 24h está cerrada o abierta.
-
-Paso 2A: Branch ventana CERRADA (más de 24h) → Send WhatsApp Template con la plantilla Meta pre-aprobada follow_up_24h, categoría Utility. Mapear: 1 = contact.first_name, 2 = contact.producto_consultado.
-
-Paso 2B: Branch ventana ABIERTA → Send WhatsApp libre. Tono usted cálido sin signos de apertura. Texto: "Hola {first_name}, queríamos saber si tiene alguna inquietud sobre {producto_consultado}. Estamos prestos a ayudarle…". Terminar con puntos suspensivos.
-
-Paso 3: Add Tag follow_up_24h_enviado para reportería.
-
-Paso 4: Wait for Contact Reply con Reply To = WhatsApp explícito, timeout 48 horas.
-
-Paso 5: Branch SÍ respondió → Trigger Bot del Conversation AI. El bot retoma la conversación.
-
-Paso 6: Branch NO respondió → Update Opportunity stage Lead frío + End.
-
-Importante: este WF NO usa tag como gateway de routing — solo se aplica tag al final para reportería. El gateway real es la condición temporal de ventana 24h. El modelo es pool: no asignar a asesor individual.</div>
-          </div>
-        </div>
-      </div>
-    </details>
-
     <!-- WF 08 -->
     <details class="wf">
       <summary>
@@ -991,6 +865,7 @@ Importante: este WF NO usa tag como gateway de routing — solo se aplica tag al
           <ol class="text-sm text-zinc-300 space-y-1.5 leading-relaxed list-decimal pl-5">
             <li>Trigger A: Tag Added <code>pago_transferencia_confirmado</code> (lo aplica el asesor manual)</li>
             <li>Add Tag <code>pago_confirmado</code></li>
+            <li>Assign User → asesor responsable que confirmó el pago (no al pool — queda dueño del cierre)</li>
             <li>Update Opportunity stage "Pago confirmado / SO cargada"</li>
             <li>If/Else ventana 24h:
               <div class="mt-1 pl-2">
@@ -1012,7 +887,9 @@ Trigger principal: Tag Added "pago_transferencia_confirmado". Trigger auxiliar o
 
 Paso 1: Add Tag pago_confirmado.
 
-Paso 2: Update Opportunity stage Pago confirmado / SO cargada.
+Paso 2: Assign User al asesor responsable — el mismo que confirmó la transferencia queda dueño del cierre. No usar el custom value de pool acá.
+
+Paso 3: Update Opportunity stage Pago confirmado / SO cargada.
 
 Paso 3: If/Else con condición Time since last inbound message > 24 hours.
 
@@ -1307,7 +1184,7 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
 
     <!-- Bot Actions Add Contact Info -->
     <div class="card mb-6">
-      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-4">Bot Actions · Add Contact Info (9 acciones)</div>
+      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-4">Bot Actions · Add Contact Info (6 acciones)</div>
       <table class="std">
         <thead><tr><th>#</th><th>Action Name</th><th>Field</th><th>Trigger</th></tr></thead>
         <tbody>
@@ -1316,10 +1193,7 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
           <tr><td>3</td><td>Actualizar Ciudad Cliente</td><td><code>Ciudad Cliente</code></td><td>cuando el cliente menciona ciudad</td></tr>
           <tr><td>4</td><td>Actualizar Zona Envío</td><td><code>Zona Envío</code></td><td>zona específica (sobre todo GYE)</td></tr>
           <tr><td>5</td><td>Actualizar Método Pago Preferido</td><td><code>Método Pago Preferido</code></td><td>cuando elige forma de pago</td></tr>
-          <tr><td>6</td><td>Actualizar Objeción Detectada</td><td><code>Objeción Detectada</code></td><td>objeción explícita del cliente</td></tr>
-          <tr><td>7</td><td>Actualizar Motivo Handoff</td><td><code>Motivo Handoff</code></td><td>al ejecutar un Bot Transfer</td></tr>
-          <tr><td>8</td><td>Actualizar Caso Clínico Mencionado</td><td><code>Caso Clínico Mencionado</code></td><td>mención literal de condición</td></tr>
-          <tr><td>9</td><td>Actualizar Notas Bot Conversacion</td><td><code>Notas Bot Conversacion</code></td><td>al cierre de la conversación</td></tr>
+          <tr><td>6</td><td>Actualizar Caso Clínico Mencionado</td><td><code>Caso Clínico Mencionado</code></td><td>mención literal de condición</td></tr>
         </tbody>
       </table>
     </div>
@@ -1344,16 +1218,11 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
 
     <!-- Stop Bot -->
     <div class="card mb-6">
-      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-4">Stop Bot · 3 condiciones</div>
+      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-4">Stop Bot · 2 condiciones</div>
+      <p class="text-[11px] text-zinc-500 mb-3">El caso "quiero hablar con un humano" lo cubre el <span class="font-mono">Human Handover</span> nativo de GHL en automático — no se carga como Stop Bot manual.</p>
       <table class="std">
         <thead><tr><th>Scenario</th><th>Trigger</th><th>Final Message</th><th>Reactivate</th></tr></thead>
         <tbody>
-          <tr>
-            <td>Pedido humano</td>
-            <td>"quiero hablar con un humano", "asesor por favor", "QUIERO HABLAR CON UN HUMANO"</td>
-            <td><i class="text-zinc-400">Listo, le derivo con un asesor de Escollanos enseguida 🌷</i></td>
-            <td>24h</td>
-          </tr>
           <tr>
             <td>Confirmación de compra</td>
             <td>"ya transferí", "le mando captura", "ya pagué", imagen comprobante</td>
@@ -1573,7 +1442,7 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
           <tr><td>Gaby/Mela</td><td>Número exacto de WhatsApp para recetas</td><td>Antes del 5 jun</td></tr>
           <tr><td>Blanquita</td><td>Listado zonas Guayaquil SIN cobertura</td><td>Antes del 5 jun</td></tr>
           <tr><td>Gaby</td><td>Correo único para notificaciones de handoff (pool de 6)</td><td>Antes del 5 jun</td></tr>
-          <tr><td>Gaby</td><td>Confirmar nº WhatsApp API principal (telefono_pool)</td><td>Antes del 5 jun</td></tr>
+          <tr><td>Gaby</td><td>Confirmar nº WhatsApp API principal</td><td>Antes del 5 jun</td></tr>
           <tr><td>Gaby/Mela</td><td>Decisión sobre nombre propio del bot (postergable)</td><td>Cuando quieran</td></tr>
           <tr><td>Asesores</td><td>Frases recurrentes (Pantosa, etc.) + Top 10 FAQs cerradas</td><td>Continuo</td></tr>
           <tr><td>Equipo Escollanos</td><td>Capturas de conversaciones modelo + conversaciones problemáticas</td><td>Continuo</td></tr>
