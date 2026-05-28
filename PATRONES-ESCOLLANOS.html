@@ -77,8 +77,10 @@
       <a href="#cross-sell">Cross-sell matrix</a>
       <div class="group-title">Bot Responses</div>
       <a href="#cbrs">50 Custom Bot Responses</a>
+      <div class="group-title">Catálogo extendido</div>
+      <a href="#catalogo-55">55 productos · 5 labs</a>
       <div class="group-title">Próximos pasos</div>
-      <a href="#gaps">Gaps & catálogo pendiente</a>
+      <a href="#pendientes">Pendientes para culminar</a>
     </nav>
   </aside>
 
@@ -687,6 +689,93 @@ Correo: contabilidad4@escollanos.com</pre>
       <div id="cbr-list" class="space-y-2"></div>
     </section>
 
+    <!-- CATÁLOGO EXTENDIDO 55 -->
+    <section id="catalogo-55" class="mb-16">
+      <h2 class="display text-3xl font-bold mb-2">Catálogo extendido · 5 laboratorios · 55 productos</h2>
+      <p class="text-[var(--muted)] mb-6">Análisis de los PDFs oficiales de Escollanos (PiLeJe + EsCanabis CiBiDol + Labfarve + Dr. Reckeweg + Vademécum Ecuador). Carga completa en <span class="kbd">knowledge/catalogo-laboratorios/catalogo-completo.csv</span>.</p>
+
+      <div class="grid md:grid-cols-2 gap-3 mb-6">
+        <div class="card p-5">
+          <div class="pill pill-blue mb-2">PiLeJe 🇫🇷 · 2 SKUs</div>
+          <h3 class="display text-lg font-semibold mb-2">Probióticos</h3>
+          <ul class="text-sm text-[var(--muted)] space-y-1">
+            <li>• <strong class="text-[var(--text)]">Lactibiane Référence</strong> — estreñimiento (4 cepas: B. longum LA101, L. helveticus LA102, Lactococcus LA103, S. thermophilus LA304)</li>
+            <li>• <strong class="text-[var(--text)]">Lactibiane Tolérance</strong> — SII / Crohn (5 cepas, foco mucosa)</li>
+          </ul>
+        </div>
+        <div class="card p-5">
+          <div class="pill pill-emerald mb-2">EsCanabis 🇪🇨 · 4 SKUs</div>
+          <h3 class="display text-lg font-semibold mb-2">CBD medicinal</h3>
+          <ul class="text-sm text-[var(--muted)] space-y-1">
+            <li>• <strong class="text-[var(--text)]">CiBiDol S</strong> — 2.5% CBD · estrés/insomnio/ansiedad</li>
+            <li>• <strong class="text-[var(--text)]">CiBiDol M</strong> — 10% CBD · dolor + neuroprotección</li>
+            <li>• <strong class="text-[var(--text)]">CiBiDol L</strong> — 20% CBD · dolor + náuseas + metabólico</li>
+            <li>• <strong class="text-[var(--text)]">CiBiDol Crema</strong> — tópico (cannabis + árnica + zingiber + aesculus)</li>
+          </ul>
+          <p class="text-xs text-[var(--accent-2)] mt-2 italic">⚠ Requiere respaldo médico — el bot ofrece info pero no cierra venta sin verificación.</p>
+        </div>
+        <div class="card p-5">
+          <div class="pill pill-violet mb-2">Labfarve 🇨🇴 · 7 SKUs</div>
+          <h3 class="display text-lg font-semibold mb-2">Fitoterapia (40+ años · U. Juan N. Corpas)</h3>
+          <ul class="text-sm text-[var(--muted)] space-y-1">
+            <li>• Caléndula Jarabe (gastritis) · Caléndula Crema (dermatitis)</li>
+            <li>• Alcachofa (Cynara) — colerético + peso</li>
+            <li>• <strong class="text-[var(--accent)]">Vira Vira</strong> (Achyrocline) — ITU bajas ← gap A1 resuelto</li>
+            <li>• Glunat (Momordica) — hipoglicemiante</li>
+            <li>• Artrosed (Salix) — analgésico/antiinflamatorio</li>
+            <li>• Passiflora — hipnógeno/sedante</li>
+          </ul>
+        </div>
+        <div class="card p-5">
+          <div class="pill pill-rose mb-2">Dr. Reckeweg 🇩🇪 · 42 SKUs</div>
+          <h3 class="display text-lg font-semibold mb-2">Homeopáticos compuestos (R1-R96 + Drenatox + Apetimed)</h3>
+          <p class="text-sm text-[var(--muted)]">Línea completa con Vademécum Ecuador estructurado por <strong class="text-[var(--text)]">sistema</strong> (Cardio/Respi/Digestivo/Urinario/Endocrino/Nervioso/Osteomuscular/Piel/Inmunitario/ORL) y por <strong class="text-[var(--text)]">utilidad terapéutica</strong> — base canónica para el prompt del bot.</p>
+        </div>
+      </div>
+
+      <h3 class="display text-xl font-semibold mb-3">Top categorías Reckeweg</h3>
+      <div class="card p-2 overflow-x-auto">
+        <table class="matrix">
+          <thead><tr><th>Sistema</th><th>Productos</th></tr></thead>
+          <tbody>
+            <tr><td>Respiratorio</td><td>R1 Anginacid · R6 Gripfektan · R8 Jutussin · R48 Pulmosol · R49 Rhinopulsan · R96 Pulsatilla</td></tr>
+            <tr><td>Digestivo</td><td>R5 Gastreu · R7 Hepagalen · R37 Colinteston · Apetimed</td></tr>
+            <tr><td>Urinario / Próstata</td><td>R18 Cystophylin · R25 Prostatan · R27 Renocalcin</td></tr>
+            <tr><td>Cardiovascular</td><td>R3 Corvosan · R12 Multojodin · R42 Haemovenin · R63 Endangitin</td></tr>
+            <tr><td>Osteomuscular</td><td>R11 Lumbagin · R34 Calcossin · R46 Manurheumin · R55 Rutavine · R71 Ischialgin · R73 Spondarthrin</td></tr>
+            <tr><td>Endocrino / Metabólico</td><td>R10 Klimakteran · R19/R20 Euglandin M/F · R40 Diaglukon · R51 Thyreosan · R59 Vesiculine</td></tr>
+            <tr><td>Nervioso / Mental</td><td>R14 Quieta · Vita C 15 Forte · R16 Cimisan · R29 Theridon · R54 Imbelion</td></tr>
+            <tr><td>Piel</td><td>R21 Medorrhan · R53 Comedonin</td></tr>
+            <tr><td>Linfático / Tumoral</td><td>R17 Cobralactin · R26 Remisin</td></tr>
+            <tr><td>Drenaje / Detox</td><td>Drenatox Kit (R7+R17+R27+R37)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="display text-xl font-semibold mt-6 mb-3">Mapa síntoma → producto (selección)</h3>
+      <div class="card p-2 overflow-x-auto">
+        <table class="matrix">
+          <thead><tr><th>Cliente dice…</th><th>Producto principal</th><th>Combo / alternativa</th></tr></thead>
+          <tbody>
+            <tr><td>Infección urinaria / cistitis</td><td>Vira Vira</td><td>R18 Cystophylin · Drenatox</td></tr>
+            <tr><td>Gastritis / reflujo</td><td>Caléndula Jarabe</td><td>R5 Gastreu · Lactibiane Tolérance</td></tr>
+            <tr><td>Colon irritable / Crohn</td><td>Lactibiane Tolérance</td><td>Caléndula Jarabe</td></tr>
+            <tr><td>Estreñimiento</td><td>Lactibiane Référence</td><td>R37 Colinteston</td></tr>
+            <tr><td>Insomnio / ansiedad</td><td>R14 Quieta</td><td>Passiflora · CiBiDol S · R15 Vita C</td></tr>
+            <tr><td>Dolor / artrosis</td><td>R73 Spondarthrin</td><td>Artrosed · CiBiDol Crema (tópico) · CiBiDol M/L</td></tr>
+            <tr><td>Diabetes</td><td>Glunat + R40 Diaglukon</td><td>—</td></tr>
+            <tr><td>Próstata</td><td>R25 Prostatan</td><td>R63 (si circulación)</td></tr>
+            <tr><td>Migraña</td><td>R16 Cimisan</td><td>—</td></tr>
+            <tr><td>Menopausia + insomnio</td><td>Renobella + R14 Quieta</td><td>R10 Klimakteran + Passiflora</td></tr>
+            <tr><td>Heridas / esguinces</td><td>R55 Rutavine</td><td>CiBiDol Crema · Caléndula Crema</td></tr>
+            <tr><td>Anemia / falta apetito</td><td>Apetimed</td><td>R31 Contraemin</td></tr>
+            <tr><td>Sinusitis / rinitis</td><td>R49 Rhinopulsan</td><td>R96 Pulsatilla (nasal)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-[var(--muted)] mt-3 italic">Mapa completo (9 sistemas + 5 reglas duras) en <span class="kbd">knowledge/catalogo-laboratorios/mapa-indicacion-producto.md</span>.</p>
+    </section>
+
     <!-- GAPS -->
     <section id="gaps" class="mb-16">
       <h2 class="display text-3xl font-bold mb-4">Gaps & próximos pasos</h2>
@@ -720,6 +809,69 @@ Correo: contabilidad4@escollanos.com</pre>
           <li>Política de preventa cuando stock agotado</li>
           <li>Mecánica oficial de sorteos &gt;$30 (TV, terapias CAM, balón Mundial)</li>
         </ol>
+      </div>
+    </section>
+
+    <!-- PENDIENTES PARA CULMINAR -->
+    <section id="pendientes" class="mb-16">
+      <h2 class="display text-3xl font-bold mb-2">Pendientes para culminar</h2>
+      <p class="text-[var(--muted)] mb-6">Lo que falta para que el bot Conversation AI esté 100% operativo en producción. Ordenado por prioridad.</p>
+
+      <div class="card p-6 mb-4 border-l-4 border-[var(--accent-2)]">
+        <div class="flex items-center gap-3 mb-3"><span class="pill pill-amber">🔴 BLOQUEANTE</span><h3 class="display text-lg font-semibold">Materiales que faltan del cliente</h3></div>
+        <ol class="space-y-3 text-sm list-decimal pl-5">
+          <li><strong class="text-[var(--text)]">PDFs de Quantum Pharm 🇪🇨</strong> — Metafat y Renobella son top sellers y NO están cubiertos en los 5 PDFs recibidos. Pedir folleto técnico oficial a Montse.</li>
+          <li><strong class="text-[var(--text)]">Listado de precios 2026 vigentes</strong> — los PDFs traen QR a listado externo. Necesitamos precios fijos para crear los Custom Values en GHL: <span class="kbd">precio_drenatox</span> <span class="kbd">precio_r14</span> <span class="kbd">precio_metafat</span> <span class="kbd">precio_alcachofa</span> <span class="kbd">precio_lactibiane_tolerance</span> <span class="kbd">precio_lactibiane_reference</span> <span class="kbd">precio_calendula</span> <span class="kbd">precio_renobella</span> <span class="kbd">precio_vira_vira</span> <span class="kbd">precio_cibidol_s/m/l/crema</span> <span class="kbd">precio_glunat</span> <span class="kbd">precio_artrosed</span> <span class="kbd">precio_passiflora</span> + 42 SKUs Reckeweg.</li>
+          <li><strong class="text-[var(--text)]">Productos secundarios sin PDF</strong> — Curcuzin-C, Iris Red, Serum C / Facemed, Flores de Bach, Calendulin (crema 90g). Pedir o confirmar si siguen en catálogo activo.</li>
+        </ol>
+      </div>
+
+      <div class="card p-6 mb-4 border-l-4 border-[var(--accent)]">
+        <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">🟢 IMPLEMENTACIÓN GHL</span><h3 class="display text-lg font-semibold">Setup en la subaccount</h3></div>
+        <ol class="space-y-3 text-sm list-decimal pl-5">
+          <li><strong class="text-[var(--text)]">Crear Custom Field</strong> <span class="kbd">producto_consultado</span> tipo dropdown con las 55 opciones (lista canónica en <span class="kbd">dropdown-cf-medicamentos.md</span>).</li>
+          <li><strong class="text-[var(--text)]">Crear Custom Values</strong> para precios + datos bancarios + correo de salida + mensaje LOPD.</li>
+          <li><strong class="text-[var(--text)]">Cargar Knowledge Base</strong>: subir <span class="kbd">KB-MAESTRA.md</span> como Doc + <span class="kbd">catalogo-completo.csv</span> como Table en GHL Conversation AI.</li>
+          <li><strong class="text-[var(--text)]">Pegar los 50 Custom Bot Responses</strong> uno por uno en Reputation → Conversation AI → Custom Bot Responses.</li>
+          <li><strong class="text-[var(--text)]">Configurar Bot Goals</strong>: (a) Captación / Saludo+LOPD · (b) Pitch producto · (c) Manejo objeciones · (d) Cierre 9 datos · (e) Handoff humano.</li>
+        </ol>
+      </div>
+
+      <div class="card p-6 mb-4 border-l-4 border-[var(--violet)]">
+        <div class="flex items-center gap-3 mb-3"><span class="pill pill-violet">🟣 OPERACIÓN</span><h3 class="display text-lg font-semibold">Reglas y políticas a confirmar con Montse</h3></div>
+        <ol class="space-y-3 text-sm list-decimal pl-5">
+          <li><strong class="text-[var(--text)]">CiBiDol</strong>: ¿bot puede ofrecer info y derivar a asesor? ¿o handoff inmediato por requerir prescripción?</li>
+          <li><strong class="text-[var(--text)]">Direcciones farmacias físicas</strong> + código cupón 5% (Quito · Guayaquil · Cuenca · Sto. Domingo).</li>
+          <li><strong class="text-[var(--text)]">Lista de mensajeros activos por ciudad</strong> + política — ¿el bot puede compartir teléfono del mensajero?</li>
+          <li><strong class="text-[var(--text)]">Vigencia Reto 21 días</strong> (R14 Quieta) + link de invitación al grupo WhatsApp.</li>
+          <li><strong class="text-[var(--text)]">Criterios cliente SILVER</strong> (¿hay GOLD/BRONZE? umbrales de compra para descuento).</li>
+          <li><strong class="text-[var(--text)]">Política de preventa</strong> cuando stock agotado (precio + tiempo de llegada).</li>
+          <li><strong class="text-[var(--text)]">Mecánica de sorteos &gt;$30</strong> (TV 43", terapias CAM, balón Mundial) — vigencia + qué productos aplican.</li>
+        </ol>
+      </div>
+
+      <div class="card p-6 mb-4 border-l-4 border-[var(--blue)]">
+        <div class="flex items-center gap-3 mb-3"><span class="pill pill-blue">🔵 VALIDACIÓN</span><h3 class="display text-lg font-semibold">Antes de salir a producción</h3></div>
+        <ol class="space-y-3 text-sm list-decimal pl-5">
+          <li><strong class="text-[var(--text)]">Test plan bot E2E</strong> con casos canónicos: 3 productos top, 3 objeciones, cierre Quito vs resto país, handoff CBD, embarazo en caléndula, cross-sell por síntoma.</li>
+          <li><strong class="text-[var(--text)]">Revisión legal/clínica</strong> de la postura "no contraindicaciones" con Montse — alinear con lo que el equipo médico esté dispuesto a respaldar.</li>
+          <li><strong class="text-[var(--text)]">Piloto con 1 asesor sombra</strong> durante 1 semana: el bot conversa, el asesor revisa antes de enviar. Ajuste fino de tono y cierre.</li>
+          <li><strong class="text-[var(--text)]">Métricas baseline</strong>: conversion rate actual (humano-only) vs post-bot. Tiempo de primera respuesta. CSAT.</li>
+        </ol>
+      </div>
+
+      <div class="card p-5 bg-[rgba(52,211,153,0.04)] border-[var(--accent)]/30">
+        <div class="flex items-center gap-3 mb-2"><span class="pill pill-emerald">✅ LISTO</span><h3 class="display text-base font-semibold">Lo que ya está cerrado</h3></div>
+        <ul class="text-sm text-[var(--muted)] space-y-1 grid sm:grid-cols-2 gap-x-4">
+          <li>• 17.265 conversaciones scrapeadas vía API GHL</li>
+          <li>• 216 transcripts curados por producto × outcome</li>
+          <li>• 8 docs de patrones por producto (texto literal)</li>
+          <li>• KB-MAESTRA consolidada con 7 patrones cross-product</li>
+          <li>• 50 Custom Bot Responses redactados</li>
+          <li>• Catálogo completo de 55 productos (5 labs)</li>
+          <li>• Dropdown CF + mapa síntoma→producto</li>
+          <li>• HTML artifact publicado en GitHub Pages</li>
+        </ul>
       </div>
     </section>
 
