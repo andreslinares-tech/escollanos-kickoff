@@ -433,7 +433,7 @@
 <section id="sec-3" class="px-8 lg:px-16 py-20 border-b border-white/5">
   <div class="max-w-6xl">
     <div class="sec-num mb-3">03 / CUSTOM FIELDS</div>
-    <h2 class="sec-title mb-3">9 campos · 1 carpeta · todos TEXT</h2>
+    <h2 class="sec-title mb-3">10 campos · 1 carpeta · todos TEXT</h2>
     <p class="text-zinc-400 max-w-3xl mb-8 leading-relaxed">
       Todos los CFs son <span class="text-white">Single Line Text</span>, agrupados en la carpeta <span class="font-mono text-cyan-200">Bot Escollanos</span>, con naming con espacios (los asesores los ven en la UI del contacto). El bot los llena vía <span class="font-mono">Add Contact Info</span> a medida que avanza la conversación.
     </p>
@@ -444,7 +444,8 @@
           <tr><th>Nombre</th><th>Campo (UI GHL)</th><th>Qué actualizar</th><th>Ejemplos de salida</th></tr>
         </thead>
         <tbody>
-          <tr><td>Producto Consultado</td><td><code>Producto Consultado</code></td><td>Producto principal por el que viene la consulta. Si menciona varios, el primero va acá.</td><td><code>R14</code> · <code>Renovella Sofoco</code> · <code>Tolerance</code> · <code>Atroce</code> · <code>Gripfectan</code></td></tr>
+          <tr style="background: rgba(245,158,11,.06);"><td><span class="pill pill-amber" style="font-size:10px;">WF pre-bot</span> Nombre del Producto</td><td><code>Nombre del Producto</code></td><td><span class="text-white">Lo setea el WF <span class="font-mono">INICIO BOT ESCOLLANOS V1.0</span></span> según la rama del If/Else (1 de 10 productos) antes de que el bot tome la conversación. El bot lo lee como contexto inicial para abrir el KB del producto correcto.</td><td><code>CURCUZINC</code> · <code>VITALMEN</code> · <code>R14 QUIETA</code> · <code>DRENATOX</code> · <code>DRENATOX + METAFAT</code> · <code>RENOBELLA</code> · <code>METAFAT</code> · <code>ALCACHOFA</code> · <code>TOLERANCE</code> · <code>REFERENCE</code></td></tr>
+          <tr><td>Producto Consultado</td><td><code>Producto Consultado</code></td><td>Producto principal confirmado por el bot tras pregunta diagnóstica. Suele coincidir con <code>Nombre del Producto</code> salvo que el lead reoriente la consulta.</td><td><code>R14</code> · <code>Renovella Sofoco</code> · <code>Tolerance</code> · <code>Atroce</code> · <code>Gripfectan</code></td></tr>
           <tr><td>Productos Mencionados Adicionales</td><td><code>Productos Mencionados Adicionales</code></td><td>Complementarios sugeridos por bot (cross-sell) o preguntados por el cliente, separados por coma.</td><td><code>Jarabe de Caléndula</code> · <code>Gripfectan, Tolerance</code></td></tr>
           <tr><td>Origen Campaña</td><td><code>Origen Campaña</code></td><td>Origen del lead, lo setea WF 01 según canal.</td><td><code>Meta Ads</code> · <code>Numero Directo</code> · <code>Facebook DM</code> · <code>Instagram DM</code></td></tr>
           <tr><td>Ciudad Cliente</td><td><code>Ciudad Cliente</code></td><td>Ciudad donde recibe el producto.</td><td><code>quito</code> · <code>guayaquil</code> · <code>cuenca</code> · <code>ambato</code></td></tr>
@@ -1023,6 +1024,114 @@ Si todavía busca opciones para {{2}}, en Escollanos seguimos a su disposición�
     <p class="text-zinc-400 max-w-3xl mb-10 leading-relaxed">
       Bot único sobre GoHighLevel Conversation AI V2 (Bot Goals). Se presenta como asesor de Escollanos, sin nombre propio (decisión postergada). Behavior <span class="font-mono">Autopilot</span> tras soft launch en modo <span class="font-mono">Suggestive</span>.
     </p>
+
+    <!-- ===== PRE-BOT CONTEXT · WF INICIO BOT ESCOLLANOS V1.0 ===== -->
+    <div class="card card-amber mb-6">
+      <div class="flex items-center gap-2 mb-4">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fcd34d" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span class="font-mono text-[11px] tracking-widest text-amber-300 uppercase">Pre-Bot · Workflow de routing por producto (corre ANTES del bot)</span>
+      </div>
+
+      <p class="text-sm text-zinc-300 mb-5 leading-relaxed">
+        El workflow <span class="font-mono text-amber-200">INICIO BOT ESCOLLANOS V1.0</span> se ejecuta <span class="text-white">antes</span> de que el bot tome la conversación. Su trabajo es: <span class="text-white">identificar el producto</span> según el CTA del anuncio que tocó el lead, mandar saludo + info del producto, y <span class="text-white">esperar a que el lead responda</span>. Recién cuando el lead responde, el bot entra en escena — con producto <span class="text-white">ya identificado por canal</span>, no por interpretación del LLM.
+      </p>
+
+      <!-- Trigger -->
+      <div class="card-tight mb-4" style="background: rgba(40,28,8,.25); border-color: rgba(245,158,11,.25);">
+        <div class="font-mono text-[11px] tracking-widest text-amber-300 uppercase mb-2">Trigger</div>
+        <div class="flex flex-wrap gap-2 text-sm">
+          <span class="pill pill-violet">Customer Replied</span>
+          <span class="pill pill-cyan">Reply channel = WhatsApp</span>
+          <span class="pill pill-rose">Doesn't Have Tag · apaga bot</span>
+        </div>
+      </div>
+
+      <!-- Flow esquema horizontal -->
+      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-3">Esquema del flujo</div>
+      <div class="card-tight mb-5" style="background: rgba(15,12,8,.5); border-color: rgba(255,255,255,.05);">
+        <div class="flex flex-col gap-3 text-sm">
+
+          <!-- Paso 1 -->
+          <div class="flex items-start gap-3">
+            <div class="font-mono text-xs text-amber-300 mt-0.5 shrink-0 w-6">①</div>
+            <div class="text-zinc-300">
+              <span class="text-white">Lead toca anuncio de Meta Ads</span> (10 campañas activas, una por producto) → llega a WhatsApp con mensaje pre-llenado tipo <span class="font-mono text-zinc-400">"Hola, vi el anuncio de [producto]…"</span>
+            </div>
+          </div>
+
+          <!-- Paso 2 -->
+          <div class="flex items-start gap-3">
+            <div class="font-mono text-xs text-amber-300 mt-0.5 shrink-0 w-6">②</div>
+            <div class="text-zinc-300">
+              <span class="text-white">Router If/Else por producto</span> — el WF lee el primer mensaje y rutea por contenido a una de las 10 ramas:
+              <div class="mt-2 grid grid-cols-2 md:grid-cols-5 gap-1.5 text-xs">
+                <span class="pill pill-emerald">1️⃣ CURCUZINC</span>
+                <span class="pill pill-emerald">2️⃣ VITALMEN</span>
+                <span class="pill pill-emerald">3️⃣ R14 QUIETA</span>
+                <span class="pill pill-emerald">4️⃣ DRENATOX</span>
+                <span class="pill pill-emerald">5️⃣ DRENATOX + METAFAT</span>
+                <span class="pill pill-emerald">6️⃣ RENOBELLA</span>
+                <span class="pill pill-emerald">7️⃣ METAFAT</span>
+                <span class="pill pill-emerald">8️⃣ ALCACHOFA</span>
+                <span class="pill pill-emerald">9️⃣ TOLERANCE</span>
+                <span class="pill pill-emerald">🔟 REFERENCE</span>
+              </div>
+              <div class="text-xs text-zinc-500 mt-2">+ rama fallback <span class="font-mono">cualquiera</span> · when none of the conditions are met</div>
+              <div class="text-xs text-amber-300/80 mt-2">⚙ Cada rama setea el CF <span class="font-mono">{{contact.nombre_del_producto}}</span> con el nombre del producto antes de seguir — eso es lo que después el bot lee como contexto inicial.</div>
+            </div>
+          </div>
+
+          <!-- Paso 3 -->
+          <div class="flex items-start gap-3">
+            <div class="font-mono text-xs text-amber-300 mt-0.5 shrink-0 w-6">③</div>
+            <div class="text-zinc-300">
+              En cada rama, el WF dispara <span class="text-white">la misma secuencia</span>:
+              <div class="mt-2 flex flex-wrap gap-1.5 items-center text-xs">
+                <span class="pill pill-zinc">Wait</span>
+                <span class="text-zinc-600">→</span>
+                <span class="pill pill-cyan">WhatsApp · saludo</span>
+                <span class="text-zinc-600">→</span>
+                <span class="pill pill-cyan">WhatsApp · info del producto</span>
+                <span class="text-zinc-600">→</span>
+                <span class="pill pill-amber">Espera respuesta del lead</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paso 4 -->
+          <div class="flex items-start gap-3">
+            <div class="font-mono text-xs text-amber-300 mt-0.5 shrink-0 w-6">④</div>
+            <div class="text-zinc-300">
+              <span class="text-white">Split por Contact Reply / Time Out 23h</span>:
+              <div class="mt-2 grid md:grid-cols-2 gap-2">
+                <div class="card-tight" style="background: rgba(8,28,22,.4); border-color: rgba(16,185,129,.25); padding:10px 14px;">
+                  <div class="text-xs font-medium text-emerald-300 mb-1">✓ Si responde (Contact Reply)</div>
+                  <div class="text-xs text-zinc-400">→ <span class="text-white">acá entra el Bot Conversation AI</span> — el bot toma la conversación con producto ya identificado.</div>
+                </div>
+                <div class="card-tight" style="background: rgba(28,22,8,.4); border-color: rgba(245,158,11,.25); padding:10px 14px;">
+                  <div class="text-xs font-medium text-amber-300 mb-1">⏱ Si no responde (Time Out 23h)</div>
+                  <div class="text-xs text-zinc-400">→ Follow-up (WhatsApp/SMS) → Espera 2 días → <span class="pill pill-rose" style="font-size:10px;">tag apaga bot</span> → Go To FINAL.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Implicaciones para el bot -->
+      <div class="card-tight" style="background: rgba(15,12,28,.45); border-color: rgba(139,92,246,.25);">
+        <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-3">Qué significa esto para el Bot</div>
+        <ul class="text-sm text-zinc-300 space-y-2 leading-relaxed">
+          <li>· <span class="text-white">El bot NUNCA inicia conversación.</span> Siempre arranca después de la secuencia WhatsApp saludo + WhatsApp producto del WF, y solo cuando el lead respondió.</li>
+          <li>· <span class="text-white">El producto consultado ya está identificado por canal</span> (rama del If/Else), no por interpretación del mensaje. El step 1 del Script Flow ("identificar producto") es <span class="text-white">confirmar</span>, no descubrir.</li>
+          <li>· <span class="text-white">Custom Field <span class="font-mono text-cyan-200">{{contact.nombre_del_producto}}</span></span> queda seteado por el WF antes del handoff (uno de los 10 valores: <span class="font-mono">CURCUZINC</span>, <span class="font-mono">VITALMEN</span>, <span class="font-mono">R14 QUIETA</span>, etc.). El bot lo lee como variable de contexto y carga automáticamente del KB la sección correspondiente a ese producto — apertura tipo <span class="serif-italic text-zinc-200">"veo que está consultando por <span class="font-mono not-italic">{{contact.nombre_del_producto}}</span>… ¿en qué puedo asistirle?"</span></li>
+          <li>· <span class="text-white">El primer turno del lead que el bot ve NO es "Hola, vi el anuncio…"</span> — eso ya pasó. El bot ve la respuesta del lead al mensaje de info del producto (preguntas, "cuánto cuesta", "lo quiero", dudas de envío, etc.).</li>
+          <li>· <span class="text-white">Tag <span class="font-mono">apaga bot</span></span> bloquea re-entrada al WF (filter del trigger) y debe activarse al cerrar venta o handoff humano.</li>
+          <li>· <span class="text-white">Productos cubiertos por el WF</span> = catálogo activo del bot. Si entra mensaje fuera de esos 10 productos, cae en la rama <span class="font-mono">cualquiera</span> — definir si el bot la atiende o se hace Bot Transfer "Mensaje fuera de campaña".</li>
+        </ul>
+      </div>
+    </div>
 
     <!-- Settings -->
     <div class="card mb-6">
