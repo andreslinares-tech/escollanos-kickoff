@@ -472,7 +472,7 @@
       <div class="card-tight">
         <div class="font-mono text-[11px] tracking-widest text-amber-300 uppercase mb-2">⏳ Pendiente cliente</div>
         <ul class="text-sm text-zinc-300 space-y-1.5 leading-relaxed">
-          <li>· Producto Consultado → listado final de 22 productos (Mela)</li>
+          <li>· Producto Consultado → 55 productos identificados desde PDFs oficiales (Reckeweg 42 · PiLeJe 2 · CiBiDol 4 · LabFarve 7) — ver dropdown canónico</li>
           <li>· Caso Clínico → lista de condiciones recurrentes (Mela)</li>
         </ul>
       </div>
@@ -1350,16 +1350,17 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
 
     <!-- KB plan -->
     <div class="card">
-      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-4">Knowledge Base plan · 3 KBs</div>
+      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-4">Knowledge Base plan · 4 KBs</div>
       <table class="std">
         <thead><tr><th>KB</th><th>Tipo</th><th>Contenido</th></tr></thead>
         <tbody>
           <tr><td>KB 1 · Transversal Escollanos</td><td>Web Crawler + Rich Text</td><td>Web del cliente, registro sanitario, frases éticas, zonas cobertura, métodos pago, modelo pool 24/7</td></tr>
-          <tr><td>KB 2 · Tabla Productos</td><td>Tables CSV (UTF-8)</td><td>22 productos publicables + Gripfectan + complementarios · precio, uso, complementario, publicable sí/no</td></tr>
+          <tr><td>KB 2 · Tabla Productos</td><td>Tables CSV (UTF-8)</td><td>55 productos identificados (Reckeweg 42 · PiLeJe 2 · CiBiDol 4 · LabFarve 7) · uso, pregunta diagnóstica, complementarios, frase ética, publicable sí/no</td></tr>
           <tr><td>KB 3 · Custom Responses</td><td>FAQs manuales</td><td>Precio fijo, registro sanitario, frases éticas literales, datos bancarios, FAQs operativas</td></tr>
+          <tr><td>KB 4 · Cross-Sell Matrix</td><td>Rich Text inline en prompt</td><td>Mapa síntoma → producto principal → complementarios por 9 sistemas + 4 combos vigentes (Reset 30 Días · R14+Tolérance · R14+Renovella · Tratamiento 3 meses)</td></tr>
         </tbody>
       </table>
-      <p class="text-[11px] text-zinc-500 mt-3">Total 3/7 KBs por bot · 3/15 KBs por location. Margen amplio.</p>
+      <p class="text-[11px] text-zinc-500 mt-3">Total 4/7 KBs por bot · 4/15 KBs por location. Margen amplio.</p>
     </div>
   </div>
 </section>
@@ -1368,12 +1369,12 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
 <section id="sec-9" class="px-8 lg:px-16 py-20 border-b border-white/5">
   <div class="max-w-6xl">
     <div class="sec-num mb-3">09 / KNOWLEDGE BASE</div>
-    <h2 class="sec-title mb-3">3 KBs · carga manual UI</h2>
+    <h2 class="sec-title mb-3">4 KBs · carga manual UI</h2>
     <p class="text-zinc-400 max-w-3xl mb-8 leading-relaxed">
       La API V2 de GHL <span class="text-white">no expone endpoints CRUD para Knowledge Base</span> — toda la carga es manual desde <span class="font-mono">AI Agents → Knowledge Base</span>. Indexación ~60s por KB.
     </p>
 
-    <div class="grid md:grid-cols-3 gap-4 mb-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
       <div class="card">
         <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">KB 1 · Transversal</div>
         <div class="text-base text-white mb-2">Web Crawler + Rich Text</div>
@@ -1389,15 +1390,15 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
 
       <div class="card">
         <div class="font-mono text-[11px] tracking-widest text-cyan-300 uppercase mb-2">KB 2 · Tabla Productos</div>
-        <div class="text-base text-white mb-2">Tables CSV · UTF-8 sin BOM</div>
+        <div class="text-base text-white mb-2">Tables CSV · 55 productos</div>
         <ul class="text-sm text-zinc-300 space-y-1 leading-relaxed">
-          <li>· Nombre, categoría, precio</li>
-          <li>· Uso principal + variantes diagnósticas</li>
-          <li>· Complementario asociado + frase cross-sell</li>
-          <li>· Publicable en redes (SÍ/NO — Gripfectan = NO)</li>
-          <li>· Frase Ética Aplicable</li>
+          <li>· 42 Reckeweg (R1–R96 + Drenatox + Apetimed)</li>
+          <li>· 2 PiLeJe (Lactibiane Référence + Tolérance)</li>
+          <li>· 4 EsCanabis CiBiDol (S/M/L/Crema)</li>
+          <li>· 7 LabFarve (Caléndula, Alcachofa, Glunat, Vira Vira, Artrosed, Passiflora, Crema)</li>
+          <li>· Uso · pregunta diagnóstica · complementarios · frase ética</li>
         </ul>
-        <div class="text-[11px] text-amber-300 mt-3">⏳ Mela arma planilla maestra</div>
+        <div class="text-[11px] text-emerald-300 mt-3">✅ Destilado de PDFs oficiales · ⏳ Mela precios + alias</div>
       </div>
 
       <div class="card">
@@ -1412,6 +1413,19 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
           <li>· Devoluciones · recompra · objeción precio</li>
         </ul>
         <div class="text-[11px] text-zinc-500 mt-3">LLM no varía respuesta</div>
+      </div>
+
+      <div class="card">
+        <div class="font-mono text-[11px] tracking-widest text-amber-300 uppercase mb-2">KB 4 · Cross-Sell Matrix</div>
+        <div class="text-base text-white mb-2">Rich Text inline · 9 sistemas</div>
+        <ul class="text-sm text-zinc-300 space-y-1 leading-relaxed">
+          <li>· Síntoma → producto principal → complementarios</li>
+          <li>· Digestivo · nervioso · respiratorio · osteomuscular</li>
+          <li>· GU · hormonal · cardio · piel · inmunidad</li>
+          <li>· 4 combos vigentes (Reset 30 Días · R14+Tolérance · R14+Renovella · 3 meses)</li>
+          <li>· Reglas SÍ/NO + horarios al combinar</li>
+        </ul>
+        <div class="text-[11px] text-emerald-300 mt-3">✅ Base del patrón #7 Cross-sell por síntoma</div>
       </div>
     </div>
 
@@ -1478,7 +1492,7 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
           <li>Pipeline Comercial Escollanos con 8 etapas</li>
           <li>Usuario pool "Bot Escollanos" creado</li>
           <li>6 asesores recibiendo notificaciones del correo compartido</li>
-          <li>3 KBs creadas y status "Active"</li>
+          <li>4 KBs creadas y status "Active"</li>
           <li>Plantillas Meta aprobadas</li>
           <li>/preflight-ghl OK</li>
         </ul>
@@ -1543,7 +1557,7 @@ Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma
         <thead><tr><th>Responsable</th><th>Entregable</th><th>Fecha</th></tr></thead>
         <tbody>
           <tr><td>Mela</td><td>Plantillas WhatsApp faltantes (productos sin flujo)</td><td>Esta semana</td></tr>
-          <tr><td>Mela</td><td>Listado completo 22 productos + Gripfectan + complementarios · precio · ficha técnica</td><td>Antes del 5 jun</td></tr>
+          <tr><td>Mela</td><td>Precios actualizados de los 55 productos · resolver alias (Atroce↔Artrosed · Renovella↔R10 · R15↔Vita C 15) · confirmar política CiBiDol en redes</td><td>Antes del 5 jun</td></tr>
           <tr><td>Mela</td><td>Tabla productos complementarios (bump/upsell) con frase del asesor</td><td>Antes del 5 jun</td></tr>
           <tr><td>Gaby</td><td>Frase oficial registro sanitario / legalidad</td><td>Antes del 5 jun</td></tr>
           <tr><td>Gaby + Mela</td><td>Frases éticas oficiales (psicotrópicos + enfermedades puntuales)</td><td>Antes del 5 jun</td></tr>
