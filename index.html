@@ -527,7 +527,7 @@
     <div class="sec-num mb-3">05 / TAGS</div>
     <h2 class="sec-title mb-3">Convenciones de reportería</h2>
     <p class="text-zinc-400 max-w-3xl mb-8 leading-relaxed">
-      Los tags en este proyecto son <span class="text-white">solo para reportería</span> — no disparan workflows. El handoff es atómico vía <span class="font-mono">Bot Transfer</span>. Se aplican vía workflows y bot actions, no se crean manualmente.
+      La mayoría de los tags son <span class="text-white">para reportería</span> (Smart Lists, segmentación). La excepción son los <span class="font-mono text-rose-200">handoff_*</span>: cada escenario de <span class="text-white">Transferencia a humano</span> aplica su tag y <span class="text-white">ese tag dispara el WF</span> de handoff correspondiente. Se aplican vía escenarios, workflows y bot actions — no se crean manualmente.
     </p>
 
     <div class="grid md:grid-cols-2 gap-5">
@@ -573,6 +573,67 @@
     <p class="text-zinc-400 max-w-3xl mb-8 leading-relaxed">
       Los workflows <span class="text-white">orquestan al bot</span> — por eso van antes del bot en este blueprint. Cada uno con instrucciones manuales UI + prompt para pegar en el <span class="font-mono">Workflow AI Builder</span> de GHL. Carpetas: <span class="font-mono text-violet-200">Bot</span> (WF 01-06) y <span class="font-mono text-emerald-200">Proceso comercial</span> (WF 08). El follow-up 24h se resuelve dentro de WF 01 vía If/Else — no hay WF separado de remarketing.
     </p>
+
+    <!-- Callout: mecanismo de handoff -->
+    <div class="card card-violet mb-8">
+      <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-3">Mecanismo de handoff · capa bot</div>
+      <p class="text-sm text-zinc-300 leading-relaxed mb-4">
+        Los handoffs (WF 02-06) <span class="text-white">no usan</span> la acción <span class="font-mono">Bot Transfer</span>. Se configuran con la función nativa <span class="text-white">Transferencia a humano</span> (Bot Goals → escenarios). Cada escenario detecta la condición, <span class="text-white">asigna al pool</span>, manda el mensaje final, <span class="text-white">apaga el bot</span> y aplica un tag <span class="font-mono text-rose-200">handoff_*</span>. <span class="text-white">Ese tag dispara el WF</span> que ejecuta la capa operativa (etapa, notificación, derivación). Una sola fuente de verdad, sin gastar acciones del bot (límite de 5).
+      </p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-zinc-400 font-mono text-[11px] tracking-widest uppercase border-b border-white/10">
+              <th class="py-2 pr-4">Escenario</th>
+              <th class="py-2 pr-4">Condición de activación</th>
+              <th class="py-2 pr-4">Asigna</th>
+              <th class="py-2 pr-4">Reactivar</th>
+              <th class="py-2 pr-4">Tag → WF</th>
+            </tr>
+          </thead>
+          <tbody class="text-zinc-300 align-top">
+            <tr class="border-b border-white/5">
+              <td class="py-2 pr-4 text-white">Pago Link / Tarjeta</td>
+              <td class="py-2 pr-4">Pide pagar con link Datafast, Deuna o tarjeta débito/crédito.</td>
+              <td class="py-2 pr-4">pool</td>
+              <td class="py-2 pr-4">8 h</td>
+              <td class="py-2 pr-4"><span class="pill pill-rose">handoff_pago_link</span> → WF 02</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-2 pr-4 text-white">Receta Médica</td>
+              <td class="py-2 pr-4">Llega imagen de receta o texto del tipo "el doctor me mandó esto".</td>
+              <td class="py-2 pr-4">pool</td>
+              <td class="py-2 pr-4">8 h</td>
+              <td class="py-2 pr-4"><span class="pill pill-rose">handoff_receta</span> → WF 03</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-2 pr-4 text-white">Imagen No Identificada</td>
+              <td class="py-2 pr-4">Imagen que no mapea a producto del catálogo ni es receta.</td>
+              <td class="py-2 pr-4">pool</td>
+              <td class="py-2 pr-4">8 h</td>
+              <td class="py-2 pr-4"><span class="pill pill-rose">handoff_imagen</span> → WF 04</td>
+            </tr>
+            <tr class="border-b border-white/5">
+              <td class="py-2 pr-4 text-white">Solicitud de humano <span class="text-zinc-500">(pre-built)</span></td>
+              <td class="py-2 pr-4">Pide explícitamente hablar con una persona.</td>
+              <td class="py-2 pr-4">pool</td>
+              <td class="py-2 pr-4">8 h</td>
+              <td class="py-2 pr-4"><span class="pill pill-rose">handoff_pedido_humano</span> → WF 05</td>
+            </tr>
+            <tr>
+              <td class="py-2 pr-4 text-white">Caso Clínico</td>
+              <td class="py-2 pr-4">Quiere dejar/reemplazar psicotrópico o menciona enfermedad puntual e insiste tras la frase ética.</td>
+              <td class="py-2 pr-4">pool</td>
+              <td class="py-2 pr-4 text-rose-300">no reactiva</td>
+              <td class="py-2 pr-4"><span class="pill pill-rose">handoff_caso_clinico</span> → WF 06</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-zinc-500 mt-4 leading-relaxed">
+        En cada escenario va marcado <span class="font-mono">Omita la asignación si el contacto ya tiene usuario asignado</span>. El <span class="font-mono">Mensaje final</span> es lo último que dice el bot antes de apagarse — la capa operativa de cada WF arranca al aplicarse el tag.
+      </p>
+    </div>
 
     <!-- WF 01 -->
     <details class="wf" open>
@@ -637,21 +698,18 @@ No incluir asignación a asesores individuales — el modelo es pool puro. No in
     <details class="wf">
       <summary>
         <div class="flex items-center gap-3"><span class="font-mono text-sm text-violet-300">WF 02</span><span class="text-white text-base font-medium">Handoff Pago Link (Datafast / Deuna)</span></div>
-        <div class="flex gap-2 flex-wrap"><span class="pill pill-violet">Bot Transfer "Pago Link"</span><span class="pill pill-rose">handoff</span></div>
+        <div class="flex gap-2 flex-wrap"><span class="pill pill-rose">Tag handoff_pago_link</span><span class="pill pill-violet">Transferencia a humano</span></div>
       </summary>
       <div class="wf-body">
         <div>
           <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-2">Instrucciones manuales UI</div>
           <ol class="text-sm text-zinc-300 space-y-1.5 leading-relaxed list-decimal pl-5">
-            <li>Trigger: Workflow Trigger from Bot Actions · origen Bot Transfer "Pago Link" o "Pago Deuna"</li>
-            <li>Add Tag <code>handoff_pago_link</code></li>
+            <li>Trigger: Contact Tag Added · <code>handoff_pago_link</code> <span class="text-zinc-500">(lo aplica el escenario "Pago Link / Tarjeta")</span></li>
             <li>If/Else: <code>contact.metodo_pago_elegido = "Datafast"</code> → tag <code>pago_datafast</code> · NO → tag <code>pago_deuna</code></li>
             <li>Update Opportunity stage "Datos pago enviados"</li>
-            <li>Assign User → <code>{{custom_values.usuario_pool_bot}}</code></li>
             <li>Send Email · From/To = <code>{{custom_values.correo_de_salida}}</code> · Subject <span class="font-mono">[HANDOFF PAGO]</span> · Body con datos cliente + link al chat + acción requerida</li>
-            <li>Stop Bot</li>
           </ol>
-          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">No envía mensaje automático al cliente — el bot ya le dijo que un asesor le manda el link.</p>
+          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">La asignación al pool, el mensaje final y el Stop Bot los hace el escenario de Transferencia a humano — este WF solo agrega la capa operativa. No envía mensaje automático: el bot ya le dijo que un asesor le manda el link.</p>
         </div>
         <div>
           <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Prompt Workflow AI Builder</div>
@@ -659,21 +717,15 @@ No incluir asignación a asesores individuales — el modelo es pool puro. No in
             <button class="copy-btn" data-copy>copy</button>
             <div class="prompt-block">Crea un workflow de handoff para cuando el bot de Escollanos detecta que el cliente quiere pagar con link Datafast o con Deuna. Estos métodos requieren que un asesor humano genere un link personalizado por compra, así que el bot transfiere y el WF notifica al pool de 6 asesores.
 
-Trigger: viene desde Bot Transfer "Pago Link" o Bot Transfer "Pago Deuna". Eliminar cualquier trigger placeholder que la AI Builder agregue.
+Trigger: Contact Tag Added con el tag handoff_pago_link. Ese tag lo aplica automáticamente el escenario "Pago Link / Tarjeta" de la función Transferencia a humano del bot (que además asigna al pool, manda el mensaje final y apaga el bot). Eliminar cualquier trigger placeholder que la AI Builder agregue.
 
-Paso 1: Add Tag handoff_pago_link.
+Paso 1: If/Else con condición contact.metodo_pago_elegido = "Datafast". Si sí, Add Tag pago_datafast. Si no, Add Tag pago_deuna.
 
-Paso 2: If/Else con condición contact.metodo_pago_elegido = "Datafast". Si sí, Add Tag pago_datafast. Si no, Add Tag pago_deuna.
+Paso 2: Update Opportunity moviéndolo a stage Datos pago enviados.
 
-Paso 3: Update Opportunity moviéndolo a stage Datos pago enviados.
+Paso 3: Send Email — From = custom_values.correo_de_salida, To = custom_values.correo_de_salida (el correo compartido del pool). Subject: HANDOFF PAGO con first_name y método. Body con cliente, teléfono, producto consultado, método de pago, ciudad y link al chat de GHL. Aclarar que el asesor debe generar el link personalizado y enviárselo al cliente por WhatsApp.
 
-Paso 4: Assign User al custom value usuario_pool_bot (usuario único Bot Escollanos). El asesor del pool que esté disponible lo toma — no asignar a una persona específica.
-
-Paso 5: Send Email — From = custom_values.correo_de_salida, To = custom_values.correo_de_salida (el correo compartido del pool). Subject: HANDOFF PAGO con first_name y método. Body con cliente, teléfono, producto consultado, método de pago, ciudad y link al chat de GHL. Aclarar que el asesor debe generar el link personalizado y enviárselo al cliente por WhatsApp.
-
-Paso 6: Stop Bot — esto pausa el Conversation AI para que no interrumpa al asesor humano.
-
-NO enviar mensaje WhatsApp automático al cliente. El bot ya le explicó que un asesor le envía el link en breve. NO asignar a un asesor individual — el modelo es pool puro.</div>
+NO incluir Assign User ni Stop Bot — eso ya lo hace el escenario de Transferencia a humano. NO enviar mensaje WhatsApp automático al cliente: el bot ya le explicó que un asesor le envía el link en breve. NO asignar a un asesor individual — el modelo es pool puro.</div>
           </div>
         </div>
       </div>
@@ -683,20 +735,18 @@ NO enviar mensaje WhatsApp automático al cliente. El bot ya le explicó que un 
     <details class="wf">
       <summary>
         <div class="flex items-center gap-3"><span class="font-mono text-sm text-violet-300">WF 03</span><span class="text-white text-base font-medium">Handoff Receta Médica</span></div>
-        <div class="flex gap-2 flex-wrap"><span class="pill pill-violet">Bot Transfer "Receta"</span><span class="pill pill-cyan">deriva a numero_recetas</span></div>
+        <div class="flex gap-2 flex-wrap"><span class="pill pill-rose">Tag handoff_receta</span><span class="pill pill-cyan">deriva a numero_recetas</span></div>
       </summary>
       <div class="wf-body">
         <div>
           <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-2">Instrucciones manuales UI</div>
           <ol class="text-sm text-zinc-300 space-y-1.5 leading-relaxed list-decimal pl-5">
-            <li>Trigger: Workflow Trigger from Bot Actions · Bot Transfer "Receta Médica"</li>
-            <li>Add Tag <code>handoff_receta</code></li>
+            <li>Trigger: Contact Tag Added · <code>handoff_receta</code> <span class="text-zinc-500">(lo aplica el escenario "Receta Médica")</span></li>
             <li>Send WhatsApp libre: <i class="text-zinc-400">"Con gusto le ayudamos con su receta, {{first_name}}. Por favor escríbanos a este número: {{custom_values.numero_recetas}} donde nuestro equipo de recetas le atenderá directamente…"</i></li>
             <li>Update Opportunity stage "Derivado a recetas"</li>
-            <li>Assign User → <code>{{custom_values.usuario_pool_bot}}</code> (solo registro interno)</li>
             <li>Send Email informativo · Subject <span class="font-mono">[RECETA derivada]</span> · Body breve "no requiere acción"</li>
-            <li>Stop Bot</li>
           </ol>
+          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">La asignación al pool, el mensaje final y el Stop Bot los hace el escenario "Receta Médica". <span class="text-amber-300">Bloqueante:</span> sin <code>numero_recetas</code> cargado, la derivación queda vacía.</p>
         </div>
         <div>
           <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Prompt Workflow AI Builder</div>
@@ -704,21 +754,15 @@ NO enviar mensaje WhatsApp automático al cliente. El bot ya le explicó que un 
             <button class="copy-btn" data-copy>copy</button>
             <div class="prompt-block">Crea un workflow para Escollanos que maneja el handoff cuando el cliente envía una receta médica al número principal de WhatsApp. Escollanos tiene un número de WhatsApp dedicado solo para recetas — el bot debe derivar al cliente ahí, sin procesar la imagen (la letra del médico es ilegible). Volumen bajo, ~1% de los mensajes.
 
-Trigger: Workflow Trigger from Bot Actions, disparado por la Bot Transfer "Receta Médica".
+Trigger: Contact Tag Added con el tag handoff_receta. Ese tag lo aplica el escenario "Receta Médica" de la función Transferencia a humano del bot (que además asigna al pool, manda el mensaje final y apaga el bot). Eliminar cualquier trigger placeholder que la AI Builder agregue.
 
-Paso 1: Add Tag handoff_receta.
+Paso 1: Send WhatsApp con mensaje libre (la ventana de 24h está abierta porque el cliente acaba de escribir). Tono usted formal cálido, sin signos de apertura ¡ ¿. Texto: "Con gusto le ayudamos con su receta, {first_name}. Por favor escríbanos a este número: {custom_values.numero_recetas} donde nuestro equipo de recetas le atenderá directamente…". Usar puntos suspensivos al final, no signo de exclamación.
 
-Paso 2: Send WhatsApp con mensaje libre (la ventana de 24h está abierta porque el cliente acaba de escribir). Tono usted formal cálido, sin signos de apertura ¡ ¿. Texto: "Con gusto le ayudamos con su receta, {first_name}. Por favor escríbanos a este número: {custom_values.numero_recetas} donde nuestro equipo de recetas le atenderá directamente…". Usar puntos suspensivos al final, no signo de exclamación.
+Paso 2: Update Opportunity moviéndolo a stage Derivado a recetas.
 
-Paso 3: Update Opportunity moviéndolo a stage Derivado a recetas.
+Paso 3: Send Email — From y To = custom_values.correo_de_salida. Subject: RECETA derivada + first_name. Body breve: el bot derivó al nº de recetas, datos del cliente, no requiere acción.
 
-Paso 4: Assign User al custom value usuario_pool_bot. Es solo registro interno, no requiere atención activa porque el cliente fue derivado a otro número.
-
-Paso 5: Send Email — From y To = custom_values.correo_de_salida. Subject: RECETA derivada + first_name. Body breve: el bot derivó al nº de recetas, datos del cliente, no requiere acción.
-
-Paso 6: Stop Bot para que el Conversation AI no interrumpa si el cliente sigue escribiendo en este número.
-
-NO procesar la imagen de la receta bajo ninguna circunstancia. Si el cliente insiste en este número, el pool decide si interviene manualmente.</div>
+NO incluir Assign User ni Stop Bot — eso ya lo hace el escenario de Transferencia a humano. NO procesar la imagen de la receta bajo ninguna circunstancia. Si el cliente insiste en este número, el pool decide si interviene manualmente.</div>
           </div>
         </div>
       </div>
@@ -728,20 +772,17 @@ NO procesar la imagen de la receta bajo ninguna circunstancia. Si el cliente ins
     <details class="wf">
       <summary>
         <div class="flex items-center gap-3"><span class="font-mono text-sm text-violet-300">WF 04</span><span class="text-white text-base font-medium">Handoff Imagen No Identificada</span></div>
-        <div class="flex gap-2 flex-wrap"><span class="pill pill-violet">Bot Transfer "Imagen"</span></div>
+        <div class="flex gap-2 flex-wrap"><span class="pill pill-rose">Tag handoff_imagen</span><span class="pill pill-violet">Transferencia a humano</span></div>
       </summary>
       <div class="wf-body">
         <div>
           <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-2">Instrucciones manuales UI</div>
           <ol class="text-sm text-zinc-300 space-y-1.5 leading-relaxed list-decimal pl-5">
-            <li>Trigger: Workflow Trigger from Bot Actions · Bot Transfer "Imagen No Identificada"</li>
-            <li>Add Tag <code>handoff_imagen</code></li>
-            <li>Send WhatsApp libre: <i class="text-zinc-400">"{{first_name}}, voy a derivarle con un asesor para que le ayude con esta consulta…"</i></li>
+            <li>Trigger: Contact Tag Added · <code>handoff_imagen</code> <span class="text-zinc-500">(lo aplica el escenario "Imagen No Identificada")</span></li>
             <li>Update Opportunity stage "Handoff asesor"</li>
-            <li>Assign User → pool</li>
             <li>Send Email · Subject <span class="font-mono">[IMAGEN]</span> · Body con datos cliente + link chat + acción "revisar imagen y responder"</li>
-            <li>Stop Bot</li>
           </ol>
+          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">La asignación al pool, el mensaje final (<i>"déjeme revisar esto con el equipo…"</i>) y el Stop Bot los hace el escenario — este WF solo mueve la etapa y notifica.</p>
         </div>
         <div>
           <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Prompt Workflow AI Builder</div>
@@ -749,21 +790,13 @@ NO procesar la imagen de la receta bajo ninguna circunstancia. Si el cliente ins
             <button class="copy-btn" data-copy>copy</button>
             <div class="prompt-block">Crea un workflow de handoff para Escollanos que dispara cuando el bot Conversation AI recibe una imagen que no puede identificar (no es receta y no es una foto clara de producto del catálogo). Por política, el bot no procesa imágenes con detalle — siempre deriva al pool de asesores humanos.
 
-Trigger: Workflow Trigger from Bot Actions, vía Bot Transfer "Imagen No Identificada".
+Trigger: Contact Tag Added con el tag handoff_imagen. Ese tag lo aplica el escenario "Imagen No Identificada" de la función Transferencia a humano del bot (que además asigna al pool, manda el mensaje final y apaga el bot). Eliminar cualquier trigger placeholder que la AI Builder agregue.
 
-Paso 1: Add Tag handoff_imagen.
+Paso 1: Update Opportunity moviendo a stage Handoff asesor.
 
-Paso 2: Send WhatsApp con mensaje libre, ventana de 24h abierta. Tono usted cálido, sin signos de apertura. Texto: "{first_name}, voy a derivarle con un asesor para que le ayude con esta consulta…". Terminar con puntos suspensivos.
+Paso 2: Send Email — From y To = custom_values.correo_de_salida. Subject: IMAGEN Handoff por imagen no identificada + first_name. Body con datos del cliente, producto que se estaba conversando, link al chat de GHL, y acción requerida: revisar la imagen y responder.
 
-Paso 3: Update Opportunity moviendo a stage Handoff asesor.
-
-Paso 4: Assign User al custom value usuario_pool_bot. El primer asesor disponible toma.
-
-Paso 5: Send Email — From y To = custom_values.correo_de_salida. Subject: IMAGEN Handoff por imagen no identificada + first_name. Body con datos del cliente, producto que se estaba conversando, link al chat de GHL, y acción requerida: revisar la imagen y responder.
-
-Paso 6: Stop Bot — el asesor humano se hace cargo, no queremos que el bot vuelva a interrumpir.
-
-NO procesar la imagen. NO intentar describir el contenido. La derivación es directa.</div>
+NO incluir Assign User ni Stop Bot — eso ya lo hace el escenario de Transferencia a humano. El escenario ya manda el mensaje final al cliente, así que NO enviar WhatsApp adicional desde el WF. NO procesar la imagen ni intentar describir el contenido.</div>
           </div>
         </div>
       </div>
@@ -773,43 +806,31 @@ NO procesar la imagen. NO intentar describir el contenido. La derivación es dir
     <details class="wf">
       <summary>
         <div class="flex items-center gap-3"><span class="font-mono text-sm text-violet-300">WF 05</span><span class="text-white text-base font-medium">Handoff Pedido Humano</span></div>
-        <div class="flex gap-2 flex-wrap"><span class="pill pill-violet">Bot Transfer "Pedido Humano"</span><span class="pill pill-red">URGENT</span></div>
+        <div class="flex gap-2 flex-wrap"><span class="pill pill-rose">Tag handoff_pedido_humano</span><span class="pill pill-red">URGENT</span></div>
       </summary>
       <div class="wf-body">
         <div>
           <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-2">Instrucciones manuales UI</div>
           <ol class="text-sm text-zinc-300 space-y-1.5 leading-relaxed list-decimal pl-5">
-            <li>Trigger: Workflow Trigger from Bot Actions · Bot Transfer "Pedido Humano"</li>
-            <li>Add Tag <code>handoff_pedido_humano</code></li>
-            <li>Send WhatsApp libre: <i class="text-zinc-400">"Por supuesto, {{first_name}}. Le voy a derivar con un asesor en este momento…"</i></li>
+            <li>Trigger: Contact Tag Added · <code>handoff_pedido_humano</code> <span class="text-zinc-500">(escenario pre-built "Solicitud de humano", con tag personalizado)</span></li>
             <li>Update Opportunity stage "Handoff asesor"</li>
-            <li>Assign User → pool</li>
             <li>Send Email URGENT · Subject <span class="font-mono">🔔 [URGENTE] Pedido humano</span> · Body con datos + link chat</li>
-            <li>Stop Bot</li>
           </ol>
-          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">El público adulto escribe estas frases con frecuencia (incluso en mayúsculas). La velocidad es la métrica clave.</p>
+          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">El escenario "Solicitud de humano" (ya Activado) asigna al pool, manda el mensaje final y apaga el bot. Hay que agregarle el tag personalizado <code>handoff_pedido_humano</code> para que dispare este WF. El público adulto escribe estas frases con frecuencia (incluso en mayúsculas) — la velocidad es la métrica clave.</p>
         </div>
         <div>
           <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Prompt Workflow AI Builder</div>
           <div class="copy-wrap">
             <button class="copy-btn" data-copy>copy</button>
-            <div class="prompt-block">Crea un workflow para Escollanos que maneja el handoff cuando el cliente pide explícitamente hablar con una persona. El público de Escollanos es adulto y suele escribir frases como "humano", "asesor", "persona real" o incluso "QUIERO HABLAR CON UN HUMANO" en mayúsculas — hay que responder rápido para no perder confianza. El bot detecta esa intención y dispara Bot Transfer Pedido Humano.
+            <div class="prompt-block">Crea un workflow para Escollanos que maneja el handoff cuando el cliente pide explícitamente hablar con una persona. El público de Escollanos es adulto y suele escribir frases como "humano", "asesor", "persona real" o incluso "QUIERO HABLAR CON UN HUMANO" en mayúsculas — hay que responder rápido para no perder confianza. Lo detecta el escenario pre-built "Solicitud de humano" de la función Transferencia a humano del bot.
 
-Trigger: Workflow Trigger from Bot Actions vía Bot Transfer "Pedido Humano".
+Trigger: Contact Tag Added con el tag handoff_pedido_humano. Ese tag se agrega como tag personalizado en el escenario "Solicitud de humano" (que además asigna al pool, manda el mensaje final y apaga el bot). Eliminar cualquier trigger placeholder que la AI Builder agregue.
 
-Paso 1: Add Tag handoff_pedido_humano.
+Paso 1: Update Opportunity stage Handoff asesor.
 
-Paso 2: Send WhatsApp libre, ventana abierta. Tono usted cálido sin signos de apertura: "Por supuesto, {first_name}. Le voy a derivar con un asesor en este momento…". Terminar con puntos suspensivos.
+Paso 2: Send Email — From y To = custom_values.correo_de_salida. Subject marcado URGENTE con first_name. Body explica que el cliente pidió explícitamente humano, datos de contacto, producto que se estaba consultando, link al chat de GHL, y acción: tomar la conversación inmediato.
 
-Paso 3: Update Opportunity stage Handoff asesor.
-
-Paso 4: Assign User al custom value usuario_pool_bot. El pool de 6 asesores comparte el correo y toma según disponibilidad.
-
-Paso 5: Send Email — From y To = custom_values.correo_de_salida. Subject marcado URGENTE con first_name. Body explica que el cliente pidió explícitamente humano, datos de contacto, producto que se estaba consultando, link al chat de GHL, y acción: tomar la conversación inmediato.
-
-Paso 6: Stop Bot — esto es crítico, el cliente NO quiere seguir hablando con el bot bajo ningún concepto.
-
-Sin demoras ni reglas adicionales. La velocidad es la métrica clave acá.</div>
+NO incluir Assign User ni Stop Bot — eso ya lo hace el escenario. El escenario ya mandó el mensaje final, así que NO enviar WhatsApp adicional. Sin demoras ni reglas adicionales: la velocidad es la métrica clave acá.</div>
           </div>
         </div>
       </div>
@@ -819,20 +840,17 @@ Sin demoras ni reglas adicionales. La velocidad es la métrica clave acá.</div>
     <details class="wf">
       <summary>
         <div class="flex items-center gap-3"><span class="font-mono text-sm text-violet-300">WF 06</span><span class="text-white text-base font-medium">Handoff Caso Clínico</span></div>
-        <div class="flex gap-2 flex-wrap"><span class="pill pill-red">CRÍTICO · ética farmacéutica</span></div>
+        <div class="flex gap-2 flex-wrap"><span class="pill pill-rose">Tag handoff_caso_clinico</span><span class="pill pill-red">CRÍTICO · ética farmacéutica</span></div>
       </summary>
       <div class="wf-body">
         <div>
           <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-2">Instrucciones manuales UI</div>
           <ol class="text-sm text-zinc-300 space-y-1.5 leading-relaxed list-decimal pl-5">
-            <li>Trigger: Bot Transfer "Caso Clínico" (cuando CF <code>caso_clinico_mencionado</code> tiene valor + cliente insiste)</li>
-            <li>Add Tag <code>caso_clinico</code> + <code>handoff_clinico</code></li>
-            <li>Send WhatsApp libre: <i class="text-zinc-400">"{{first_name}}, le derivo con un asesor que va a poder ayudarle con más detalle…"</i> (el bot ya dio la frase ética)</li>
+            <li>Trigger: Contact Tag Added · <code>handoff_caso_clinico</code> <span class="text-zinc-500">(escenario "Caso Clínico" — también aplica <code>caso_clinico</code> para auditoría)</span></li>
             <li>Update Opportunity stage "Caso clínico — handoff"</li>
-            <li>Assign User → pool</li>
             <li>Send Email URGENT · Subject <span class="font-mono">⚠️ [CASO CLÍNICO] atención inmediata</span> · Body con caso_clinico_mencionado + reglas (no afirmar que producto sirve, no dosis, no dejar medicación, derivar al médico)</li>
-            <li>Stop Bot <span class="text-rose-300">definitivo</span> — no reactivar</li>
           </ol>
+          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">El bot ya dio la frase ética antes de transferir. El escenario "Caso Clínico" asigna al pool, manda el mensaje final y apaga el bot con la <span class="text-rose-300">reactivación desmarcada (no reactivar)</span> por la sensibilidad del caso.</p>
         </div>
         <div>
           <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Prompt Workflow AI Builder</div>
@@ -840,23 +858,13 @@ Sin demoras ni reglas adicionales. La velocidad es la métrica clave acá.</div>
             <button class="copy-btn" data-copy>copy</button>
             <div class="prompt-block">Crea un workflow de handoff crítico para Escollanos que se dispara cuando el bot detecta un caso clínico — el cliente menciona una enfermedad puntual (lupus, embarazo, diabetes, otras) o pide reemplazar un medicamento psicotrópico. Este es el WF más sensible por ética farmacéutica. El bot ya dio la frase ética oficial antes de transferir.
 
-Trigger: Workflow Trigger from Bot Actions vía Bot Transfer "Caso Clínico". Se activa cuando el CF caso_clinico_mencionado tiene valor y el cliente insiste en respuesta clínica.
+Trigger: Contact Tag Added con el tag handoff_caso_clinico. Ese tag lo aplica el escenario "Caso Clínico" de la función Transferencia a humano del bot, que se activa tras la frase ética (también aplica el tag caso_clinico para auditoría, asigna al pool, manda el mensaje final y apaga el bot sin reactivación). Eliminar cualquier trigger placeholder que la AI Builder agregue.
 
-Paso 1: Add Tag caso_clinico.
+Paso 1: Update Opportunity stage Caso clínico — handoff.
 
-Paso 2: Add Tag handoff_clinico.
+Paso 2: Send Email marcado URGENT. From y To = custom_values.correo_de_salida. Subject con warning, CASO CLÍNICO + first_name + atención inmediata. Body con datos del cliente, caso clínico mencionado (CF), producto consultado, link al chat, y reglas duras para el asesor humano: el bot ya dio la frase ética, NO afirmar que el producto sirve para la enfermedad, NO recomendar dosis, NO recomendar dejar medicamentos, si el cliente insiste redirigir a su médico.
 
-Paso 3: Send WhatsApp libre, ventana abierta. Tono usted cálido, sin signos de apertura: "{first_name}, le derivo con un asesor que va a poder ayudarle con más detalle…". El bot ya dio la frase ética completa en la conversación previa, no repetirla acá.
-
-Paso 4: Update Opportunity stage Caso clínico — handoff.
-
-Paso 5: Assign User al custom value usuario_pool_bot.
-
-Paso 6: Send Email marcado URGENT. From y To = custom_values.correo_de_salida. Subject con warning, CASO CLÍNICO + first_name + atención inmediata. Body con datos del cliente, caso clínico mencionado (CF), producto consultado, link al chat, y reglas duras para el asesor humano: el bot ya dio la frase ética, NO afirmar que el producto sirve para la enfermedad, NO recomendar dosis, NO recomendar dejar medicamentos, si el cliente insiste redirigir a su médico.
-
-Paso 7: Stop Bot — definitivo. El bot NO debe reactivarse en esta conversación.
-
-Este WF es crítico por compliance farmacéutico. La velocidad de respuesta del pool importa.</div>
+NO incluir Assign User ni Stop Bot — eso ya lo hace el escenario, que además deja la reactivación del bot desmarcada (no reactivar) por la sensibilidad del caso. El escenario ya mandó el mensaje final, así que NO enviar WhatsApp adicional. Este WF es crítico por compliance farmacéutico — la velocidad de respuesta del pool importa.</div>
           </div>
         </div>
       </div>
@@ -1136,7 +1144,7 @@ Si todavía busca opciones para {{2}}, en Escollanos seguimos a su disposición�
           <li>· <span class="text-white">Custom Field <span class="font-mono text-cyan-200">{{contact.nombre_del_producto}}</span></span> queda seteado por el WF antes del handoff (uno de los 10 valores: <span class="font-mono">CURCUZINC</span>, <span class="font-mono">VITALMEN</span>, <span class="font-mono">R14 QUIETA</span>, etc.). El bot lo lee como variable de contexto y carga automáticamente del KB la sección correspondiente a ese producto — apertura tipo <span class="serif-italic text-zinc-200">"veo que está consultando por <span class="font-mono not-italic">{{contact.nombre_del_producto}}</span>… ¿en qué puedo asistirle?"</span></li>
           <li>· <span class="text-white">El primer turno del lead que el bot ve NO es "Hola, vi el anuncio…"</span> — eso ya pasó. El bot ve la respuesta del lead al mensaje de info del producto (preguntas, "cuánto cuesta", "lo quiero", dudas de envío, etc.).</li>
           <li>· <span class="text-white">Tag <span class="font-mono">apaga bot</span></span> bloquea re-entrada al WF (filter del trigger) y debe activarse al cerrar venta o handoff humano.</li>
-          <li>· <span class="text-white">Productos cubiertos por el WF</span> = catálogo activo del bot. Si entra mensaje fuera de esos 10 productos, cae en la rama <span class="font-mono">cualquiera</span> — definir si el bot la atiende o se hace Bot Transfer "Mensaje fuera de campaña".</li>
+          <li>· <span class="text-white">Productos cubiertos por el WF</span> = catálogo activo del bot. Si entra mensaje fuera de esos 10 productos, cae en la rama <span class="font-mono">cualquiera</span> — definir si el bot la atiende o se hace handoff "Mensaje fuera de campaña".</li>
         </ul>
       </div>
     </div>
@@ -1203,18 +1211,18 @@ Reglas de estilo obligatorias:
         <span class="pill pill-violet">pegar en campo Objective de GHL</span>
       </div>
       <ol class="text-sm text-zinc-300 space-y-2 leading-relaxed list-decimal pl-5 mb-5">
-        <li>Identificar producto consultado por contexto de campaña (R14, Renovella, Tolerance, Atroce). Si no viene de campaña → Bot Transfer "Mensaje fuera de campaña".</li>
+        <li>Identificar producto consultado por contexto de campaña (R14, Renovella, Tolerance, Atroce). Si no viene de campaña → handoff "Mensaje fuera de campaña".</li>
         <li>Confirmar producto + pregunta diagnóstica (R14: "lo busca por estrés, insomnio o ansiedad?"; Tolerance: "estreñimiento, dolores o gastritis?"; Renovella: "sofocos, cambios de ánimo o ciclo?").</li>
         <li>Guardar Producto Consultado y motivo con Add Contact Info.</li>
         <li>Responder dudas usando KB · sugerir UN complementario · guardar en Productos Mencionados Adicionales.</li>
-        <li>Si pregunta por envío → identificar ciudad. Quito/Cuenca cobertura total. Guayaquil → validar zona → si dudosa, Bot Transfer "Zona Guayaquil sin confirmar". Resto → Servientrega previo pago.</li>
-        <li>Si quiere comprar, preguntar método de pago y guardar. Transfer → mandar <code>{{custom_values.datos_bancarios_pichincha}}</code>. Link/Deuna → Bot Transfer "Pago Link". Contra entrega solo Q/G/C.</li>
+        <li>Si pregunta por envío → identificar ciudad. Quito/Cuenca cobertura total. Guayaquil → validar zona → si dudosa, handoff "Zona Guayaquil sin confirmar". Resto → Servientrega previo pago.</li>
+        <li>Si quiere comprar, preguntar método de pago y guardar. Transfer → mandar <code>{{custom_values.datos_bancarios_pichincha}}</code>. Link/Deuna → handoff "Pago Link". Contra entrega solo Q/G/C.</li>
         <li>Objeción precio → frase empática + dejar al cliente (remarketing 24h actúa fuera del bot).</li>
-        <li>Receta médica (texto o imagen) → respuesta corta + Bot Transfer "Receta Médica".</li>
-        <li>Imagen no identificada → Bot Transfer "Imagen No Identificada".</li>
+        <li>Receta médica (texto o imagen) → respuesta corta + handoff "Receta Médica".</li>
+        <li>Imagen no identificada → handoff "Imagen No Identificada".</li>
         <li>Cliente confirma compra con transferencia → guardar notas + Stop Bot "Confirmación de compra".</li>
         <li>Enfermedad puntual mencionada → ver Additional Information §"enfermedades_puntuales".</li>
-        <li>Cliente pide dejar psicotrópico → ver Additional Information §"psicotropicos" — respuesta literal obligatoria + Bot Transfer.</li>
+        <li>Cliente pide dejar psicotrópico → ver Additional Information §"psicotropicos" — respuesta literal obligatoria + handoff al pool.</li>
       </ol>
       <div class="copy-wrap">
         <button class="copy-btn" data-copy>copy</button>
@@ -1222,7 +1230,7 @@ Reglas de estilo obligatorias:
 
 Script de flujo (seguí este orden):
 
-1. Identificar producto consultado. Leé el campo "Nombre del Producto" y abrí la KB correspondiente. Si por algún motivo no viene de campaña y no podés identificar producto, ejecutá Bot Transfer "Mensaje fuera de campaña".
+1. Identificar producto consultado. Leé el campo "Nombre del Producto" y abrí la KB correspondiente. Si por algún motivo no viene de campaña y no podés identificar producto, derivá al pool — handoff "Mensaje fuera de campaña".
 
 2. Confirmar producto + pregunta diagnóstica corta. Adaptá la pregunta al producto:
 - R14 (insomnio/ansiedad): "lo busca por estrés, insomnio o ansiedad?"
@@ -1234,21 +1242,21 @@ Script de flujo (seguí este orden):
 
 4. Responder dudas con la KB. Sugerí UN solo producto complementario si aplica (cross-sell ético, no presión). Guardalo en "Productos Mencionados Adicionales" separado por coma si hay más de uno.
 
-5. Si el cliente pregunta por envío, identificá ciudad. Quito y Cuenca = cobertura total con mensajero propio. Guayaquil = validar zona; si la zona es dudosa o no figura como cubierta, ejecutá Bot Transfer "Zona Guayaquil sin confirmar". Resto del país = Servientrega previo pago, gratis.
+5. Si el cliente pregunta por envío, identificá ciudad. Quito y Cuenca = cobertura total con mensajero propio. Guayaquil = validar zona; si la zona es dudosa o no figura como cubierta, derivá al pool — handoff "Zona Guayaquil sin confirmar". Resto del país = Servientrega previo pago, gratis.
 
-6. Si quiere comprar, preguntá método de pago y guardalo. Si elige transferencia bancaria, mandá los datos con {{custom_values.datos_bancarios_pichincha}}. Si elige link, Deuna o tarjeta, ejecutá Bot Transfer "Pago Link" — esos métodos los maneja un asesor humano. Contra entrega solo para Quito, Guayaquil cobertura, Cuenca.
+6. Si quiere comprar, preguntá método de pago y guardalo. Si elige transferencia bancaria, mandá los datos con {{custom_values.datos_bancarios_pichincha}}. Si elige link, Deuna o tarjeta, derivá al pool — handoff "Pago Link" — esos métodos los maneja un asesor humano. Contra entrega solo para Quito, Guayaquil cobertura, Cuenca.
 
 7. Si el cliente objeta el precio, respondé con una frase empática corta y dejalo. No insistas. El remarketing a 24 horas actúa fuera del bot.
 
-8. Si el cliente manda una receta médica (texto o imagen), respuesta corta + Bot Transfer "Receta Médica" al número dedicado.
+8. Si el cliente manda una receta médica (texto o imagen), respuesta corta + handoff "Receta Médica" al número dedicado.
 
-9. Si el cliente manda una imagen que no podés identificar, ejecutá Bot Transfer "Imagen No Identificada".
+9. Si el cliente manda una imagen que no podés identificar, derivá al pool — handoff "Imagen No Identificada".
 
 10. Cuando el cliente confirma que hizo la transferencia, guardá la información en notas y ejecutá Stop Bot "Confirmación de compra" para que el asesor verifique el comprobante.
 
 11. Si el cliente menciona una enfermedad puntual (embarazo, lupus, diabetes, hipertensión, hipotiroidismo, cáncer, autoinmune), aplicá la respuesta literal de la sección "Enfermedades puntuales" en Additional Information.
 
-12. Si el cliente pide dejar o reemplazar un psicotrópico (alprazolam, clonazepam, sertralina, fluoxetina, antidepresivo, ansiolítico, pastillas para dormir), aplicá la respuesta literal obligatoria de la sección "Psicotrópicos" en Additional Information y después ejecutá Bot Transfer "Caso Clínico". Nunca recomiendes dejar medicación.</div>
+12. Si el cliente pide dejar o reemplazar un psicotrópico (alprazolam, clonazepam, sertralina, fluoxetina, antidepresivo, ansiolítico, pastillas para dormir), aplicá la respuesta literal obligatoria de la sección "Psicotrópicos" en Additional Information y después derivá al pool — handoff "Caso Clínico". Nunca recomiendes dejar medicación.</div>
       </div>
     </div>
 
@@ -1274,7 +1282,7 @@ Script de flujo (seguí este orden):
           <div class="copy-wrap">
             <div class="prompt-block rose">Para dejar un medicamento debe hacerlo de la mano con su médico, siempre bajo su supervisión. Nuestro producto puede acompañar su tratamiento como adyuvante.</div>
           </div>
-          <p class="text-[11px] text-rose-300 mt-2">Después de esta frase → disparar Bot Transfer "Caso Clínico".</p>
+          <p class="text-[11px] text-rose-300 mt-2">Después de esta frase → disparar el handoff "Caso Clínico".</p>
         </div>
 
         <!-- Enfermedades puntuales -->
@@ -1287,7 +1295,7 @@ Script de flujo (seguí este orden):
           <div class="copy-wrap">
             <div class="prompt-block rose">Nuestro medicamento no tiene contraindicaciones. Sin embargo, en casos como el suyo siempre recomendamos consultar con su médico si puede incorporar nuestro medicamento a su tratamiento.</div>
           </div>
-          <p class="text-[11px] text-rose-300 mt-2">Si el cliente insiste o muestra duda real → Bot Transfer "Caso Clínico".</p>
+          <p class="text-[11px] text-rose-300 mt-2">Si el cliente insiste o muestra duda real → handoff "Caso Clínico".</p>
         </div>
 
         <!-- Recetas médicas -->
@@ -1300,7 +1308,7 @@ Script de flujo (seguí este orden):
           <div class="copy-wrap">
             <div class="prompt-block rose">Para recetas tenemos un número específico que las maneja. Le derivo enseguida al asesor que sigue por ahí…</div>
           </div>
-          <p class="text-[11px] text-rose-300 mt-2">Después → Bot Transfer "Receta Médica" · {{custom_values.numero_recetas}}.</p>
+          <p class="text-[11px] text-rose-300 mt-2">Después → handoff "Receta Médica" · {{custom_values.numero_recetas}}.</p>
         </div>
 
         <!-- Registro sanitario -->
@@ -1327,7 +1335,7 @@ Script de flujo (seguí este orden):
           <div class="copy-wrap">
             <div class="prompt-block rose">voy a confirmar con el área de entregas si cubrimos su ruta…</div>
           </div>
-          <p class="text-[11px] text-rose-300 mt-2">Después → Bot Transfer "Zona Guayaquil sin confirmar". Para Quito/Cuenca cobertura total — confirmar sin derivar.</p>
+          <p class="text-[11px] text-rose-300 mt-2">Después → handoff "Zona Guayaquil sin confirmar". Para Quito/Cuenca cobertura total — confirmar sin derivar.</p>
         </div>
 
         <!-- Datos bancarios -->
@@ -1343,7 +1351,7 @@ Script de flujo (seguí este orden):
 
 Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma.</div>
           </div>
-          <p class="text-[11px] text-rose-300 mt-2">Si el Custom Value está vacío → Bot Transfer "Pago Link" para que el asesor humano pase los datos.</p>
+          <p class="text-[11px] text-rose-300 mt-2">Si el Custom Value está vacío → handoff "Pago Link" para que el asesor humano pase los datos.</p>
         </div>
       </div>
 
@@ -1365,7 +1373,7 @@ Trigger: el cliente pide dejar o reemplazar alprazolam, clonazepam, sertralina, 
 Respuesta literal obligatoria:
 "Para dejar un medicamento debe hacerlo de la mano con su médico, siempre bajo su supervisión. Nuestro producto puede acompañar su tratamiento como adyuvante."
 
-Después de esta frase, ejecutá Bot Transfer "Caso Clínico" para que un asesor humano siga la conversación.
+Después de esta frase, derivá al pool — handoff "Caso Clínico" para que un asesor humano siga la conversación.
 
 ## Enfermedades puntuales · embarazo, lupus, diabetes, hipertensión
 
@@ -1374,7 +1382,7 @@ Trigger: el cliente menciona embarazo, lactancia, lupus, diabetes, hipertensión
 Respuesta literal obligatoria:
 "Nuestro medicamento no tiene contraindicaciones. Sin embargo, en casos como el suyo siempre recomendamos consultar con su médico si puede incorporar nuestro medicamento a su tratamiento."
 
-Si el cliente insiste o muestra duda real después de esta respuesta, ejecutá Bot Transfer "Caso Clínico".
+Si el cliente insiste o muestra duda real después de esta respuesta, derivá al pool — handoff "Caso Clínico".
 
 ## Recetas médicas · derivar al número dedicado
 
@@ -1383,7 +1391,7 @@ Trigger: el cliente manda una imagen que parece receta médica, o escribe "tengo
 Respuesta literal obligatoria:
 "Para recetas tenemos un número específico que las maneja. Le derivo enseguida al asesor que sigue por ahí…"
 
-Después, ejecutá Bot Transfer "Receta Médica" al número {{custom_values.numero_recetas}}.
+Después, derivá al pool — handoff "Receta Médica" al número {{custom_values.numero_recetas}}.
 
 ## Registro sanitario · legalidad de productos
 
@@ -1401,7 +1409,7 @@ Trigger: el cliente menciona una zona de Guayaquil que no figura como cubierta o
 Respuesta:
 "voy a confirmar con el área de entregas si cubrimos su ruta…"
 
-Después, ejecutá Bot Transfer "Zona Guayaquil sin confirmar". Para Quito y Cuenca hay cobertura total — confirmar sin derivar.
+Después, derivá al pool — handoff "Zona Guayaquil sin confirmar". Para Quito y Cuenca hay cobertura total — confirmar sin derivar.
 
 ## Datos bancarios Pichincha · nunca hardcodear
 
@@ -1413,7 +1421,7 @@ Cuando el cliente confirma que va a pagar por transferencia bancaria, mandá los
 
 Cuando haga la transferencia, mándeme captura por favor y el equipo le confirma."
 
-Si el Custom Value datos_bancarios_pichincha está vacío, ejecutá Bot Transfer "Pago Link" para que el asesor humano pase los datos manualmente.</div>
+Si el Custom Value datos_bancarios_pichincha está vacío, derivá al pool — handoff "Pago Link" para que el asesor humano pase los datos manualmente.</div>
         </div>
       </div>
     </div>
@@ -1434,12 +1442,12 @@ Si el Custom Value datos_bancarios_pichincha está vacío, ejecutá Bot Transfer
       </table>
     </div>
 
-    <!-- Bot Transfers -->
+    <!-- Transferencia a humano -->
     <div class="card mb-6">
-      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-4">Bot Transfer · handoffs atómicos (7)</div>
-      <p class="text-[11px] text-amber-300 mb-3">⚠️ GHL permite máx 5 Trigger Workflows + Bot Transfers por bot. Consolidar antes de cargar a UI (sugerencia: fusionar #4 "Imagen" + #5 "Fuera de campaña" en "Derivar pool").</p>
+      <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-4">Transferencia a humano · escenarios (7)</div>
+      <p class="text-[11px] text-emerald-300 mb-3">✓ Se configuran en la función nativa <span class="font-mono">Transferencia a humano</span> (Bot Goals) — NO consumen el cupo de 5 Trigger Workflows + Bot Actions del bot. Cada escenario aplica su tag <span class="font-mono text-rose-200">handoff_*</span> que dispara el WF. Igual conviene consolidar #5 "Fuera de campaña" + #7 "Cliente Pesado" en "Derivar pool" para no multiplicar escenarios.</p>
       <table class="std">
-        <thead><tr><th>#</th><th>Bot Transfer</th><th>Cuándo dispara</th></tr></thead>
+        <thead><tr><th>#</th><th>Escenario</th><th>Cuándo dispara</th></tr></thead>
         <tbody>
           <tr><td>1</td><td>Pago Link</td><td>cliente confirma Datafast o Deuna</td></tr>
           <tr><td>2</td><td>Receta Médica</td><td>imagen receta o texto "me recetó el doctor"</td></tr>
@@ -1629,11 +1637,11 @@ Si el Custom Value datos_bancarios_pichincha está vacío, ejecutá Bot Transfer
         <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-3">Smoke test · 9 casos críticos</div>
         <ol class="text-sm text-zinc-300 space-y-2 leading-relaxed list-decimal pl-5">
           <li>"Cuánto cuesta el R14?" → KB 2 entrega precio + diagnóstico</li>
-          <li>"Estoy tomando alprazolam, puedo reemplazarlo?" → frase ética psicotrópico literal + Bot Transfer Caso Clínico</li>
+          <li>"Estoy tomando alprazolam, puedo reemplazarlo?" → frase ética psicotrópico literal + handoff Caso Clínico</li>
           <li>"Estoy embarazada de 5 meses, puedo tomar Renovella?" → frase ética enfermedad puntual literal</li>
-          <li>Imagen de receta médica → Bot Transfer Receta Médica + derivación a numero_recetas</li>
-          <li>"Llegan a Durán, Guayaquil?" → Bot Transfer Zona Guayaquil sin confirmar</li>
-          <li>"Quiero pagar con tarjeta" → Bot Transfer Pago Link (nunca manda link)</li>
+          <li>Imagen de receta médica → handoff Receta Médica + derivación a numero_recetas</li>
+          <li>"Llegan a Durán, Guayaquil?" → handoff Zona Guayaquil sin confirmar</li>
+          <li>"Quiero pagar con tarjeta" → handoff Pago Link (nunca manda link)</li>
           <li>"Sus productos tienen registro sanitario?" → KB 3 con frase_registro_sanitario</li>
           <li>Compra Tolerance → transferencia → bot manda datos bancarios via Custom Value</li>
           <li>Compra R14 contra entrega en Quito → bot confirma cobertura + handoff cierre</li>
