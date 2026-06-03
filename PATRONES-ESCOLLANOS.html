@@ -7,7 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-  :root{--bg:#0a0a0b;--surface:#141416;--surface-2:#1c1c20;--border:#26262c;--text:#e8e8ea;--muted:#8a8a92;--accent:#34d399;--accent-2:#fbbf24;--violet:#a78bfa;--blue:#60a5fa;}
+  :root{--bg:#0a0a0b;--surface:#141416;--surface-2:#1c1c20;--border:#26262c;--text:#e8e8ea;--muted:#8a8a92;--accent:#34d399;--accent-2:#fbbf24;--violet:#a78bfa;--blue:#60a5fa;--rose:#fb7185;}
   html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;}
   body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");opacity:.5;}
   h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;}
@@ -15,25 +15,19 @@
   .grad-text{background:linear-gradient(120deg,#34d399 0%,#60a5fa 50%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
   .glow{box-shadow:0 0 0 1px rgba(52,211,153,.12),0 8px 40px -8px rgba(52,211,153,.18);}
   .card{background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);border:1px solid var(--border);border-radius:14px;}
+  .card-rose{border-color:rgba(251,113,133,.35);box-shadow:0 0 0 1px rgba(251,113,133,.10),0 8px 40px -10px rgba(251,113,133,.20);}
   .pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:500;border:1px solid var(--border);background:rgba(255,255,255,.02);}
   .pill-emerald{color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.06);}
   .pill-amber{color:#fbbf24;border-color:rgba(251,191,36,.3);background:rgba(251,191,36,.06);}
   .pill-violet{color:#a78bfa;border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.06);}
   .pill-blue{color:#60a5fa;border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.06);}
   .pill-rose{color:#fb7185;border-color:rgba(251,113,133,.3);background:rgba(251,113,133,.06);}
-  .copy-btn{position:absolute;top:10px;right:10px;display:inline-flex;align-items:center;gap:5px;padding:5px 10px;font-size:11px;font-weight:500;color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;}
-  .copy-btn:hover{color:var(--accent);border-color:var(--accent);background:rgba(52,211,153,.08);}
-  .copy-btn.copied{color:var(--accent);border-color:var(--accent);}
-  pre.payload{position:relative;background:#0d0d0f;border:1px solid var(--border);border-radius:10px;padding:14px 14px 14px 14px;padding-right:80px;font-size:12.5px;line-height:1.55;color:#cfcfd3;white-space:pre-wrap;word-break:break-word;overflow-x:auto;}
-  .var-token{color:#fbbf24;background:rgba(251,191,36,.08);padding:1px 5px;border-radius:4px;font-weight:500;}
+  .var-token{color:#fbbf24;background:rgba(251,191,36,.08);padding:1px 5px;border-radius:4px;font-weight:500;font-family:'JetBrains Mono',monospace;font-size:12px;}
+  pre.payload{position:relative;background:#0d0d0f;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:12.5px;line-height:1.55;color:#cfcfd3;white-space:pre-wrap;word-break:break-word;overflow-x:auto;}
   aside nav a{display:block;padding:6px 12px;font-size:13px;color:var(--muted);border-left:2px solid transparent;transition:all .15s;}
   aside nav a:hover{color:var(--text);border-left-color:var(--border);}
   aside nav a.active{color:var(--accent);border-left-color:var(--accent);background:rgba(52,211,153,.04);}
   aside nav .group-title{padding:14px 12px 4px;font-size:10px;font-weight:600;color:#5a5a62;letter-spacing:0.08em;text-transform:uppercase;}
-  details summary{cursor:pointer;list-style:none;}
-  details summary::-webkit-details-marker{display:none;}
-  details[open] summary .chev{transform:rotate(90deg);}
-  .chev{display:inline-block;transition:transform .15s;}
   .scrollbar::-webkit-scrollbar{width:6px;}
   .scrollbar::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
   table.matrix{width:100%;border-collapse:collapse;font-size:13px;}
@@ -43,6 +37,19 @@
   .kbd{display:inline-block;padding:1px 7px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:5px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#cfcfd3;}
   .stat-card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));border:1px solid var(--border);border-radius:14px;padding:18px;}
   .stat-num{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700;line-height:1;}
+  /* checkbox bloque pendientes */
+  .item{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--border);}
+  .item:last-child{border-bottom:none;}
+  .chk{flex:0 0 auto;width:22px;height:22px;margin-top:1px;border:2px solid var(--rose);border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:transparent;font-size:14px;font-weight:700;transition:.15s;user-select:none;}
+  .chk.done{background:var(--accent);border-color:var(--accent);color:#0a0a0b;}
+  .item.done .txt{opacity:.5;text-decoration:line-through;text-decoration-color:var(--muted);}
+  .txt b{color:#fff;font-weight:600;}
+  .progress-bar{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden;border:1px solid var(--border);}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#34d399,#60a5fa);width:0;transition:width .3s;}
+  .prod{scroll-margin-top:18px;}
+  .ficha{font-size:12.5px;line-height:1.6;color:var(--muted);}
+  .ficha strong{color:var(--text);}
+  section[id]{scroll-margin-top:18px;}
 </style>
 </head>
 <body class="min-h-screen">
@@ -56,31 +63,24 @@
       <div class="text-[11px] text-[var(--muted)] mt-1">Bot Conversation AI · Patrones</div>
     </div>
     <nav>
-      <div class="group-title">Visión</div>
-      <a href="#resumen">Resumen ejecutivo</a>
-      <a href="#metodologia">Metodología</a>
-      <a href="#patrones">7 patrones cross-product</a>
-      <div class="group-title">Catálogo</div>
-      <a href="#cat-drenatox">Drenatox</a>
-      <a href="#cat-r14">R14 / R14 Quieta</a>
-      <a href="#cat-metafat">Metafat</a>
-      <a href="#cat-alcachofa">Alcachofa</a>
-      <a href="#cat-lactibiane">Lactibiane Tolerance</a>
-      <a href="#cat-calendula">Jarabe de Caléndula</a>
-      <a href="#cat-renobella">Renobella</a>
-      <a href="#combos">Combos & promos</a>
+      <div class="group-title">Acción requerida</div>
+      <a href="#pendientes" style="color:var(--rose)">🔴 Pendiente cliente</a>
+      <div class="group-title">Reglas</div>
+      <a href="#clinica">Postura clínica oficial</a>
+      <a href="#cross-sell">Cross-sell oficial</a>
+      <div class="group-title">Catálogo (28)</div>
+      <a href="#lab-reckeweg">Dr. Reckeweg 🇩🇪</a>
+      <a href="#lab-labfarve">Labfarve 🇨🇴</a>
+      <a href="#lab-quantum">Quantum Pharm 🇪🇨</a>
+      <a href="#lab-pileje">Pileje 🇫🇷</a>
+      <a href="#lab-omisan">Omisan 🇮🇹</a>
+      <a href="#lab-elena">Elena Natural</a>
+      <a href="#lab-escanabis">Escanabis (CBD)</a>
+      <a href="#lab-kits">Combos y kits</a>
       <div class="group-title">Operación</div>
       <a href="#pago">Política de pago</a>
       <a href="#envio">Política de envío</a>
-      <a href="#clinica">Política clínica</a>
-      <a href="#cierre">Cierre · 9 datos</a>
-      <a href="#cross-sell">Cross-sell matrix</a>
-      <div class="group-title">Bot Responses</div>
-      <a href="#cbrs">50 Custom Bot Responses</a>
-      <div class="group-title">Catálogo extendido</div>
-      <a href="#catalogo-55">55 productos · 5 labs</a>
-      <div class="group-title">Próximos pasos</div>
-      <a href="#pendientes">Pendientes para culminar</a>
+      <a href="#cierre">Próximos pasos</a>
     </nav>
   </aside>
 
@@ -89,477 +89,670 @@
 
     <!-- HERO -->
     <header class="mb-12">
-      <div class="flex items-center gap-2 mb-4">
-        <span class="pill pill-emerald">v1.0 · 2026-05-28</span>
+      <div class="flex items-center gap-2 mb-4 flex-wrap">
+        <span class="pill pill-emerald">Actualizado 2026-06-03</span>
         <span class="pill pill-violet">GHL Conversation AI</span>
-        <span class="pill pill-blue">Listo para cargar</span>
+        <span class="pill pill-blue">28 productos · 7 laboratorios</span>
       </div>
-      <h1 class="display text-5xl lg:text-6xl font-bold leading-[1.05] mb-4">
-        Patrones de asesores <span class="grad-text">Escollanos</span>
+      <h1 class="display text-4xl lg:text-6xl font-bold leading-[1.05] mb-4">
+        Patrones <span class="grad-text">Escollanos</span> · Bot Conversation AI
       </h1>
       <p class="text-lg text-[var(--muted)] max-w-2xl leading-relaxed">
-        Destilación de 216 conversaciones reales en una Knowledge Base + 50 Custom Bot Responses listas para cargar en el bot Conversation AI de Go High Level.
+        Base de conocimiento del bot: 28 productos con su pitch comercial y su ficha técnica oficial (Registro Sanitario, composición, posología del laboratorio y precauciones), la postura clínica por laboratorio y el cross-sell oficial. Hola Mela y Gaby 👋 — antes de activar el bot necesitamos confirmar los puntos del bloque rojo de abajo.
       </p>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
-        <div class="stat-card">
-          <div class="stat-num grad-text">17.265</div>
-          <div class="text-xs text-[var(--muted)] mt-1">Conversaciones últimos 90 días</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num text-[var(--accent)]">216</div>
-          <div class="text-xs text-[var(--muted)] mt-1">Transcripts muestreados</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num text-[var(--accent-2)]">8</div>
-          <div class="text-xs text-[var(--muted)] mt-1">Productos top cubiertos</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num text-[var(--violet)]">50</div>
-          <div class="text-xs text-[var(--muted)] mt-1">Custom Bot Responses</div>
-        </div>
+        <div class="stat-card"><div class="stat-num grad-text">28</div><div class="text-xs text-[var(--muted)] mt-1">Productos con ficha</div></div>
+        <div class="stat-card"><div class="stat-num text-[var(--accent)]">7</div><div class="text-xs text-[var(--muted)] mt-1">Laboratorios</div></div>
+        <div class="stat-card"><div class="stat-num text-[var(--accent-2)]">13</div><div class="text-xs text-[var(--muted)] mt-1">Combos de cross-sell</div></div>
+        <div class="stat-card"><div class="stat-num text-[var(--rose)]">17</div><div class="text-xs text-[var(--muted)] mt-1">Puntos a confirmar</div></div>
       </div>
     </header>
 
-    <!-- RESUMEN -->
-    <section id="resumen" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-4">Resumen ejecutivo</h2>
-      <div class="card p-6 leading-relaxed text-[15px]">
-        <p>Se scrapearon vía API GHL las 17.265 conversaciones de los últimos 90 días en la subaccount de Escollanos. Filtrando por <em>conversaciones con asesor humano asignado + diálogo real de ≥3 turnos por lado</em> quedaron 4.503 elegibles. De ahí se muestreó estratificado por <span class="kbd">producto × outcome (ganada / no-ganada)</span> para 250 conversaciones, de las cuales 216 cumplieron el corte de diálogo válido.</p>
-        <p class="mt-4">Cada transcript se procesó para extraer texto literal de los asesores. Los 8 productos top se destilaron en patrones individuales y se consolidaron en este documento. <strong>Todos los textos son literales</strong>: copy-paste de los asesores reales con dos o tres variantes cuando difieren. Los precios se parametrizaron como <span class="kbd">[VARIABLE: precio_X]</span> para leer de Custom Values vigentes y no quedar hardcoded.</p>
+    <!-- ================= PENDIENTE CLIENTE (ROJO, ARRIBA) ================= -->
+    <section id="pendientes" class="mb-16">
+      <div class="flex items-center gap-2 mb-3 flex-wrap">
+        <span class="pill pill-rose">🔴 Acción requerida</span>
       </div>
+      <h2 class="display text-3xl font-bold mb-2">Necesitamos su confirmación <span class="text-[var(--rose)]">(Mela / Gaby)</span></h2>
+      <p class="text-[var(--muted)] mb-5 max-w-2xl leading-relaxed">Ya armamos toda la base del bot con sus productos, precios y respuestas. Para que dé información <b class="text-white">100% correcta</b>, necesitamos que confirmen estos puntos. Pueden ir marcándolos a medida que los resuelvan (el check es solo visual para su control, no se guarda al cerrar la página).</p>
+
+      <div class="card p-4 mb-6">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-semibold">Progreso</span>
+          <span class="text-sm text-[var(--muted)]"><span id="count">0</span> / <span id="total">0</span> resueltos</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
+      </div>
+
+      <div class="space-y-4" id="groups"></div>
     </section>
 
-    <!-- METODOLOGIA -->
-    <section id="metodologia" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-4">Metodología</h2>
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="card p-5">
-          <div class="pill pill-emerald mb-3">Pasada 1 · Metadata</div>
-          <p class="text-sm text-[var(--muted)]">Paginación API <span class="kbd">/conversations/search</span> ordenada por <span class="kbd">last_message_date desc</span>. Se capturaron ID, contactId, tags, asesor, dirección último mensaje, action automated/manual.</p>
-        </div>
-        <div class="card p-5">
-          <div class="pill pill-amber mb-3">Pasada 2 · Transcripts</div>
-          <p class="text-sm text-[var(--muted)]">Por cada conversación muestreada, <span class="kbd">/conversations/{id}/messages</span> con limit 100. Mensajes ordenados ascendente y exportados a Markdown con metadata + diálogo CLIENTE/ASESOR.</p>
-        </div>
-        <div class="card p-5">
-          <div class="pill pill-violet mb-3">Estratificación</div>
-          <p class="text-sm text-[var(--muted)]">8 productos top × outcome (20 ganadas + 10 no-ganadas por producto) + 10 casos otros. Total objetivo 250, finales 216 tras filtrar diálogos cortos.</p>
-        </div>
-        <div class="card p-5">
-          <div class="pill pill-blue mb-3">Destilación</div>
-          <p class="text-sm text-[var(--muted)]">Un agente especializado por producto leyó sus ~25 transcripts y extrajo: saludo, pitch, objeciones, cierre, follow-up, FAQs sugeridas, tono y léxico. Un agente consolidador generó KB maestra + CBRs.</p>
-        </div>
-      </div>
-    </section>
+    <!-- ================= POSTURA CLÍNICA OFICIAL ================= -->
+    <section id="clinica" class="mb-16">
+      <h2 class="display text-3xl font-bold mb-2">Postura clínica oficial</h2>
+      <p class="text-[var(--muted)] mb-6 max-w-2xl">La postura <strong class="text-white">depende del laboratorio</strong>, no es universal (corrección oficial del cliente, 2026-06-03).</p>
 
-    <!-- 7 PATRONES CROSS-PRODUCT -->
-    <section id="patrones" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-2">7 patrones invariantes cross-product</h2>
-      <p class="text-[var(--muted)] mb-6">Lo que se repite idéntico en todos los productos. Implementación dura del bot.</p>
-
-      <div class="space-y-3">
-        <div class="card p-5">
-          <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">01</span><h3 class="display text-lg font-semibold">Saludo + LOPD</h3></div>
-          <p class="text-sm text-[var(--muted)] mb-3">Mensaje 1 del asesor, idéntico en todos los hilos.</p>
-          <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>Hola 🙂 está escribiendo a ESCOLLANOS Medicamentos Biológicos es un gusto poder atenderle!
-
-Conforme con lo dispuesto en el Reglamento a Ley Orgánica de Protección de Datos Personales Acuerdo No. 012-2019, le informamos que sus datos están siendo protegidos bajo nuestras políticas de uso de datos, al continuar usted acepta nuestros términos y condiciones para mayor información ingrese a nuestra pagina web:
-
-https://escollanos.com.ec/politicas_privacidad</pre>
+      <div class="space-y-4">
+        <!-- Reckeweg -->
+        <div class="card p-6">
+          <div class="flex items-center gap-2 mb-3 flex-wrap">
+            <span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span>
+            <span class="pill pill-emerald">Sin contraindicaciones</span>
+            <h3 class="display text-lg font-semibold">Homeopáticos</h3>
+          </div>
+          <p class="text-sm text-[var(--muted)] mb-3">Drenatox · R14 Quieta · Vita-C 15 Forte · Jutusin · Pulsatilla · Apetimed · Atemaron.</p>
+          <div class="grid sm:grid-cols-2 gap-2 text-xs mb-4">
+            <div class="pill pill-rose">❌ NO contraindicaciones</div>
+            <div class="pill pill-rose">❌ NO efectos secundarios</div>
+            <div class="pill pill-rose">❌ NO farmacodependencia</div>
+            <div class="pill pill-rose">❌ NO interactúa con otros medicamentos</div>
+          </div>
+          <p class="text-sm text-[var(--muted)] mb-3"><strong class="text-[var(--accent)]">Aptos para todas las condiciones:</strong> hipertensión, diabetes, hipotiroidismo, pacientes cardíacos, adultos mayores, cáncer. <strong class="text-white">Niños desde los 12 años</strong>; antes de esa edad solo por recomendación médica.</p>
+          <div class="p-3 rounded-lg border border-[var(--accent-2)]/30 bg-[var(--accent-2)]/5 mb-3">
+            <p class="text-sm"><strong class="text-[var(--accent-2)]">Excepción pediátrica:</strong> Jutusin, Pulsatilla y Apetimed tienen posología para bebés/niños en su ficha → pueden usarse en menores según la dosis indicada. <span class="pill pill-amber">pendiente confirmar</span></p>
+          </div>
+          <div class="text-sm text-[var(--muted)] space-y-2">
+            <p><strong class="text-white">Regla 1 · cliente con enfermedad:</strong> decirle que es homeopático y no tiene contraindicación, <em>pero que le comente a su médico</em> que incorpora un nuevo producto a su tratamiento habitual.</p>
+            <p><strong class="text-white">Regla 2 · cambiar su tratamiento por el nuestro:</strong> debe hacerlo de forma <em>supervisada con su médico</em>.</p>
+            <p><strong class="text-white">Gotas vs tabletas:</strong> mismo efecto y composición; cambia la forma y el sabor (preferencia del cliente). Gotas → en medio vaso de agua, sabor alicorado. Tabletas → bajo la lengua, sin sabor.</p>
+          </div>
         </div>
 
-        <div class="card p-5">
-          <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">02</span><h3 class="display text-lg font-semibold">Política de pago bifurcada por ciudad</h3></div>
-          <ul class="text-sm text-[var(--muted)] space-y-2 leading-relaxed">
-            <li><strong class="text-[var(--text)]">Quito / Guayaquil / Cuenca:</strong> contraentrega · solo efectivo · De Una · transferencia Pichincha→Pichincha · link de pagos. <span class="text-[var(--accent-2)]">NUNCA tarjeta en entrega.</span></li>
-            <li><strong class="text-[var(--text)]">Resto del país:</strong> previa cancelación obligatoria + Servientrega 24-48h con guía de rastreo.</li>
+        <!-- Labfarve -->
+        <div class="card p-6">
+          <div class="flex items-center gap-2 mb-3 flex-wrap">
+            <span class="pill pill-blue">Labfarve 🇨🇴</span>
+            <span class="pill pill-rose">Contraindicado embarazo / lactancia / alergia</span>
+            <h3 class="display text-lg font-semibold">Fitoterápicos</h3>
+          </div>
+          <p class="text-sm text-[var(--muted)] mb-3">Alcachofa · Vira Vira · Passiflora · Artrosed · Glunat · Caléndula Crema · Caléndula Jarabe · Calendulin.</p>
+          <p class="text-sm text-[var(--muted)] mb-3">Medicamentos fitoterápicos 100% naturales, elaborados con plantas cultivadas para ese fin. <strong class="text-white">Todos los productos Labfarve están CONTRAINDICADOS en embarazo, lactancia y alergia al componente principal.</strong> El bot debe declararlo en esos casos.</p>
+          <div class="p-3 rounded-lg border border-[var(--accent-2)]/30 bg-[var(--accent-2)]/5">
+            <p class="text-sm"><strong class="text-[var(--accent-2)]">Caso Alcachofa + hipertensión:</strong> la ficha oficial dice "usar con precaución en hipertensión" (no afirmar que "no eleva la presión"). <span class="pill pill-amber">pendiente confirmar</span></p>
+          </div>
+        </div>
+
+        <!-- Otros labs -->
+        <div class="card p-6">
+          <div class="flex items-center gap-2 mb-3 flex-wrap">
+            <span class="pill pill-violet">Otros laboratorios</span>
+            <h3 class="display text-lg font-semibold">Según ficha de cada producto</h3>
+          </div>
+          <p class="text-sm text-[var(--muted)] mb-3">Quantum Pharm · Pileje · Omisan · Elena Natural · Escanabis. La corrección del cliente no los cubre → se usa la ficha técnica oficial de cada producto.</p>
+          <ul class="ficha space-y-1">
+            <li><strong>CurcuZin-C (Quantum):</strong> contraindicado por alergia a soya / lactosa (planta de fabricación).</li>
+            <li><strong>Iris Red (Omisan):</strong> NO administrar en embarazo ni lactancia; hipersensibilidad a los componentes.</li>
+            <li><strong>Línea CiBiDol (Escanabis, CBD):</strong> no recomendado en embarazo ni lactancia; contraindicado en hipersensibilidad.</li>
+            <li><strong>Quantum / Pileje / Elena:</strong> en embarazo, lactancia o tratamiento médico, consultar con el médico como precaución estándar.</li>
           </ul>
-          <p class="text-xs text-[var(--muted)] mt-3 italic">El bot debe preguntar ciudad ANTES de cerrar para elegir el flujo correcto.</p>
         </div>
 
-        <div class="card p-5">
-          <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">03</span><h3 class="display text-lg font-semibold">Postura clínica oficial</h3></div>
-          <p class="text-sm text-[var(--muted)]">Universal: <strong class="text-[var(--text)]">"NO tiene contraindicaciones"</strong>. Para hipertensión, adulto mayor, medicación crónica, edad avanzada: siempre <em>"100% natural, sin contraindicaciones, lo puede tomar con tranquilidad"</em>.</p>
-          <p class="text-sm text-[var(--accent-2)] mt-3"><strong>Única excepción:</strong> Embarazo / lactancia para Jarabe de Caléndula → derivar a médico.</p>
-        </div>
-
-        <div class="card p-5">
-          <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">04</span><h3 class="display text-lg font-semibold">Pitch = bloque literal + precio variable</h3></div>
-          <p class="text-sm text-[var(--muted)]">Los 8 productos tienen un bloque idéntico palabra-por-palabra en &gt;70% de los transcripts; solo el precio fluctúa por promo.</p>
-          <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
-            <div class="pill pill-violet">Pitch en Custom Bot Response fijo por producto</div>
-            <div class="pill pill-amber">Precio desde Custom Value <span class="kbd">precio_X</span></div>
-            <div class="pill pill-blue">Promo activa desde <span class="kbd">promo_activa</span></div>
-          </div>
-        </div>
-
-        <div class="card p-5">
-          <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">05</span><h3 class="display text-lg font-semibold">Cierre estructurado · 9 datos obligatorios</h3></div>
-          <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>Para procesar su pedido, por favor, ayúdeme enviando los siguientes datos para poder elaborar su factura y programar su entrega:
-
-✅Nombre
-✅Cédula o Ruc
-✅correo 💊
-✅Celular
-✅Número de teléfono adicional
-✅Ciudad de entrega
-✅Dirección completa de entrega escrita (incluye calle numeración, etc)
-✅Ubicación (maps)
-✅ Medicamentos solicitados</pre>
-          <p class="text-xs text-[var(--muted)] mt-2 italic">Bot Action <span class="kbd">Add Contact Info</span> puede capturar los 9 secuencialmente.</p>
-        </div>
-
-        <div class="card p-5">
-          <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">06</span><h3 class="display text-lg font-semibold">Follow-up 24h sin respuesta</h3></div>
-          <p class="text-sm text-[var(--muted)] mb-3">Mensaje canónico, idéntico cross-product. Candidato directo a Workflow GHL sin humano.</p>
-          <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>🌟Hola te saludamos nuevamente de ESCOLLANOS!🌟
-Quería preguntarte si tienes alguna pregunta adicional del producto que nos consultaste con la que pueda ayudarte?
-
-Desde el sistema inmunológico hasta el bienestar digestivo y emocional… Tenemos opciones naturales para cada necesidad!
-
-Realiza tu pedido por este medio! ⬇️⬇️⬇️
-¿No le interesa? Toque en «Detener promociones»</pre>
-        </div>
-
-        <div class="card p-5">
-          <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">07</span><h3 class="display text-lg font-semibold">Cross-sell por síntoma</h3></div>
-          <p class="text-sm text-[var(--muted)]">Cada asesor amplía con producto complementario según síntoma. Mapa completo en sección <a href="#cross-sell" class="text-[var(--accent)] underline">Cross-sell matrix</a>.</p>
+        <div class="card p-5 border-[var(--accent-2)]/30">
+          <p class="text-sm"><strong class="text-[var(--accent-2)]">Anti-patrón a evitar:</strong> el bot NO debe afirmar que un producto "cura" una enfermedad ni dar diagnósticos. Mantenerse en "apoyo", "coadyuvante", "ayuda a".</p>
         </div>
       </div>
     </section>
 
-    <!-- CATÁLOGO -->
-    <section class="mb-16">
-      <h2 class="display text-3xl font-bold mb-2">Catálogo de productos</h2>
-      <p class="text-[var(--muted)] mb-6">Pitches literales, posología, precio variable. Pegar directo como pitch del bot o cargar en KB como Doc.</p>
-
-      <!-- DRENATOX -->
-      <article id="cat-drenatox" class="card p-6 mb-4">
-        <div class="flex items-start justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <h3 class="display text-2xl font-bold mb-1">Drenatox</h3>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span>
-              <span class="pill pill-emerald">21 transcripts</span>
-              <span class="pill">Kit 4 frascos</span>
-            </div>
-          </div>
-          <span class="pill pill-amber"><span class="var-token">precio_drenatox</span></span>
-        </div>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>*DRENATOX (gotas orales) DESINTOXICACIÓN Y BIENESTAR POR TAN SOLO *<span class="var-token">[VARIABLE: precio_drenatox]</span>* Y ENVIO GRATIS para todo el país excepto Galápagos*
-
-Fabricado por Dr.Reckeweg Alemania, es un kit de 4 productos que le permite realizar una desintoxicación y drenaje general de todo su cuerpo para mantenerlo saludable y ayudarle a bajar de peso.
-
-✅R7 HEPAGALEN: Hepatoprotector *(HIGADO)*
-✅R17 COBRALACTIN: Potencializa el drenaje linfático
-✅R27 RENOCALCIN: Permite depurar el organismo y mantiene el tracto urinario desintoxicado. *(RIÑON)*
-✅R37 COLINTESTON: Mantiene desintoxicado el tracto intestinal. *( COLON )*
-
-Todos estos medicamentos hacen una sinergia que le ayuda a bajar de peso por medio de la eliminación de toxinas y sustancias que nuestro organismo no necesita, además le ayudan también a eliminar pigmentaciones y acné.
-Con DRENATOX es posible estar saludable por dentro y esbelto por fuera ☺️
-🚨No tiene contraindicaciones
-Para más información sobre sus componentes le invitamos a visitar el enlace adjunto 👇
-https://escollanos.com.ec/producto/drenatox/</pre>
-        <div class="mt-3 text-xs text-[var(--muted)] grid sm:grid-cols-2 gap-2">
-          <div><strong class="text-[var(--text)]">Posología:</strong> 15 gotas de cada frasco (total 60) en 1-2L de agua, todo el día desde el desayuno. ~1 mes.</div>
-          <div><strong class="text-[var(--text)]">Cross-sell #1:</strong> Vira Vira (urinario) · Metafat (combo Reset)</div>
-        </div>
-      </article>
-
-      <!-- R14 -->
-      <article id="cat-r14" class="card p-6 mb-4">
-        <div class="flex items-start justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <h3 class="display text-2xl font-bold mb-1">R14 / R14 Quieta</h3>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span>
-              <span class="pill pill-emerald">29 + 29 transcripts</span>
-              <span class="pill">Tabletas · Gotas</span>
-              <span class="pill pill-violet">+ Reto 21 días</span>
-            </div>
-          </div>
-          <span class="pill pill-amber"><span class="var-token">precio_r14</span></span>
-        </div>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>R14 QUIETA BIENESTAR POR TAN SOLO *<span class="var-token">[VARIABLE: precio_r14]</span>* Y ENVÍO GRATIS
-
-Presentaciones disponibles:
-TABLETAS SUBLINGUALES (200 unidades)
-GOTAS ORALES (50ml = 1000 gotas)
-
-El R14 QUIETA elaborado por Dr.Reckeweg es un medicamento homeopático 100% alemán para tratar de forma natural el estrés, insomnio y la ansiedad.
-
-🧘BENEFICIOS:
-✅ Controla el insomnio y la exaltación mental
-✅ Favorece el control de la ansiedad y el nerviosismo
-✅ Controla la irritabilidad nerviosa
-✅ Ideal para la depresión y agitación nocturna
-✅ Puede usarse en pacientes cardíacos
-
-Importante
-❌NO crea efectos secundarios adversos
-❌NO causa farmacodependencia
-❌NO interactúa de manera negativa con otros medicamentos
-❌NO tiene contraindicaciones
-
-¿COMO TOMAR?
-TABLETAS Colocas 2 tabletas bajo la lengua 3 veces al día.
-GOTAS viertes 10 gotas en medio vaso de agua y lo tomas 3 veces al dia
-
-Le comparto el enlace de los componentes 👇 https://escollanos.com.ec/producto/quieta/</pre>
-        <div class="mt-3 text-xs text-[var(--muted)] grid sm:grid-cols-2 gap-2">
-          <div><strong class="text-[var(--text)]">Sinónimos:</strong> R14 · QUIETA · TR14 QUIETA · "Quieta"</div>
-          <div><strong class="text-[var(--text)]">Posología noche:</strong> hasta 19h00; insomnio resistente, duplicar 10 min antes de acostarse</div>
-        </div>
-      </article>
-
-      <!-- METAFAT -->
-      <article id="cat-metafat" class="card p-6 mb-4">
-        <div class="flex items-start justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <h3 class="display text-2xl font-bold mb-1">Metafat</h3>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="pill pill-blue">Quantum Pharm 🇪🇨</span>
-              <span class="pill pill-emerald">30 transcripts</span>
-              <span class="pill">60 cápsulas · 1 mes</span>
-            </div>
-          </div>
-          <span class="pill pill-amber"><span class="var-token">precio_metafat</span></span>
-        </div>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>⚖️🔥 METAFAT 🥗💪 VALOR <span class="var-token">[VARIABLE: precio_metafat]</span> Y ENVIO GRATIS para todo el país excepto Galápagos
-
-Es ideal para personas que buscan apoyar la pérdida de peso, activar el metabolismo de las grasas y mejorar la digestión, sin afectar el equilibrio natural del organismo.
-
-🔬 Beneficios principales:
-✅ Favorece la quema de grasa al apoyar el uso de lípidos como fuente de energía ⚡
-✅ Ayuda a controlar el metabolismo de los carbohidratos y grasas
-✅ Contribuye a mantener niveles normales de glucosa en sangre
-✅ Apoya la digestión y reduce la sensación de pesadez
-
-🧬 Componentes principales:
-✅ L-Carnitina: apoya la utilización de grasa como energía
-✅ Alcachofa: estimula la función digestiva y hepática
-✅ Cromo: contribuye al metabolismo normal de macronutrientes y al control de la glucosa
-✅ Vitamina B6: favorece el metabolismo de proteínas y glucógeno
-
-📦 Presentación: frasco de 60 cápsulas, tratamiento para un mes.
-💊 Posología: 2 cápsulas diarias con un vaso de agua 30 minutos despues de su almuerzo.
-Fabricado por laboratorio Quantum.</pre>
-        <div class="mt-3 text-xs text-[var(--muted)]"><strong class="text-[var(--text)]">Upsell estrella:</strong> Combo Reset 30 Días (Drenatox + Metafat) con 5% OFF + guía digital gratis.</div>
-      </article>
-
-      <!-- ALCACHOFA -->
-      <article id="cat-alcachofa" class="card p-6 mb-4">
-        <div class="flex items-start justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <h3 class="display text-2xl font-bold mb-1">Alcachofa</h3>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="pill pill-blue">Labfarve 🇨🇴</span>
-              <span class="pill pill-emerald">27 transcripts</span>
-              <span class="pill">Gotero · ~1 mes</span>
-            </div>
-          </div>
-          <span class="pill pill-amber"><span class="var-token">precio_alcachofa</span></span>
-        </div>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>🌱Alcachofa (gotas orales) POR TAN SOLO *<span class="var-token">[VARIABLE: precio_alcachofa]</span>* Y ENVIO GRATIS para todo el país, excepto Galápagos
-
-Producto elaborado por Laboratorio Labfarve Colombia.
-Es un coadyuvante Natural que le ayuda a bajar de peso y a controlar los niveles de triglicéridos y colesterol además:
-
-✅Facilita la eliminación de grasas
-✅Incrementa la excreción de bilis
-✅Es digestiva y depura toxinas
-✅Coadyuvante para el manejo de cálculos biliares
-✅Da una sensación de saciedad alimenticia
-
-Posologia: 20 gotas en medio vaso de agua ANTES de las 3 comidas principales. Total 60 gotas AL DIA
-En caso de sufrir gastritis sería LUEGO de las 3 comidas.
-ℹ️ RECOMENDACION ADICIONAL durante el tratamiento tomar abundante agua para optimizar su efecto.
-🕔Duración del frasco aproximadamente un mes</pre>
-        <div class="mt-3 text-xs text-[var(--muted)]"><strong class="text-[var(--text)]">Apto:</strong> adulto mayor con presión alta · No eleva presión arterial · Separar 1-2h de medicación habitual. Acción suave, no laxante.</div>
-      </article>
-
-      <!-- LACTIBIANE -->
-      <article id="cat-lactibiane" class="card p-6 mb-4">
-        <div class="flex items-start justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <h3 class="display text-2xl font-bold mb-1">Lactibiane Tolerance</h3>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="pill pill-blue">PileJe 🇫🇷</span>
-              <span class="pill pill-emerald">26 transcripts</span>
-              <span class="pill">30 cápsulas · Probiótico</span>
-            </div>
-          </div>
-          <span class="pill pill-amber"><span class="var-token">precio_lactibiane</span></span>
-        </div>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>Valor <span class="var-token">[VARIABLE: precio_lactibiane]</span>
-
-El Lactibiane TOLERANCE (cápsulas) es un producto elaborado a base de probióticos en Francia por Laboratorios PileJe
-Indicado para:
-✅Síndrome del colon irritable
-✅Enfermedad de Crohn
-✅Intolerancia alimenticia
-✅ Hiperpermeabilidad intestinal
-✅Colitis
-✅Enfermedad celiaca
-✅Proteger la microbiota intestinal
-✅Incrementar el sistema inmune
-
-Nuestro producto es libre de lactosa, gluten y azúcar
-
-Composición
-Lactobacillus acidophilus LA 201
-Lactobacillus acidophilus plantarum LA 301
-Lactobacillus salivarius LA 302
-Bifidobacterium lactis LA 303
-Bifidobacterium lactis LA 304
-
-Contenido 30 cápsulas.
-Posología: 1 diaria en las mañanas al despertar con abundante agua (de 1 a 2 vasos)
-
-Le adjunto un enlace con mayor información 👇
-https://escollanos.com.ec/producto/lactibiane-tolerance/</pre>
-        <div class="mt-3 text-xs text-[var(--muted)]"><strong class="text-[var(--text)]">vs Reference:</strong> Tolerance = patologías intestinales (Crohn, colitis, intolerancias). Reference = mantenimiento general de flora.</div>
-      </article>
-
-      <!-- CALENDULA -->
-      <article id="cat-calendula" class="card p-6 mb-4">
-        <div class="flex items-start justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <h3 class="display text-2xl font-bold mb-1">Jarabe de Caléndula</h3>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="pill pill-blue">Labfarve 🇨🇴</span>
-              <span class="pill pill-emerald">21 transcripts</span>
-              <span class="pill pill-rose">⚠ Embarazo → médico</span>
-            </div>
-          </div>
-          <span class="pill pill-amber"><span class="var-token">precio_calendula</span></span>
-        </div>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>Valor <span class="var-token">[VARIABLE: precio_calendula]</span> y envío a domicilio GRATIS
-Envío no aplica a Galápagos
-
-Jarabe de Caléndula producto de Laboratorio Labfarve Colombia.
-Le comparto algunos beneficios del jarabe de caléndula
-✅Indicado para la gastritis
-✅Es un antiséptico, antinflamatorio y cicatrizante
-✅Ayuda a tratar úlceras
-✅Ayudan eliminar el reflujo y la acidez estomacal
-✅Alivia el dolor
-
-¿Quién puede tomarlo?
-👉Adultos mayores que se encuentren consumiendo medicamentos farmacológicos
-👉Personas que sufren de gastritis, problemas digestivos o que quieran prevenirlos
-👉Todo grupo etario que quiera cuidar de su salud
-
-Posología: una (1) cucharada antes del almuerzo y una cucharada (1) antes de la cena, todos los días.
-Para más información sobre sus componentes le invitamos a visitar el enlace adjunto 👇
-https://escollanos.com.ec/producto/calendula_jarabe/</pre>
-        <table class="matrix mt-4">
-          <thead><tr><th>Edad</th><th>Dosis</th></tr></thead>
+    <!-- ================= CROSS-SELL OFICIAL ================= -->
+    <section id="cross-sell" class="mb-16">
+      <h2 class="display text-3xl font-bold mb-2">Cross-sell oficial</h2>
+      <p class="text-[var(--muted)] mb-6 max-w-2xl">Matriz corregida por el cliente (2026-06-03). El bot detecta la necesidad/síntoma y ofrece el combo correspondiente.</p>
+      <div class="card p-2 sm:p-4 overflow-x-auto">
+        <table class="matrix">
+          <thead><tr><th>#</th><th>Necesidad / síntoma</th><th>Combo oficial</th></tr></thead>
           <tbody>
-            <tr><td>Bebés 0-12 meses</td><td>¼ cucharadita con 3 cucharaditas de leche · máx 4/día</td></tr>
-            <tr><td>Niños 2-5 años</td><td>¼ cucharadita · 3 veces al día</td></tr>
-            <tr><td>Niños 6-12 años</td><td>½ cucharadita · 3 veces al día</td></tr>
-            <tr><td>12-70 años</td><td>1 cucharada · 3 veces al día</td></tr>
-            <tr><td>70+ años</td><td>½ cucharadita · 3 veces al día</td></tr>
-            <tr><td>Casos agudos</td><td>Aumentar hasta 6 veces al día</td></tr>
+            <tr><td>1</td><td>Gripe / resfríos / tos</td><td>Jutusin + Pulsatilla + <span class="text-[var(--accent-2)]">Gripfectan</span> (+ <span class="text-[var(--accent-2)]">Anginacid</span> si amigdalitis)</td></tr>
+            <tr><td>2</td><td>Vitalidad masculina</td><td>VitalMen + Vita-C 15 Forte</td></tr>
+            <tr><td>3</td><td>Sistema inmunológico</td><td>CurcuZin-C + Drenatox + Vita-C 15 Forte</td></tr>
+            <tr><td>4</td><td>Menopausia</td><td>Renobella + R14 Quieta + <span class="text-[var(--accent-2)]">Klimakteran</span></td></tr>
+            <tr><td>5</td><td>Colon irritable / digestión pesada</td><td>Lactibiane Tolérance + Caléndula Jarabe</td></tr>
+            <tr><td>6</td><td>Gastritis / úlcera / reflujo</td><td>Caléndula Jarabe + Tolérance (+ <span class="text-[var(--accent-2)]">Gastreu</span>)</td></tr>
+            <tr><td>7</td><td>Estreñimiento</td><td>Lactibiane Reference + Caléndula Jarabe</td></tr>
+            <tr><td>8</td><td>Rinitis o sinusitis</td><td>Pulsatilla + <span class="text-[var(--accent-2)]">R49 Rhinopulsan</span></td></tr>
+            <tr><td>9</td><td>Estrés / insomnio / ansiedad</td><td>R14 Quieta + <span class="text-[var(--accent-2)]">Flores de Bach</span></td></tr>
+            <tr><td>10</td><td>Estrés con colon irritable</td><td>R14 Quieta + Lactibiane Tolérance</td></tr>
+            <tr><td>11</td><td>Artrosis o artritis</td><td>Artrosed + CiBiDol Crema</td></tr>
+            <tr><td>12</td><td>Fatiga crónica</td><td>Vita-C 15 Forte + CurcuZin-C</td></tr>
+            <tr><td>13</td><td>Rosácea</td><td>Calendulin</td></tr>
           </tbody>
         </table>
+      </div>
+      <p class="text-xs text-[var(--muted)] mt-3 leading-relaxed">Combos de peso/detox vigentes: Reset 30 Días (Drenatox + Metafat) y Kit Drenatox + Alcachofa. Productos en <span class="text-[var(--accent-2)]">ámbar</span> aún sin ficha oficial. <strong class="text-[var(--rose)]">Gripfectan es no publicable:</strong> solo en conversación 1-a-1, nunca en mensajes salientes ni plantillas Meta.</p>
+    </section>
+
+    <!-- ================= CATÁLOGO ================= -->
+    <section class="mb-6">
+      <h2 class="display text-3xl font-bold mb-2">Catálogo de productos (28)</h2>
+      <p class="text-[var(--muted)] mb-2 max-w-2xl">Agrupados por laboratorio. Cada producto trae su pitch comercial breve + ficha técnica oficial. Envío gratis a todo el país excepto Galápagos en todos los productos.</p>
+      <p class="text-xs text-[var(--muted)] mb-8">Los precios se leen del Custom Value <span class="kbd">precio_&lt;producto&gt;</span> vigente (no se hardcodean, fluctúan por promo).</p>
+    </section>
+
+    <!-- DR. RECKEWEG -->
+    <h3 id="lab-reckeweg" class="display text-2xl font-bold mb-4 prod">Dr. Reckeweg <span class="pill pill-blue ml-1">🇩🇪 Homeopáticos</span></h3>
+    <div class="space-y-4 mb-12">
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Drenatox</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span><span class="pill">Kit 4 frascos · gotas</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_drenatox</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Kit de desintoxicación y drenaje general del cuerpo; ayuda a bajar de peso y apoya acné y pigmentaciones. Componentes: R7 Hepagalen (hígado), R17 Cobralactin (drenaje linfático), R27 Renocalcin (riñón), R37 Colinteston (colon).</p>
+        <div class="ficha space-y-1">
+          <div><strong>Indicaciones:</strong> drenaje, desintoxicación y activación de funciones excretoras; restablece el equilibrio del organismo.</div>
+          <div><strong>Posología:</strong> 15 gotas de cada frasco (total 60) en 1-2 L de agua, a lo largo del día desde el desayuno. Tratamiento ~1 mes.</div>
+          <div><strong>Presentación:</strong> kit de 4 frascos de gotas orales.</div>
+          <div><strong>Precauciones:</strong> homeopático Dr. Reckeweg, sin contraindicaciones.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/drenatox/</div>
+        </div>
       </article>
 
-      <!-- RENOBELLA -->
-      <article id="cat-renobella" class="card p-6 mb-4">
-        <div class="flex items-start justify-between flex-wrap gap-3 mb-4">
-          <div>
-            <h3 class="display text-2xl font-bold mb-1">Renobella</h3>
-            <div class="flex flex-wrap gap-1.5">
-              <span class="pill pill-blue">Quantum Pharm 🇪🇨</span>
-              <span class="pill pill-emerald">30 transcripts</span>
-              <span class="pill">60 cápsulas · 1 mes</span>
-            </div>
-          </div>
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">R14 Quieta</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span><span class="pill">Gotas · tabletas</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_r14</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Homeopático 100% alemán para estrés, insomnio y ansiedad. Controla exaltación mental, irritabilidad nerviosa, depresión y agitación nocturna. Apto para pacientes cardíacos; no causa somnolencia, no genera dependencia. Sinónimos: R14, Quieta, TR14 Quieta.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> gotas 0115MHE1112 · tabletas 66-MHE-0116.</div>
+          <div><strong>Composición (gotas):</strong> Avena sativa, Chamomilla, Coffea, Eschscholzia californica, Humulus lupulus, Ignatia, Passiflora incarnata, Valeriana, Zincum valerianicum.</div>
+          <div><strong>Posología (laboratorio):</strong> gotas — 5-10 gotas en agua, 3 veces/día, 30 min antes de comidas (niños 2-5 a: 3-5 gotas; 6-12 a: 5-8 gotas). Tabletas — 2 bajo la lengua 3 veces/día. Última dosis hasta 19h00; insomnio resistente duplicar 10 min antes de dormir.</div>
+          <div><strong>Presentaciones:</strong> tabletas sublinguales (200 u) · gotas orales (50 ml).</div>
+          <div><strong>Precauciones:</strong> homeopático Dr. Reckeweg, sin contraindicaciones.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/quieta/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Vita-C 15 Forte</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span><span class="pill">12 ampollas bebibles</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_vitac15</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Revitalizador físico y mental para falta de concentración, apatía, depresión, agotamiento mental, falta de memoria y convalecencia. <strong>Ampollas bebibles, nunca inyectar.</strong></p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 091MHE092012.</div>
+          <div><strong>Indicaciones:</strong> neurastenia, cansancio psicofísico, estrés.</div>
+          <div><strong>Composición:</strong> Acidum phosphoricum, Citrus limon, Cocculus, Helonias dioica, Ignatia, Panax ginseng, Sepia, Zincum metallicum + corrigentes (ác. ascórbico, escaramujo, serbal).</div>
+          <div><strong>Posología (laboratorio):</strong> 1 ampolla ante situaciones de estrés. Mejora notable: 3 ampollas/día por 6 días, luego 1 ampolla/día por 3 semanas.</div>
+          <div><strong>Precauciones:</strong> no se reportan; en embarazo/lactancia consultar al médico. Homeopático Dr. Reckeweg.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/vita-c-15-forte/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Jutusin (jarabe)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span><span class="pill pill-emerald">posología pediátrica</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_jutusin</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Jarabe respiratorio para toda la familia: broncodilatador y expectorante en tos seca o productiva, bronquitis, resfrío y rinolaringofaringitis.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 098MHE1012.</div>
+          <div><strong>Indicaciones:</strong> rino-laringofaringitis, bronquitis y tos.</div>
+          <div><strong>Composición:</strong> Ammonium causticum, Belladonna, Bryonia, Chamomilla, Coccus cacti, Corallium rubrum, Cuprum aceticum, Drosera, Ipecacuanha, Thymus vulgaris.</div>
+          <div><strong>Posología (laboratorio):</strong> 1 cucharadita cada 2 h, máx 6/día; con mejoría 3 veces/día. Bebés 0-12 m y niños 2-5 a: ¼ cucharadita con 3 cucharaditas de leche, máx 4/día. Niños 6-12 a: ½ cucharadita, máx 6/día.</div>
+          <div><strong>Precauciones:</strong> homeopático Dr. Reckeweg, sin contraindicaciones. Excepción pediátrica oficial.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/r8-jutussin/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Pulsatilla (spray nasal)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span><span class="pill pill-emerald">posología pediátrica</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_pulsatilla</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Spray nasal para congestión por gripe, rinitis alérgica, sinusitis y catarro.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Indicaciones:</strong> catarros agudos y crónicos de las mucosas nasales.</div>
+          <div><strong>Composición:</strong> Calcium carbonicum, Cinnabaris, Kalium bichromicum, Pulsatilla (solución isotónica); variante con Senecio bicolor.</div>
+          <div><strong>Posología (laboratorio):</strong> adultos 3-5 veces/día, 1 nebulización en cada fosa (previa limpieza). Niños 6-12 a: 3-4/día; 2-5 a: 2-3/día; bebés 0-12 m: 1-2/día.</div>
+          <div><strong>Precauciones:</strong> puede producir sialorrea (suspender). Puede usarse en embarazo y lactancia (indicación de ficha). Excepción pediátrica oficial.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/pulsatilla/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Apetimed (jarabe)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span><span class="pill pill-emerald">posología pediátrica</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_apetimed</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Estimula el apetito, combate la anemia, fortalece huesos y sistema nervioso. Niños y adultos con bajo peso o anemia.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 0218MHE0214.</div>
+          <div><strong>Indicaciones:</strong> anemia, pérdida de apetito, convalecencia, pérdida de peso, apoyo al crecimiento en niños.</div>
+          <div><strong>Composición:</strong> Acidum phosphoricum, Avena sativa, Calcium phosphoricum, China, Cinnamomum, Hydrastis, Magnesium phosphoricum, Alfalfa, Nux vomica, Panax ginseng.</div>
+          <div><strong>Posología (laboratorio):</strong> adultos 1 cucharada 3 veces/día; niños 1 cucharadita 3 veces/día antes de comidas.</div>
+          <div><strong>Precauciones:</strong> homeopático Dr. Reckeweg, sin contraindicaciones. Excepción pediátrica oficial.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/apetimed/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Atemaron (pomada)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Dr. Reckeweg 🇩🇪</span><span class="pill pill-rose">🔴 sin stock</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_atemaron</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Pomada para neuralgia, torceduras, dolores musculares y masaje general; uso frecuente en medicina del deporte.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 0110-MHE1012.</div>
+          <div><strong>Composición:</strong> Arnica, Belladonna, Calendula, Camphora, Echinacea, Hamamelis, Hypericum, Millefolium, Rhus toxicodendron + aceites de lavanda, oliva, pino, romero.</div>
+          <div><strong>Modo de empleo:</strong> aplicar mañana y tarde frotando. No aplicar en heridas abiertas.</div>
+          <div><strong>Estado:</strong> sin stock — el bot debe avisar disponibilidad antes de cerrar.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/atemaron/</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- LABFARVE -->
+    <h3 id="lab-labfarve" class="display text-2xl font-bold mb-2 prod">Labfarve <span class="pill pill-blue ml-1">🇨🇴 Fitoterápicos</span></h3>
+    <p class="text-xs text-[var(--rose)] mb-4">⚠️ Todos contraindicados en embarazo, lactancia y alergia al componente principal.</p>
+    <div class="space-y-4 mb-12">
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Alcachofa (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Labfarve 🇨🇴</span><span class="pill pill-amber">precaución hipertensión</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_alcachofa</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Coadyuvante natural para bajar de peso y controlar triglicéridos y colesterol. Facilita la eliminación de grasas, incrementa la bilis, es digestiva, depura toxinas y da saciedad.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 76-PNE-0416.</div>
+          <div><strong>Composición:</strong> hojas de alcachofa deshidratadas y pulverizadas (Cynara scolymus).</div>
+          <div><strong>Posología (laboratorio):</strong> 20 gotas 3 veces/día. (Asesor: 20 gotas en ½ vaso de agua antes de las 3 comidas; con gastritis luego de comer; abundante agua; frasco ~1 mes.)</div>
+          <div><strong>Precauciones:</strong> hipersensibilidad, embarazo, lactancia, niños &lt;12 a, obstrucción biliar. <strong class="text-[var(--accent-2)]">Usar con precaución en hipertensión.</strong></div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/alcachofa/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Caléndula Jarabe</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Labfarve 🇨🇴</span><span class="pill">gastritis · digestivo</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_calendula_jarabe</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Indicado para gastritis; antiséptico, antiinflamatorio y cicatrizante; ayuda a úlceras, reflujo y acidez estomacal; coadyuvante en Helicobacter pylori.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 33-PNE-0515.</div>
+          <div><strong>Composición:</strong> Caléndula (Calendula officinalis), goma xanthan, sacarina sódica, propilenglicol, metilparabeno, ác. cítrico, sabor melocotón.</div>
+          <div><strong>Posología (laboratorio):</strong> 1 cucharada de 15 mL 2 veces/día hasta que cedan los síntomas. (Asesor: 1 antes del almuerzo y 1 antes de la cena, ~3 meses.)</div>
+          <div><strong>Precauciones:</strong> no usar en embarazo ni lactancia. Labfarve — contraindicado embarazo/lactancia/alergia.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/calendula_jarabe/</div>
+        </div>
+        <div class="mt-3 p-2 rounded-lg" style="background:rgba(251,191,36,.05)"><span class="pill pill-amber">⏳ precio pendiente</span> <span class="text-xs text-[var(--muted)] ml-1">$17.60 vs $18.50 (a confirmar con el cliente).</span></div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Caléndula Crema</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Labfarve 🇨🇴</span><span class="pill">uso tópico</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_calendula_crema</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Ungüento para adultos y niños: protege la piel, quemaduras, escaras, dermatitis del pañal; regenera y cicatriza.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 68-PNE-0316 (venta libre).</div>
+          <div><strong>Composición:</strong> extracto 0,2:1 de flores de caléndula. Excipientes: aceite mineral, ác. esteárico, lanolina, esencia de rosas.</div>
+          <div><strong>Posología (laboratorio):</strong> aplicar localmente 1 o más veces/día. No aplicar en heridas abiertas.</div>
+          <div><strong>Precauciones:</strong> no usar en embarazo ni lactancia. Labfarve.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/calendula-crema/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Calendulin (emulsión)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Labfarve 🇨🇴</span><span class="pill pill-emerald">promo 2x1</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_calendulin</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Crema de caléndula para toda la familia con óxido de zinc, vitamina E y lanolina. Bebés: pañalitis y rozaduras. Adultos: heridas, quemaduras leves, piel reseca, escaras. Indicada para rosácea.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 407-PNE-0324.</div>
+          <div><strong>Composición:</strong> aceite de flores de caléndula 1.3% + extracto 5%. Excipientes: lanolina, óxido de zinc, tocoferol, vaselina.</div>
+          <div><strong>Posología (laboratorio):</strong> aplicar 3-5 veces/día sobre área limpia y seca, en capa fina, hasta recuperar la piel.</div>
+          <div><strong>Precauciones:</strong> no aplicar con sensibilidad a componentes. Embarazo/lactancia bajo supervisión médica. Labfarve.</div>
+          <div><strong>Precio / promo:</strong> 2x1.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/calendulin/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Artrosed (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Labfarve 🇨🇴</span><span class="pill">analgésico</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_artrosed</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Extracto de sauce (salicina): analgésico y antiinflamatorio para artrosis, artritis, reumatismo, ciática, cefalea, dolor muscular y fiebre.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 73-PNE-0416.</div>
+          <div><strong>Composición:</strong> extracto fluido 1:1 de sauce equivalente a 1 g de corteza y hojas frescas por mL.</div>
+          <div><strong>Posología (laboratorio):</strong> adultos y niños &gt;12 a: 25 gotas (1 mL) cada 8 h.</div>
+          <div><strong>Precauciones:</strong> Labfarve — contraindicado embarazo/lactancia/alergia.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/artrosed/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Passiflora (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Labfarve 🇨🇴</span><span class="pill">sedante natural</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_passiflora</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Ansiolítico y sedante natural: insomnio, sueño reparador y ansiedad.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 73-PNE-0416.</div>
+          <div><strong>Composición:</strong> polvo de hojas de passiflora 0,2 g por mL.</div>
+          <div><strong>Posología (laboratorio):</strong> adultos y niños &gt;12 a: 25 gotas (1 mL) cada 8 h. (Asesor: 20 gotas a las 18h30 + 20 al dormir.)</div>
+          <div><strong>Precauciones:</strong> Labfarve — contraindicado embarazo/lactancia/alergia.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/passiflora/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Vira Vira (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Labfarve 🇨🇴</span><span class="pill">vías urinarias</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_vira_vira</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Para vías urinarias: inflamación de vías bajas, prevención de infecciones recurrentes, antiséptico y antiinflamatorio, prostatitis, cistitis.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 78-PNE-0416.</div>
+          <div><strong>Composición:</strong> extracto de partes aéreas de vira vira (Achyrocline bogotensis) 0,2:1 en alcohol al 36%.</div>
+          <div><strong>Posología (laboratorio):</strong> adultos y niños &gt;12 a: 25 gotas (1 mL) cada 8 h.</div>
+          <div><strong>Precauciones:</strong> Labfarve — contraindicado embarazo/lactancia/alergia.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/vira-vira/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Glunat (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Labfarve 🇨🇴</span><span class="pill">apoyo glucémico</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_glunat</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Extracto de balsamina (Momordica charantia): apoyo en diabetes, hipoglucemiante natural que reduce la glucosa progresivamente.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 77-PNE-0416 (venta libre).</div>
+          <div><strong>Composición:</strong> Momordica charantia planta pulverizada 1.5 g por mL.</div>
+          <div><strong>Posología (laboratorio):</strong> 30 gotas 3 veces/día o según indicación médica.</div>
+          <div><strong>Modo de empleo:</strong> agitar antes de usar; espaciar 1 h de otros medicamentos.</div>
+          <div><strong>Precauciones:</strong> Labfarve — contraindicado embarazo/lactancia/alergia.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/glunat-gotas/</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- QUANTUM -->
+    <h3 id="lab-quantum" class="display text-2xl font-bold mb-4 prod">Quantum Pharm <span class="pill pill-blue ml-1">🇪🇨 Suplementos</span></h3>
+    <div class="space-y-4 mb-12">
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Metafat (cápsulas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Quantum 🇪🇨</span><span class="pill">60 cáps · 1 mes</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_metafat</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Apoya la pérdida de peso, activa el metabolismo de las grasas y mejora la digestión, sin afectar el equilibrio del organismo. No tiene efecto rebote. Componentes: L-Carnitina, alcachofa, cromo, vitamina B6.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 48098-ALN-0825.</div>
+          <div><strong>Ingredientes:</strong> extracto de hojas de alcachofa, L-carnitina, picolinato de cromo, vitamina B6 + excipientes.</div>
+          <div><strong>Posología (laboratorio):</strong> 2 cápsulas/día con agua (asesor: 30 min después del almuerzo).</div>
+          <div><strong>Presentación:</strong> frasco de 60 cápsulas (~1 mes).</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/metafat/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Renobella (cápsulas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Quantum 🇪🇨</span><span class="pill">60 cáps · 1 mes</span></div></div>
           <span class="pill pill-amber"><span class="var-token">precio_renobella</span></span>
         </div>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>Valor *<span class="var-token">[VARIABLE: precio_renobella]</span>* Y ENVIO GRATIS para todo el país excepto Galápagos
-🌸RENOBELLA💖 es ideal para mujeres que desean apoyar su equilibrio hormonal, bienestar celular y vitalidad diaria.
-✨Ideal para mujeres que atraviesan las etapas de climaterio o menopausia.
-
-🔬 Beneficios principales:
-✅ Apoya la regulación de la actividad hormonal
-✅ Ayuda a reducir el impacto del estrés oxidativo
-✅ Contribuye al bienestar celular y a la vitalidad femenina
-✅ Protege las células frente al daño oxidativo
-
-🧬 Componentes principales:
-✅ Isoflavonas | Resveratrol | Vitamina B6 | Vitamina E
-
-📦 Presentación: frasco de 60 cápsulas, tratamiento para un mes.
-💊 Posología: generalmente 2 cápsulas diarias con un vaso de agua.
-
-Fabricado por laboratorio Quantum Pharm 🇪🇨, bajo altos estándares de calidad.</pre>
-        <div class="mt-3 text-xs text-[var(--muted)]"><strong class="text-[var(--text)]">Pregunta clave de cierre:</strong> <em>"¿Lo está buscando por cambios hormonales, cansancio o síntomas de menopausia?"</em> → cuando responden menopausia, mini-pitch personalizado.</div>
+        <p class="text-sm text-[var(--text)] mb-3">Para mujeres que desean apoyar su equilibrio hormonal, bienestar celular y vitalidad. Ideal en climaterio o menopausia. Componentes: isoflavonas, resveratrol, vitamina B6 y E.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 48485-ALN-0925.</div>
+          <div><strong>Ingredientes:</strong> extracto de soya (40% isoflavonas), Polygonum cuspidatum (50% trans-resveratrol), vitamina E, vitamina B6 + excipientes.</div>
+          <div><strong>Posología (laboratorio):</strong> 2 cápsulas/día con agua.</div>
+          <div><strong>Presentación:</strong> frasco de 60 cápsulas (~1 mes).</div>
+          <div><strong>Precauciones:</strong> en embarazo, lactancia o tratamiento médico, consultar al médico.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/renobella/</div>
+        </div>
       </article>
-    </section>
 
-    <!-- COMBOS -->
-    <section id="combos" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-4">Combos y promos vigentes</h2>
-      <div class="space-y-3">
-        <div class="card p-5">
-          <div class="flex items-center gap-3 mb-3"><h3 class="display text-lg font-semibold">Reset 30 Días</h3><span class="pill pill-emerald">Upsell estrella</span><span class="pill pill-amber"><span class="var-token">precio_combo_reset</span></span></div>
-          <p class="text-sm text-[var(--muted)] mb-3"><strong class="text-[var(--text)]">DRENATOX + METAFAT</strong> · 5% OFF combo · Guía digital 30 días GRATIS (valor $29) · Envío sin costo</p>
-          <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>Si te sientes con inflamación, poco ánimo o con el metabolismo lento, tu cuerpo necesita apoyo real.
-
-En Escollanos te presentamos el Reset 30 Días con DRENATOX + METAFAT, un acompañamiento natural para quienes quieren:
-✔ Desinflamarse
-✔ Drenar toxinas acumuladas
-✔ Activar el metabolismo
-✔ Sentirse más livianos/as y con mejor energía
-
-🎁 PROMOCIÓN ESPECIAL
-✨ 5% OFF en el combo DRENATOX + METAFAT
-✨ Guía digital GRATIS de 30 días (valorizada en *29*)
-
-Es un proceso real y sostenible 💚
-
-Valor de los dos productos *<span class="var-token">[VARIABLE: precio_combo_reset]</span>* + ENVÍO SIN COSTO</pre>
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">VitalMen (cápsulas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Quantum 🇪🇨</span><span class="pill">60 cáps · 1 mes</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_vitalmen</span></span>
         </div>
-        <div class="grid md:grid-cols-2 gap-3">
-          <div class="card p-5">
-            <h3 class="display text-base font-semibold mb-2">Tratamiento 3 meses (universal)</h3>
-            <ul class="text-sm text-[var(--muted)] space-y-1">
-              <li>• 5% OFF sobre tratamiento de 3 productos</li>
-              <li>• Crema caléndula 90g GRATIS</li>
-              <li>• Envío gratis</li>
-              <li>• Válido hasta agotar stock</li>
-            </ul>
-          </div>
-          <div class="card p-5">
-            <h3 class="display text-base font-semibold mb-2">Descuento por volumen</h3>
-            <p class="text-sm text-[var(--muted)]">3+ unidades del mismo producto → hasta 15% de descuento (aplica a Alcachofa, Caléndula y frascos en general).</p>
-          </div>
-          <div class="card p-5">
-            <h3 class="display text-base font-semibold mb-2">R14 Quieta + Lactibiane Tolerance</h3>
-            <p class="text-sm text-[var(--muted)]">Ansiedad + colon irritable simultáneo. Histórico ref: $42.80.</p>
-          </div>
-          <div class="card p-5">
-            <h3 class="display text-base font-semibold mb-2">R14 Quieta + Renobella</h3>
-            <p class="text-sm text-[var(--muted)]">Climaterio/menopausia con insomnio o ansiedad asociada.</p>
-          </div>
+        <p class="text-sm text-[var(--text)] mb-3">Suplemento para la salud hormonal masculina, energía y bienestar reproductivo. Componentes: zinc, selenio, maca negra, vitamina E, L-arginina.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 34499-ALN-0322.</div>
+          <div><strong>Ingredientes:</strong> L-Arginina, gluconato de zinc, raíz de maca negra, vitamina E, selenito de sodio + excipientes.</div>
+          <div><strong>Posología (laboratorio):</strong> 2 cápsulas/día con agua (asesor: 30 min después del almuerzo).</div>
+          <div><strong>Presentación:</strong> frasco de 60 cápsulas (~1 mes).</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/vitalmen/</div>
         </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">CurcuZin-C (cápsulas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Quantum 🇪🇨</span><span class="pill pill-rose">tiene contraindicaciones</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_curcuzin_c</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Fortalece el sistema inmune: sube defensas, ayuda a no enfermarse seguido y reduce la inflamación. Componentes: cúrcuma, zinc, vitamina C, jengibre, pimienta negra.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Ingredientes:</strong> cúrcuma microencapsulada, vitamina C, gluconato de zinc, jengibre, pimienta negra. Fabricado en planta que maneja soya y lactosa.</div>
+          <div><strong>Posología (laboratorio):</strong> 2 cápsulas/día con agua.</div>
+          <div><strong>Precauciones:</strong> contraindicado en alérgicos a soya/lactosa (planta de fabricación). No es homeopático: no aplica la regla "sin contraindicaciones".</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/curcuzin-c/</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- PILEJE -->
+    <h3 id="lab-pileje" class="display text-2xl font-bold mb-4 prod">Pileje <span class="pill pill-blue ml-1">🇫🇷 Probióticos</span></h3>
+    <div class="space-y-4 mb-12">
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Lactibiane Tolérance</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Pileje 🇫🇷</span><span class="pill">30 cápsulas</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_lactibiane_tolerance</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Probiótico francés libre de lactosa, gluten y azúcar. Para colon irritable, Crohn, intolerancia alimenticia, colitis, protección de la microbiota y refuerzo del sistema inmune. <em>Teaser: "¿Lo busca por problemas digestivos, inflamación o una condición específica?"</em></p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 219-PNE-0920.</div>
+          <div><strong>Composición:</strong> Lactobacillus acidophilus LA 201, Lactobacillus plantarum LA 301, Lactobacillus salivarius LA 302, Bifidobacterium lactis LA 303 y LA 304.</div>
+          <div><strong>Posología (laboratorio):</strong> 1 cápsula/día 30 min antes del desayuno durante 60-90 días.</div>
+          <div><strong>Presentación:</strong> 30 cápsulas; sin gluten ni alérgenos; no requiere refrigeración.</div>
+          <div><strong>vs Reference:</strong> Tolérance = patologías intestinales (Crohn, colitis, colon irritable, intolerancias).</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/lactibiane-tolerance/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Lactibiane Reference</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Pileje 🇫🇷</span><span class="pill">30 cápsulas</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_lactibiane_reference</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Probiótico para salud digestiva: inflamación, estreñimiento y malestar digestivo. Mejora el estreñimiento desde la primera semana.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 219-PNE-0920.</div>
+          <div><strong>Indicaciones:</strong> mejora el estreñimiento desde la 1ª semana, reduce dolor abdominal, colitis, disminuye la distensión.</div>
+          <div><strong>Composición:</strong> Bifidobacterium longum LA101, Lactobacillus helveticus LA102, Lactococcus lactis LA103, Streptococcus thermophilus LA104.</div>
+          <div><strong>Posología (laboratorio):</strong> 1 cápsula/día 30 min antes del desayuno durante 60-90 días.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/lactibiane-reference/</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- OMISAN -->
+    <h3 id="lab-omisan" class="display text-2xl font-bold mb-4 prod">Omisan <span class="pill pill-blue ml-1">🇮🇹 Oftálmico</span></h3>
+    <div class="space-y-4 mb-12">
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Iris Red (gotas oftálmicas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Omisan 🇮🇹</span><span class="pill pill-emerald">promo 2x1</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_iris_red</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Gotas oftálmicas: alivia irritación y enrojecimiento, hidrata y protege, compatible con lentes de contacto, sin conservantes agresivos.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 396-PNE-0923.</div>
+          <div><strong>Indicaciones:</strong> enrojecimiento e irritación ocular, reduce inflamación, acción antiséptica. Solución estéril, vía oftálmica.</div>
+          <div><strong>Composición:</strong> extracto fluido de Euphrasia officinalis.</div>
+          <div><strong>Precauciones:</strong> NO administrar en embarazo ni lactancia. Hipersensibilidad a componentes. Tiene contraindicaciones (no es homeopático).</div>
+          <div><strong>Precio / promo:</strong> 2x1.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/iris-red/</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- ELENA NATURAL -->
+    <h3 id="lab-elena" class="display text-2xl font-bold mb-4 prod">Elena Natural Cosmetics <span class="pill pill-blue ml-1">Cosmética</span></h3>
+    <div class="space-y-4 mb-12">
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Serum C</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Elena Natural</span><span class="pill">antiedad</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_serum_c</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Serum de vitamina C antioxidante y antiedad: aporta luminosidad, activa el colágeno y aclara manchas. Unisex, todo tipo de piel. De noche sobre piel limpia antes de la crema; de día acompañar con protector solar.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Indicaciones:</strong> luminosidad y tersura para pieles mates; protege la piel y activa la síntesis de colágeno.</div>
+          <div><strong>Composición:</strong> Propylene Glycol, Ascorbic Acid (vitamina C), Glycerin, BHT, CI 19140, CI 15985.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/serum-c/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">Facemed (ampollas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Elena Natural</span><span class="pill pill-amber">ficha pendiente</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_facemed</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Ampollas faciales reparadoras y antiedad de uso tópico nocturno (caja x10 de 2 ml). <strong>Nunca inyectar.</strong> Revitaliza, humecta, reduce arrugas, antioxidante, aclara manchas y recupera la piel tras el sol.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Modo de empleo (asesor):</strong> aplicar de noche, 2 veces por semana, en rostro, cuello y escote.</div>
+          <div><strong>Presentación:</strong> caja x10 ampollas de 2 ml, uso externo.</div>
+          <div><span class="pill pill-amber">⏳ pendiente ficha cliente</span> composición y registro sanitario; precio 2x1 ($50.60 vs $46.00) a confirmar.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/facemed/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">SkinMed Plus</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Elena Natural</span><span class="pill pill-violet">profesional</span><span class="pill pill-amber">ficha pendiente</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_skinmed_plus</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Producto de medicina estética dirigido a médicos y profesionales. Aplicación mediante trasdermoterapia (no venta al público general).</p>
+        <div class="ficha space-y-1">
+          <div><strong>Notificación Sanitaria:</strong> NSOC01421-24EC.</div>
+          <div><strong>Presentación:</strong> viales x 10 ml.</div>
+          <div><span class="pill pill-amber">⏳ pendiente ficha cliente</span> composición y posología.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/skinmed-plus/</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- ESCANABIS -->
+    <h3 id="lab-escanabis" class="display text-2xl font-bold mb-2 prod">Escanabis <span class="pill pill-blue ml-1">CBD</span></h3>
+    <p class="text-xs text-[var(--rose)] mb-4">⚠️ Toda la línea CBD: no recomendado en embarazo ni lactancia; contraindicado en hipersensibilidad.</p>
+    <div class="space-y-4 mb-12">
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">CiBiDol Crema</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">tópico · dolor</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_cibidol_crema</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Emulsión tópica analgésica y antiinflamatoria: artritis, artrosis, golpes, dolor muscular, lesiones deportivas, neuralgias, esguinces y tendinitis.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 402-PNE-0224.</div>
+          <div><strong>Composición:</strong> aceite de semilla de Cannabis sativa 2 g/100 g (≈ CBD 0.018 g), árnica, Zingiber zerumbet, castaña de Indias, mentol, eucalipto, jengibre.</div>
+          <div><strong>Modo de empleo:</strong> aplicar 2-3 veces/día con masaje. Tubo de 75 ml. Conservar &lt;30 °C.</div>
+          <div><strong>Precauciones:</strong> uso externo; no en ojos, mucosas ni heridas. No en embarazo/lactancia. No con hipersensibilidad.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/cibidol-crema/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">CiBiDol S (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración baja</span><span class="pill pill-amber">pitch pendiente</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_cibidol_s</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Solución oral de CBD para estados de estrés, insomnio y ansiedad (concentración baja). Vía sublingual.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 391-PNE-0623.</div>
+          <div><strong>Composición:</strong> 23,75 mg/mL de CBD y &lt; 2 mg/mL de THC (Quimiotipo III).</div>
+          <div><strong>Posología (laboratorio):</strong> iniciar 4-7 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h (1 gota ≈ 0,725 mg CBD).</div>
+          <div><strong>Precauciones:</strong> no en embarazo/lactancia; fuera del alcance de niños.</div>
+          <div><span class="pill pill-amber">⏳ pendiente pitch cliente</span> plantilla WhatsApp propia (no reutilizar la de la crema).</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/cibidol-s/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">CiBiDol M (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración media</span><span class="pill pill-amber">pitch pendiente</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_cibidol_m</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Solución oral de CBD para el dolor con acción neuroprotectora; control de estrés, insomnio y ansiedad (concentración media). Vía sublingual.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 390-PNE-0623.</div>
+          <div><strong>Composición:</strong> 96 mg/mL de CBD y 2,88 mg/mL de THC (Quimiotipo III).</div>
+          <div><strong>Posología (laboratorio):</strong> iniciar 20-40 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h (1 gota ≈ 2,9 mg CBD).</div>
+          <div><strong>Precauciones:</strong> no en embarazo/lactancia; fuera del alcance de niños.</div>
+          <div><span class="pill pill-amber">⏳ pendiente pitch cliente</span> plantilla WhatsApp propia.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/cibidol-m/</div>
+        </div>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
+          <div><h4 class="display text-xl font-bold mb-1">CiBiDol L (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración alta</span><span class="pill pill-amber">pitch pendiente</span></div></div>
+          <span class="pill pill-amber"><span class="var-token">precio_cibidol_l</span></span>
+        </div>
+        <p class="text-sm text-[var(--text)] mb-3">Solución oral de CBD para el dolor, control de náuseas, vómito y mareo; coadyuvante en desórdenes metabólicos (concentración alta). Vía sublingual.</p>
+        <div class="ficha space-y-1">
+          <div><strong>Registro Sanitario:</strong> 392-PNE-0623.</div>
+          <div><strong>Composición:</strong> 192 mg/mL de CBD y &lt; 10 mg/mL de THC (Quimiotipo III).</div>
+          <div><strong>Posología (laboratorio):</strong> iniciar 20-40 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h (1 gota = 6 mg CBD).</div>
+          <div><strong>Precauciones:</strong> no en embarazo/lactancia; fuera del alcance de niños.</div>
+          <div><span class="pill pill-amber">⏳ pendiente pitch cliente</span> plantilla WhatsApp propia.</div>
+          <div><strong>Link:</strong> escollanos.com.ec/producto/cibidol-l/</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- KITS / COMBOS -->
+    <h3 id="lab-kits" class="display text-2xl font-bold mb-4 prod">Combos y kits</h3>
+    <div class="space-y-4 mb-16">
+
+      <article class="card p-6">
+        <div class="flex items-center gap-2 mb-2 flex-wrap"><h4 class="display text-lg font-semibold">Reset 30 Días</h4><span class="pill pill-emerald">Upsell estrella</span><span class="pill pill-amber"><span class="var-token">precio_combo_reset</span></span></div>
+        <p class="text-sm text-[var(--muted)]"><strong class="text-white">Drenatox + Metafat.</strong> Acompañamiento natural para desinflamarse, drenar toxinas, activar el metabolismo y sentirse más liviano/a. Promo: 5% OFF + guía digital de 30 días gratis + envío sin costo.</p>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-center gap-2 mb-2 flex-wrap"><h4 class="display text-lg font-semibold">Kit Drenatox + Alcachofa</h4><span class="pill pill-amber"><span class="var-token">precio_kit_drenatox_alcachofa</span></span></div>
+        <p class="text-sm text-[var(--muted)]">Drenatox depura 4 órganos; Alcachofa controla colesterol/triglicéridos y da saciedad. Ideal para bajar de peso y detox. <span class="pill pill-amber">⏳ precio pendiente</span> $54.63 (web) vs $55.40 (snippet).</p>
+      </article>
+
+      <article class="card p-6">
+        <div class="flex items-center gap-2 mb-2 flex-wrap"><h4 class="display text-lg font-semibold">Kit CiBiDol Crema + Artrosed</h4><span class="pill pill-amber"><span class="var-token">precio_kit_cibidol_artrosed</span></span></div>
+        <p class="text-sm text-[var(--muted)]">Dolor articular y antiinflamatorio: tópico (CiBiDol) + oral (Artrosed). Indicado para artrosis / artritis.</p>
+      </article>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <article class="card p-5">
+          <h4 class="display text-base font-semibold mb-1">R14 Quieta + Lactibiane Tolérance</h4>
+          <p class="text-sm text-[var(--muted)]">Ansiedad + colon irritable simultáneo (eje intestino-cerebro). <span class="pill pill-amber">⏳ precio pendiente</span> el $42.80 histórico es incorrecto.</p>
+        </article>
+        <article class="card p-5">
+          <h4 class="display text-base font-semibold mb-1">R14 Quieta + Renobella</h4>
+          <p class="text-sm text-[var(--muted)]">Climaterio / menopausia con insomnio o ansiedad asociada.</p>
+        </article>
+        <article class="card p-5 md:col-span-2">
+          <h4 class="display text-base font-semibold mb-1">Descuento por volumen (mismo producto)</h4>
+          <p class="text-sm text-[var(--muted)]">6 unidades: 10% · 12 unidades: 15% · 24 unidades: 20%.</p>
+        </article>
       </div>
-    </section>
+    </div>
 
-    <!-- PAGO -->
+    <!-- ================= POLÍTICA DE PAGO ================= -->
     <section id="pago" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-4">Política de pago</h2>
-      <div class="grid md:grid-cols-2 gap-3">
+      <h2 class="display text-3xl font-bold mb-2">Política de pago</h2>
+      <p class="text-[var(--muted)] mb-6 max-w-2xl">El bot debe preguntar la <strong class="text-white">ciudad antes de cerrar</strong> para elegir el flujo correcto.</p>
+      <div class="grid md:grid-cols-2 gap-4">
         <div class="card p-5">
           <div class="pill pill-emerald mb-3">Contraentrega</div>
           <h3 class="display text-lg font-semibold mb-2">Quito · Guayaquil · Cuenca</h3>
           <ul class="text-sm text-[var(--muted)] space-y-2">
-            <li>• <strong class="text-[var(--text)]">Solo EFECTIVO</strong> al mensajero</li>
-            <li>• "De Una" (Banco Pichincha) aceptado</li>
-            <li>• Transferencia Pichincha→Pichincha aceptada antes</li>
+            <li>• <strong class="text-white">Solo EFECTIVO</strong> al mensajero</li>
+            <li>• "De Una" (Banco Pichincha) antes de la entrega</li>
+            <li>• Transferencia Pichincha → Pichincha antes</li>
             <li>• Tarjeta → link de pago previo</li>
             <li class="text-[var(--accent-2)]">• NUNCA tarjeta al mensajero</li>
             <li>• NO aplica para fórmulas personalizadas</li>
@@ -569,658 +762,149 @@ Valor de los dos productos *<span class="var-token">[VARIABLE: precio_combo_rese
           <div class="pill pill-amber mb-3">Previa cancelación</div>
           <h3 class="display text-lg font-semibold mb-2">Resto del país</h3>
           <ul class="text-sm text-[var(--muted)] space-y-2">
-            <li>• Depósito bancario</li>
-            <li>• Transferencia bancaria</li>
+            <li>• Pago siempre previo a la entrega</li>
+            <li>• Depósito o transferencia bancaria</li>
             <li>• Tarjeta crédito/débito vía link de pago</li>
-            <li>• Foto de comprobante obligatoria antes de despacho</li>
+            <li>• Foto del comprobante obligatoria antes del despacho</li>
             <li>• Envío por Servientrega desde Quito</li>
           </ul>
         </div>
       </div>
-      <div class="card p-5 mt-3">
+      <div class="card p-5 mt-4">
         <h3 class="display text-base font-semibold mb-2">Datos bancarios para transferencia</h3>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>BANCO PICHINCHA
-Cuenta corriente
+        <pre class="payload">BANCO PICHINCHA · Cuenta corriente
 Número: 3498119104
 A nombre de: Escollanos cia ltda.
-Ruc: 1792319900001
+RUC: 1792319900001
 Correo: contabilidad4@escollanos.com</pre>
       </div>
     </section>
 
-    <!-- ENVÍO -->
+    <!-- ================= POLÍTICA DE ENVÍO ================= -->
     <section id="envio" class="mb-16">
       <h2 class="display text-3xl font-bold mb-4">Política de envío</h2>
       <div class="card p-6">
-        <p class="text-sm text-[var(--muted)] mb-4">Cobertura: <strong class="text-[var(--text)]">todo Ecuador</strong> · Costo: <strong class="text-[var(--accent)]">GRATIS</strong> · Excepción única: <strong class="text-[var(--accent-2)]">Galápagos NO se atiende</strong></p>
-        <table class="matrix">
-          <thead><tr><th>Zona</th><th>Logística</th><th>Tiempo</th></tr></thead>
-          <tbody>
-            <tr><td>Quito</td><td>Ruta propia (motorizado)</td><td>Mismo día · 1ra ruta 11h00-15h00 / 2da ruta 15h00-18h00</td></tr>
-            <tr><td>Guayaquil</td><td>Ruta propia</td><td>Mismo día según corte; algunos al día siguiente</td></tr>
-            <tr><td>Cuenca</td><td>Ruta propia</td><td>Mismo día según corte</td></tr>
-            <tr><td>Resto del país</td><td>Servientrega</td><td>24-48 horas laborables · guía de rastreo</td></tr>
-            <tr><td class="text-[var(--accent-2)]">Galápagos</td><td colspan="2" class="text-[var(--accent-2)]">NO se envía</td></tr>
-          </tbody>
-        </table>
-        <p class="text-xs text-[var(--muted)] mt-3"><strong>Horario de corte Quito (entrega mismo día):</strong> mañana hasta 8:00 am · tarde hasta 12:00 pm.</p>
-        <p class="text-xs text-[var(--muted)] mt-1"><strong>Rastreo Servientrega:</strong> <span class="kbd">servientrega.com.ec → RASTREO → ingresar número de guía</span></p>
+        <p class="text-sm text-[var(--muted)] mb-4">Cobertura: <strong class="text-white">todo Ecuador</strong> · Costo: <strong class="text-[var(--accent)]">GRATIS</strong> · Excepción única: <strong class="text-[var(--accent-2)]">Galápagos no se atiende</strong></p>
+        <div class="overflow-x-auto">
+          <table class="matrix">
+            <thead><tr><th>Zona</th><th>Logística</th><th>Tiempo</th></tr></thead>
+            <tbody>
+              <tr><td>Quito</td><td>Ruta propia (motorizado)</td><td>Mismo día · 1ª ruta 11h00-15h00 / 2ª ruta 15h00-18h00</td></tr>
+              <tr><td>Guayaquil</td><td>Ruta propia</td><td>Mismo día según corte; algunos al día siguiente</td></tr>
+              <tr><td>Cuenca</td><td>Ruta propia</td><td>Mismo día según corte</td></tr>
+              <tr><td>Resto del país</td><td>Servientrega</td><td>24-48 h laborables · guía de rastreo</td></tr>
+              <tr><td class="text-[var(--accent-2)]">Galápagos</td><td colspan="2" class="text-[var(--accent-2)]">No se envía</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-[var(--muted)] mt-3"><strong>Corte para entrega mismo día (Quito):</strong> mañana hasta 8:00 am · tarde hasta 12:00 pm.</p>
+        <p class="text-xs text-[var(--muted)] mt-1"><strong>Rastreo:</strong> <span class="kbd">servientrega.com.ec → RASTREO → número de guía</span></p>
+        <div class="mt-4 ficha space-y-1">
+          <div><strong>Quito:</strong> Juan de Sosaya OE4-54 y Ruiz de Castilla, Edif. Escollanos. L-V 07h00-18h00, Sáb 08h30-14h00.</div>
+          <div><strong>Guayaquil:</strong> Guayacanes 204 e/ V.E. Estrada y Calle Primera, Edif. Tinacorp, Urdesa. L-V 08h00-18h00, Sáb 09h00-14h00.</div>
+          <div><strong>Cuenca:</strong> Av. El Estadio 435 y Av. Roberto Crespo, Edif. El Estadio. L-V 09h00-13h00 y 14h30-18h00.</div>
+        </div>
       </div>
     </section>
 
-    <!-- CLÍNICA -->
-    <section id="clinica" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-4">Política clínica</h2>
-      <div class="card p-6">
-        <p class="text-sm text-[var(--muted)] mb-4">Regla general: medicamentos biológicos, homeopáticos y suplementos naturales.</p>
-        <div class="grid grid-cols-2 gap-2 text-sm">
-          <div class="pill pill-rose">❌ NO tienen contraindicaciones</div>
-          <div class="pill pill-rose">❌ NO efectos secundarios adversos</div>
-          <div class="pill pill-rose">❌ NO causan farmacodependencia</div>
-          <div class="pill pill-rose">❌ NO interactúan con otros medicamentos</div>
-        </div>
-        <p class="text-sm text-[var(--muted)] mt-4"><strong class="text-[var(--accent)]">Aptos para:</strong> hipertensión, diabetes, hipotiroidismo, pacientes cardíacos, adultos mayores. Separar 1-2h de medicación habitual.</p>
-        <div class="mt-4 p-4 rounded-lg border border-[var(--accent-2)]/30 bg-[var(--accent-2)]/5">
-          <p class="text-sm"><strong class="text-[var(--accent-2)]">Excepción Jarabe de Caléndula:</strong> en embarazo y lactancia consultar con médico antes de iniciar. Para el resto de productos, recomendación estándar de consulta médica preventiva.</p>
-        </div>
-        <p class="text-xs text-[var(--muted)] mt-3 italic"><strong>Anti-patrón a evitar:</strong> el bot NO debe afirmar que un producto "cura" una enfermedad ni ofrecer diagnósticos. Mantenerse en "apoyo", "coadyuvante", "ayuda a".</p>
-      </div>
-    </section>
-
-    <!-- CIERRE -->
-    <section id="cierre" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-4">Proceso de cierre · los 9 datos</h2>
-      <div class="card p-6">
-        <p class="text-sm text-[var(--muted)] mb-4">Cuando el cliente confirma intención de compra ("quiero hacer pedido", "deseo comprar", "lo llevo"), el bot solicita los 9 datos canónicos.</p>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>Para procesar su pedido, por favor, ayúdeme enviando los siguientes datos para poder elaborar su factura y programar su entrega:
-
-✅Nombre
-✅Cédula o Ruc
-✅correo 💊
-✅Celular
-✅Número de teléfono adicional
-✅Ciudad de entrega
-✅Dirección completa de entrega escrita (incluye calle numeración, etc)
-✅Ubicación (maps)
-✅ Medicamentos solicitados</pre>
-        <h3 class="display text-base font-semibold mt-5 mb-2">Confirmación SO + ventana de entrega</h3>
-        <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>Su pedido fue procesado SO###### será entregado el día [HOY/MAÑANA/DÍA-MES-AAAA] en el lapso de [11h00 a 15h00 / 15h00 a 18h00], debe cancelar *<span class="var-token">[VARIABLE: total_pedido]</span>*. Muchas gracias por preferirnos!</pre>
-      </div>
-    </section>
-
-    <!-- CROSS-SELL -->
-    <section id="cross-sell" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-4">Cross-sell matrix</h2>
-      <div class="card p-2 overflow-x-auto">
-        <table class="matrix">
-          <thead><tr><th>Síntoma / objetivo</th><th>Producto principal</th><th>Cross-sell</th><th>Razón</th></tr></thead>
-          <tbody>
-            <tr><td>Bajar de peso + desintoxicar</td><td>Drenatox</td><td>Metafat (combo Reset 30 Días)</td><td>Detox + activación metabólica</td></tr>
-            <tr><td>Infección urinaria / cistitis / riñón</td><td>Drenatox</td><td>Vira Vira</td><td>Apoyo vías urinarias</td></tr>
-            <tr><td>Bajar de peso solo</td><td>Metafat</td><td>Alcachofa</td><td>Quema grasa + control colesterol</td></tr>
-            <tr><td>Menopausia / climaterio</td><td>Renobella</td><td>R14 Quieta (si insomnio/ansiedad)</td><td>Hormonal + bienestar emocional</td></tr>
-            <tr><td>Insomnio / ansiedad / estrés</td><td>R14 Quieta</td><td>Lactibiane Tolerance (si malestar digestivo)</td><td>Eje intestino-cerebro</td></tr>
-            <tr><td>Colon irritable / digestión pesada</td><td>Lactibiane Tolerance</td><td>Alcachofa (después de comidas)</td><td>Flora intestinal + apoyo hepático</td></tr>
-            <tr><td>Gastritis / úlcera / reflujo</td><td>Jarabe de Caléndula</td><td>Alcachofa (después de comidas, no antes)</td><td>Protección gástrica + digestión</td></tr>
-            <tr><td>Colesterol / triglicéridos altos</td><td>Alcachofa</td><td>Metafat (si quiere bajar peso)</td><td>Control lipídico + metabolismo</td></tr>
-            <tr><td>Adulto mayor con polifarmacia</td><td>Jarabe de Caléndula</td><td>Alcachofa</td><td>Productos suaves, no interactivos</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="card p-5 mt-3">
-        <h3 class="display text-base font-semibold mb-2">Regla de horarios al combinar</h3>
-        <ul class="text-sm text-[var(--muted)] space-y-1 columns-1 md:columns-2">
-          <li>• <strong class="text-[var(--text)]">Probióticos (Lactibiane):</strong> en ayunas o antes de dormir</li>
-          <li>• <strong class="text-[var(--text)]">Alcachofa:</strong> después de comidas (sobre todo si hay gastritis)</li>
-          <li>• <strong class="text-[var(--text)]">R14 Quieta:</strong> 30 min antes/después de comidas; última hasta 19h00</li>
-          <li>• <strong class="text-[var(--text)]">Metafat:</strong> 30 min después del almuerzo</li>
-          <li>• <strong class="text-[var(--text)]">Renobella:</strong> con vaso de agua, sin horario fijo</li>
-          <li>• <strong class="text-[var(--text)]">Caléndula:</strong> antes del almuerzo y antes de la cena</li>
-          <li>• <strong class="text-[var(--text)]">Drenatox:</strong> preparación en 1-2L de agua, todo el día desde el desayuno</li>
-          <li>• <strong class="text-[var(--accent-2)]">Medicación farmacológica del cliente:</strong> separar 1-2 horas</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- CBRs -->
-    <section id="cbrs" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-2">50 Custom Bot Responses</h2>
-      <p class="text-[var(--muted)] mb-6">Listos para pegar uno por uno en GHL UI → Conversation AI → Custom Bot Responses. Click en cada uno para expandir. Botón <span class="kbd">📋 Copiar</span> copia la respuesta canónica al portapapeles.</p>
-      <div id="cbr-list" class="space-y-2"></div>
-    </section>
-
-    <!-- CATÁLOGO EXTENDIDO 55 -->
-    <section id="catalogo-55" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-2">Catálogo extendido · 5 laboratorios · 55 productos</h2>
-      <p class="text-[var(--muted)] mb-6">Análisis de los PDFs oficiales de Escollanos (PiLeJe + EsCanabis CiBiDol + Labfarve + Dr. Reckeweg + Vademécum Ecuador). Carga completa en <span class="kbd">knowledge/catalogo-laboratorios/catalogo-completo.csv</span>.</p>
-
-      <div class="grid md:grid-cols-2 gap-3 mb-6">
-        <div class="card p-5">
-          <div class="pill pill-blue mb-2">PiLeJe 🇫🇷 · 2 SKUs</div>
-          <h3 class="display text-lg font-semibold mb-2">Probióticos</h3>
-          <ul class="text-sm text-[var(--muted)] space-y-1">
-            <li>• <strong class="text-[var(--text)]">Lactibiane Référence</strong> — estreñimiento (4 cepas: B. longum LA101, L. helveticus LA102, Lactococcus LA103, S. thermophilus LA304)</li>
-            <li>• <strong class="text-[var(--text)]">Lactibiane Tolérance</strong> — SII / Crohn (5 cepas, foco mucosa)</li>
-          </ul>
-        </div>
-        <div class="card p-5">
-          <div class="pill pill-emerald mb-2">EsCanabis 🇪🇨 · 4 SKUs</div>
-          <h3 class="display text-lg font-semibold mb-2">CBD medicinal</h3>
-          <ul class="text-sm text-[var(--muted)] space-y-1">
-            <li>• <strong class="text-[var(--text)]">CiBiDol S</strong> — 2.5% CBD · estrés/insomnio/ansiedad</li>
-            <li>• <strong class="text-[var(--text)]">CiBiDol M</strong> — 10% CBD · dolor + neuroprotección</li>
-            <li>• <strong class="text-[var(--text)]">CiBiDol L</strong> — 20% CBD · dolor + náuseas + metabólico</li>
-            <li>• <strong class="text-[var(--text)]">CiBiDol Crema</strong> — tópico (cannabis + árnica + zingiber + aesculus)</li>
-          </ul>
-          <p class="text-xs text-[var(--accent-2)] mt-2 italic">⚠ Requiere respaldo médico — el bot ofrece info pero no cierra venta sin verificación.</p>
-        </div>
-        <div class="card p-5">
-          <div class="pill pill-violet mb-2">Labfarve 🇨🇴 · 7 SKUs</div>
-          <h3 class="display text-lg font-semibold mb-2">Fitoterapia (40+ años · U. Juan N. Corpas)</h3>
-          <ul class="text-sm text-[var(--muted)] space-y-1">
-            <li>• Caléndula Jarabe (gastritis) · Caléndula Crema (dermatitis)</li>
-            <li>• Alcachofa (Cynara) — colerético + peso</li>
-            <li>• <strong class="text-[var(--accent)]">Vira Vira</strong> (Achyrocline) — ITU bajas ← gap A1 resuelto</li>
-            <li>• Glunat (Momordica) — hipoglicemiante</li>
-            <li>• Artrosed (Salix) — analgésico/antiinflamatorio</li>
-            <li>• Passiflora — hipnógeno/sedante</li>
-          </ul>
-        </div>
-        <div class="card p-5">
-          <div class="pill pill-rose mb-2">Dr. Reckeweg 🇩🇪 · 42 SKUs</div>
-          <h3 class="display text-lg font-semibold mb-2">Homeopáticos compuestos (R1-R96 + Drenatox + Apetimed)</h3>
-          <p class="text-sm text-[var(--muted)]">Línea completa con Vademécum Ecuador estructurado por <strong class="text-[var(--text)]">sistema</strong> (Cardio/Respi/Digestivo/Urinario/Endocrino/Nervioso/Osteomuscular/Piel/Inmunitario/ORL) y por <strong class="text-[var(--text)]">utilidad terapéutica</strong> — base canónica para el prompt del bot.</p>
-        </div>
-      </div>
-
-      <h3 class="display text-xl font-semibold mb-3">Top categorías Reckeweg</h3>
-      <div class="card p-2 overflow-x-auto">
-        <table class="matrix">
-          <thead><tr><th>Sistema</th><th>Productos</th></tr></thead>
-          <tbody>
-            <tr><td>Respiratorio</td><td>R1 Anginacid · R6 Gripfektan · R8 Jutussin · R48 Pulmosol · R49 Rhinopulsan · R96 Pulsatilla</td></tr>
-            <tr><td>Digestivo</td><td>R5 Gastreu · R7 Hepagalen · R37 Colinteston · Apetimed</td></tr>
-            <tr><td>Urinario / Próstata</td><td>R18 Cystophylin · R25 Prostatan · R27 Renocalcin</td></tr>
-            <tr><td>Cardiovascular</td><td>R3 Corvosan · R12 Multojodin · R42 Haemovenin · R63 Endangitin</td></tr>
-            <tr><td>Osteomuscular</td><td>R11 Lumbagin · R34 Calcossin · R46 Manurheumin · R55 Rutavine · R71 Ischialgin · R73 Spondarthrin</td></tr>
-            <tr><td>Endocrino / Metabólico</td><td>R10 Klimakteran · R19/R20 Euglandin M/F · R40 Diaglukon · R51 Thyreosan · R59 Vesiculine</td></tr>
-            <tr><td>Nervioso / Mental</td><td>R14 Quieta · Vita C 15 Forte · R16 Cimisan · R29 Theridon · R54 Imbelion</td></tr>
-            <tr><td>Piel</td><td>R21 Medorrhan · R53 Comedonin</td></tr>
-            <tr><td>Linfático / Tumoral</td><td>R17 Cobralactin · R26 Remisin</td></tr>
-            <tr><td>Drenaje / Detox</td><td>Drenatox Kit (R7+R17+R27+R37)</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="display text-xl font-semibold mt-6 mb-3">Mapa síntoma → producto (selección)</h3>
-      <div class="card p-2 overflow-x-auto">
-        <table class="matrix">
-          <thead><tr><th>Cliente dice…</th><th>Producto principal</th><th>Combo / alternativa</th></tr></thead>
-          <tbody>
-            <tr><td>Infección urinaria / cistitis</td><td>Vira Vira</td><td>R18 Cystophylin · Drenatox</td></tr>
-            <tr><td>Gastritis / reflujo</td><td>Caléndula Jarabe</td><td>R5 Gastreu · Lactibiane Tolérance</td></tr>
-            <tr><td>Colon irritable / Crohn</td><td>Lactibiane Tolérance</td><td>Caléndula Jarabe</td></tr>
-            <tr><td>Estreñimiento</td><td>Lactibiane Référence</td><td>R37 Colinteston</td></tr>
-            <tr><td>Insomnio / ansiedad</td><td>R14 Quieta</td><td>Passiflora · CiBiDol S · R15 Vita C</td></tr>
-            <tr><td>Dolor / artrosis</td><td>R73 Spondarthrin</td><td>Artrosed · CiBiDol Crema (tópico) · CiBiDol M/L</td></tr>
-            <tr><td>Diabetes</td><td>Glunat + R40 Diaglukon</td><td>—</td></tr>
-            <tr><td>Próstata</td><td>R25 Prostatan</td><td>R63 (si circulación)</td></tr>
-            <tr><td>Migraña</td><td>R16 Cimisan</td><td>—</td></tr>
-            <tr><td>Menopausia + insomnio</td><td>Renobella + R14 Quieta</td><td>R10 Klimakteran + Passiflora</td></tr>
-            <tr><td>Heridas / esguinces</td><td>R55 Rutavine</td><td>CiBiDol Crema · Caléndula Crema</td></tr>
-            <tr><td>Anemia / falta apetito</td><td>Apetimed</td><td>R31 Contraemin</td></tr>
-            <tr><td>Sinusitis / rinitis</td><td>R49 Rhinopulsan</td><td>R96 Pulsatilla (nasal)</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="text-xs text-[var(--muted)] mt-3 italic">Mapa completo (9 sistemas + 5 reglas duras) en <span class="kbd">knowledge/catalogo-laboratorios/mapa-indicacion-producto.md</span>.</p>
-    </section>
-
-    <!-- GAPS -->
-    <section id="gaps" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-4">Gaps & próximos pasos</h2>
-      <div class="card p-6 mb-4">
-        <h3 class="display text-lg font-semibold mb-3 text-[var(--accent-2)]">Crítico · bloquea coverage del bot</h3>
-        <ul class="space-y-2 text-sm">
-          <li class="flex gap-3"><span class="pill pill-rose flex-shrink-0">A1</span><span><strong>Vira Vira</strong> · cross-sell #1 de Drenatox (infección urinaria), referencia $13.30. Falta pitch, posología, presentaciones.</span></li>
-          <li class="flex gap-3"><span class="pill pill-rose flex-shrink-0">A6</span><span><strong>Lactibiane Reference</strong> · clientes preguntan vs Tolerance. Falta pitch completo + diferencia técnica detallada.</span></li>
-          <li class="flex gap-3"><span class="pill pill-rose flex-shrink-0">A10</span><span><strong>Calendulin / Crema caléndula 90g</strong> · regalo recurrente del tratamiento 3 meses. Falta precio retail e indicaciones.</span></li>
-          <li class="flex gap-3"><span class="pill pill-rose flex-shrink-0">A7</span><span><strong>Curcuzin-C</strong> · aparece en promos mensuales (2x1). Falta pitch e indicaciones.</span></li>
-        </ul>
-      </div>
-      <div class="card p-6 mb-4">
-        <h3 class="display text-lg font-semibold mb-3 text-[var(--accent)]">Importante · catálogo secundario</h3>
-        <div class="grid sm:grid-cols-2 gap-2 text-sm text-[var(--muted)]">
-          <div>• R7 / R17 / R27 / R37 individuales (¿se venden sueltos?)</div>
-          <div>• Iris Red · salud visual</div>
-          <div>• Serum C / Facemed · cosmética antioxidante</div>
-          <div>• Flores de Bach · opción 7 del menú</div>
-          <div>• Jutussin · sistema respiratorio (?)</div>
-        </div>
-      </div>
-      <div class="card p-6">
-        <h3 class="display text-lg font-semibold mb-3 text-[var(--blue)]">Operativo · pendiente con cliente</h3>
-        <ol class="space-y-2 text-sm text-[var(--muted)] list-decimal pl-5">
-          <li><strong class="text-[var(--text)]">Confirmar precios canónicos 2026</strong> y crear Custom Values en GHL: <span class="kbd">precio_drenatox</span> <span class="kbd">precio_r14</span> <span class="kbd">precio_metafat</span> <span class="kbd">precio_alcachofa</span> <span class="kbd">precio_lactibiane</span> <span class="kbd">precio_calendula</span> <span class="kbd">precio_renobella</span> <span class="kbd">precio_combo_reset</span></li>
-          <li>Direcciones de farmacias físicas + código de cupón 5%</li>
-          <li>Lista de mensajeros activos por ciudad + política de compartir teléfono</li>
-          <li>Vigencia del Reto 21 días (R14 Quieta) + link de invitación</li>
-          <li>Criterios de cliente SILVER (¿hay GOLD/BRONZE?)</li>
-          <li>Política de preventa cuando stock agotado</li>
-          <li>Mecánica oficial de sorteos &gt;$30 (TV, terapias CAM, balón Mundial)</li>
+    <!-- ================= PRÓXIMOS PASOS ================= -->
+    <section id="cierre" class="mb-12">
+      <h2 class="display text-3xl font-bold mb-4">Pendientes y próximos pasos</h2>
+      <div class="card p-6 leading-relaxed">
+        <ol class="text-sm text-[var(--muted)] space-y-3 list-decimal list-inside">
+          <li><strong class="text-white">Confirmar el bloque rojo de arriba</strong> (postura clínica, precios, fichas faltantes, plantillas WhatsApp y operativo). Es el bloqueante para que el bot dé información 100% correcta.</li>
+          <li><strong class="text-white">Enviar fichas faltantes:</strong> Gripfectan (no publicable), Anginacid, Klimakteran, R49 Rhinopulsan, Gastreu, Facemed, SkinMed Plus, y el pitch oficial de las gotas CiBiDol (S/M/L).</li>
+          <li><strong class="text-white">Cargar en GHL:</strong> esta base como Doc de la Knowledge Base + Custom Bot Responses para precios y términos clave.</li>
+          <li><strong class="text-white">Validar precios vigentes</strong> y dejarlos en Custom Values (<span class="kbd">precio_&lt;producto&gt;</span>) para que el bot nunca dé un valor desactualizado.</li>
+          <li><strong class="text-white">Pruebas pre-launch</strong> con casos reales por laboratorio antes de activar.</li>
         </ol>
       </div>
+      <p class="text-center text-xs text-[var(--muted)] mt-8 pt-6 border-t border-[var(--border)]">
+        Escollanos · Bot Conversation AI · preparado por AL Consulting · 2026-06-03<br>
+        Cualquier duda sobre un punto, respóndannos por aquí mismo 💚
+      </p>
     </section>
-
-    <!-- PENDIENTES PARA CULMINAR -->
-    <section id="pendientes" class="mb-16">
-      <h2 class="display text-3xl font-bold mb-2">Pendientes para culminar</h2>
-      <p class="text-[var(--muted)] mb-6">Lo que falta para que el bot Conversation AI esté 100% operativo en producción. Ordenado por prioridad.</p>
-
-      <div class="card p-6 mb-4 border-l-4 border-[var(--accent-2)]">
-        <div class="flex items-center gap-3 mb-3"><span class="pill pill-amber">🔴 BLOQUEANTE</span><h3 class="display text-lg font-semibold">Materiales que faltan del cliente</h3></div>
-        <ol class="space-y-3 text-sm list-decimal pl-5">
-          <li><strong class="text-[var(--text)]">PDFs de Quantum Pharm 🇪🇨</strong> — Metafat y Renobella son top sellers y NO están cubiertos en los 5 PDFs recibidos. Pedir folleto técnico oficial a Montse.</li>
-          <li><strong class="text-[var(--text)]">Listado de precios 2026 vigentes</strong> — los PDFs traen QR a listado externo. Necesitamos precios fijos para crear los Custom Values en GHL: <span class="kbd">precio_drenatox</span> <span class="kbd">precio_r14</span> <span class="kbd">precio_metafat</span> <span class="kbd">precio_alcachofa</span> <span class="kbd">precio_lactibiane_tolerance</span> <span class="kbd">precio_lactibiane_reference</span> <span class="kbd">precio_calendula</span> <span class="kbd">precio_renobella</span> <span class="kbd">precio_vira_vira</span> <span class="kbd">precio_cibidol_s/m/l/crema</span> <span class="kbd">precio_glunat</span> <span class="kbd">precio_artrosed</span> <span class="kbd">precio_passiflora</span> + 42 SKUs Reckeweg.</li>
-          <li><strong class="text-[var(--text)]">Productos secundarios sin PDF</strong> — Curcuzin-C, Iris Red, Serum C / Facemed, Flores de Bach, Calendulin (crema 90g). Pedir o confirmar si siguen en catálogo activo.</li>
-        </ol>
-      </div>
-
-      <div class="card p-6 mb-4 border-l-4 border-[var(--accent)]">
-        <div class="flex items-center gap-3 mb-3"><span class="pill pill-emerald">🟢 IMPLEMENTACIÓN GHL</span><h3 class="display text-lg font-semibold">Setup en la subaccount</h3></div>
-        <ol class="space-y-3 text-sm list-decimal pl-5">
-          <li><strong class="text-[var(--text)]">Crear Custom Field</strong> <span class="kbd">producto_consultado</span> tipo dropdown con las 55 opciones (lista canónica en <span class="kbd">dropdown-cf-medicamentos.md</span>).</li>
-          <li><strong class="text-[var(--text)]">Crear Custom Values</strong> para precios + datos bancarios + correo de salida + mensaje LOPD.</li>
-          <li><strong class="text-[var(--text)]">Cargar Knowledge Base</strong>: subir <span class="kbd">KB-MAESTRA.md</span> como Doc + <span class="kbd">catalogo-completo.csv</span> como Table en GHL Conversation AI.</li>
-          <li><strong class="text-[var(--text)]">Pegar los 50 Custom Bot Responses</strong> uno por uno en Reputation → Conversation AI → Custom Bot Responses.</li>
-          <li><strong class="text-[var(--text)]">Configurar Bot Goals</strong>: (a) Captación / Saludo+LOPD · (b) Pitch producto · (c) Manejo objeciones · (d) Cierre 9 datos · (e) Handoff humano.</li>
-        </ol>
-      </div>
-
-      <div class="card p-6 mb-4 border-l-4 border-[var(--violet)]">
-        <div class="flex items-center gap-3 mb-3"><span class="pill pill-violet">🟣 OPERACIÓN</span><h3 class="display text-lg font-semibold">Reglas y políticas a confirmar con Montse</h3></div>
-        <ol class="space-y-3 text-sm list-decimal pl-5">
-          <li><strong class="text-[var(--text)]">CiBiDol</strong>: ¿bot puede ofrecer info y derivar a asesor? ¿o handoff inmediato por requerir prescripción?</li>
-          <li><strong class="text-[var(--text)]">Direcciones farmacias físicas</strong> + código cupón 5% (Quito · Guayaquil · Cuenca · Sto. Domingo).</li>
-          <li><strong class="text-[var(--text)]">Lista de mensajeros activos por ciudad</strong> + política — ¿el bot puede compartir teléfono del mensajero?</li>
-          <li><strong class="text-[var(--text)]">Vigencia Reto 21 días</strong> (R14 Quieta) + link de invitación al grupo WhatsApp.</li>
-          <li><strong class="text-[var(--text)]">Criterios cliente SILVER</strong> (¿hay GOLD/BRONZE? umbrales de compra para descuento).</li>
-          <li><strong class="text-[var(--text)]">Política de preventa</strong> cuando stock agotado (precio + tiempo de llegada).</li>
-          <li><strong class="text-[var(--text)]">Mecánica de sorteos &gt;$30</strong> (TV 43", terapias CAM, balón Mundial) — vigencia + qué productos aplican.</li>
-        </ol>
-      </div>
-
-      <div class="card p-6 mb-4 border-l-4 border-[var(--blue)]">
-        <div class="flex items-center gap-3 mb-3"><span class="pill pill-blue">🔵 VALIDACIÓN</span><h3 class="display text-lg font-semibold">Antes de salir a producción</h3></div>
-        <ol class="space-y-3 text-sm list-decimal pl-5">
-          <li><strong class="text-[var(--text)]">Test plan bot E2E</strong> con casos canónicos: 3 productos top, 3 objeciones, cierre Quito vs resto país, handoff CBD, embarazo en caléndula, cross-sell por síntoma.</li>
-          <li><strong class="text-[var(--text)]">Revisión legal/clínica</strong> de la postura "no contraindicaciones" con Montse — alinear con lo que el equipo médico esté dispuesto a respaldar.</li>
-          <li><strong class="text-[var(--text)]">Piloto con 1 asesor sombra</strong> durante 1 semana: el bot conversa, el asesor revisa antes de enviar. Ajuste fino de tono y cierre.</li>
-          <li><strong class="text-[var(--text)]">Métricas baseline</strong>: conversion rate actual (humano-only) vs post-bot. Tiempo de primera respuesta. CSAT.</li>
-        </ol>
-      </div>
-
-      <div class="card p-5 bg-[rgba(52,211,153,0.04)] border-[var(--accent)]/30">
-        <div class="flex items-center gap-3 mb-2"><span class="pill pill-emerald">✅ LISTO</span><h3 class="display text-base font-semibold">Lo que ya está cerrado</h3></div>
-        <ul class="text-sm text-[var(--muted)] space-y-1 grid sm:grid-cols-2 gap-x-4">
-          <li>• 17.265 conversaciones scrapeadas vía API GHL</li>
-          <li>• 216 transcripts curados por producto × outcome</li>
-          <li>• 8 docs de patrones por producto (texto literal)</li>
-          <li>• KB-MAESTRA consolidada con 7 patrones cross-product</li>
-          <li>• 50 Custom Bot Responses redactados</li>
-          <li>• Catálogo completo de 55 productos (5 labs)</li>
-          <li>• Dropdown CF + mapa síntoma→producto</li>
-          <li>• HTML artifact publicado en GitHub Pages</li>
-        </ul>
-      </div>
-    </section>
-
-    <footer class="mt-20 pt-8 border-t border-[var(--border)] text-xs text-[var(--muted)]">
-      <div>Patrones Escollanos · v1.0 · generado 2026-05-28 desde 17.265 conversaciones reales (subaccount GHL <span class="kbd">G2337yViJeyv4qV2nxV6</span>).</div>
-      <div class="mt-1">Fuente: <span class="kbd">knowledge/transcripts-asesores/patrones/</span> · 8 docs por producto + KB-MAESTRA + CUSTOM-BOT-RESPONSES + GAPS.</div>
-    </footer>
 
   </main>
 </div>
 
-<!-- CBR DATA + RUNTIME -->
 <script>
-const CBRS = [
-{n:1,t:"Saludo + LOPD (global, primer mensaje)",tr:"Primer inbound de cualquier lead (Meta Ads, orgánico, formulario). Intent: welcome.",r:`Hola 🙂 está escribiendo a ESCOLLANOS Medicamentos Biológicos es un gusto poder atenderle!
-
-Conforme con lo dispuesto en el Reglamento a Ley Orgánica de Protección de Datos Personales Acuerdo No. 012-2019, le informamos que sus datos están siendo protegidos bajo nuestras políticas de uso de datos, al continuar usted acepta nuestros términos y condiciones para mayor información ingrese a nuestra pagina web:
-
-https://escollanos.com.ec/politicas_privacidad`,c:"emerald"},
-{n:2,t:"Mensaje de espera (asesor ocupado)",tr:"Inbound fuera de horario o asesor no disponible. Intent: holding_message.",r:`☺️Gracias por contactarnos!, en este momento nuestros asesores se encuentran ocupados, pero muy pronto uno de ellos estará muy feliz de atender tu consulta! ☺️`,c:"emerald"},
-{n:3,t:"Pitch DRENATOX",tr:`"drenatox", "desintoxicar", "drenaje", "kit Reckeweg", "R7 R17 R27 R37"`,r:`*DRENATOX (gotas orales) DESINTOXICACIÓN Y BIENESTAR POR TAN SOLO *[VARIABLE: precio_drenatox]* Y ENVIO GRATIS para todo el país excepto Galápagos*
-
-Fabricado por Dr.Reckeweg Alemania, es un kit de 4 productos que le permite realizar una desintoxicación y drenaje general de todo su cuerpo para mantenerlo saludable y ayudarle a bajar de peso.
-
-✅R7 HEPAGALEN: Hepatoprotector *(HIGADO)*
-✅R17 COBRALACTIN: Potencializa el drenaje linfático
-✅R27 RENOCALCIN: Permite depurar el organismo y mantiene el tracto urinario desintoxicado. *(RIÑON)*
-✅R37 COLINTESTON: Mantiene desintoxicado el tracto intestinal. *( COLON )*
-
-Todos estos medicamentos hacen una sinergia que le ayuda a bajar de peso por medio de la eliminación de toxinas y sustancias que nuestro organismo no necesita, además le ayudan también a eliminar pigmentaciones y acné.
-Con DRENATOX es posible estar saludable por dentro y esbelto por fuera ☺️
-🚨No tiene contraindicaciones
-Para más información sobre sus componentes le invitamos a visitar el enlace adjunto 👇
-https://escollanos.com.ec/producto/drenatox/`,c:"blue"},
-{n:4,t:"Pitch R14 QUIETA",tr:`"R14", "Quieta", "ansiedad", "insomnio", "estrés", "nervios", "no puedo dormir"`,r:`R14 QUIETA BIENESTAR POR TAN SOLO *[VARIABLE: precio_r14]* Y ENVÍO GRATIS
-
-Presentaciones disponibles:
-TABLETAS SUBLINGUALES (200 unidades)
-GOTAS ORALES (50ml = 1000 gotas)
-
-El R14 QUIETA elaborado por Dr.Reckeweg es un medicamento homeopático 100% alemán para tratar de forma natural el estrés, insomnio y la ansiedad.
-
-🧘BENEFICIOS:
-✅ Controla el insomnio y la exaltación mental
-✅ Favorece el control de la ansiedad y el nerviosismo
-✅ Controla la irritabilidad nerviosa
-✅ Ideal para la depresión y agitación nocturna
-✅ Puede usarse en pacientes cardíacos
-
-Importante
-❌NO crea efectos secundarios adversos
-❌NO causa farmacodependencia
-❌NO interactúa de manera negativa con otros medicamentos
-❌NO tiene contraindicaciones
-
-¿COMO TOMAR?
-TABLETAS Colocas 2 tabletas bajo la lengua 3 veces al día.
-GOTAS viertes 10 gotas en medio vaso de agua y lo tomas 3 veces al dia
-
-Le comparto el enlace de los componentes 👇 https://escollanos.com.ec/producto/quieta/`,c:"blue"},
-{n:5,t:"Pitch METAFAT",tr:`"metafat", "bajar de peso", "quemar grasa", "metabolismo lento", "adelgazar"`,r:`⚖️🔥 METAFAT 🥗💪 VALOR [VARIABLE: precio_metafat] Y ENVIO GRATIS para todo el país excepto Galápagos
-
-Es ideal para personas que buscan apoyar la pérdida de peso, activar el metabolismo de las grasas y mejorar la digestión, sin afectar el equilibrio natural del organismo.
-
-🔬 Beneficios principales:
-✅ Favorece la quema de grasa al apoyar el uso de lípidos como fuente de energía ⚡
-✅ Ayuda a controlar el metabolismo de los carbohidratos y grasas
-✅ Contribuye a mantener niveles normales de glucosa en sangre
-✅ Apoya la digestión y reduce la sensación de pesadez
-
-🧬 Componentes principales:
-✅ L-Carnitina: apoya la utilización de grasa como energía
-✅ Alcachofa: estimula la función digestiva y hepática
-✅ Cromo: contribuye al metabolismo normal de macronutrientes y al control de la glucosa
-✅ Vitamina B6: favorece el metabolismo de proteínas y glucógeno
-
-📦 Presentación: frasco de 60 cápsulas, tratamiento para un mes.
-💊 Posología: 2 cápsulas diarias con un vaso de agua 30 minutos despues de su almuerzo.
-Fabricado por laboratorio Quantum.`,c:"blue"},
-{n:6,t:"Pitch ALCACHOFA",tr:`"alcachofa", "colesterol", "triglicéridos", "digestión", "vesícula", "cálculos biliares"`,r:`🌱Alcachofa (gotas orales) POR TAN SOLO *[VARIABLE: precio_alcachofa]* Y ENVIO GRATIS para todo el país, excepto Galápagos
-
-Producto elaborado por Laboratorio Labfarve Colombia.
-Es un coadyuvante Natural que le ayuda a bajar de peso y a controlar los niveles de triglicéridos y colesterol además:
-
-✅Facilita la eliminación de grasas
-✅Incrementa la excreción de bilis
-✅Es digestiva y depura toxinas
-✅Coadyuvante para el manejo de cálculos biliares
-✅Da una sensación de saciedad alimenticia
-
-Posologia: 20 gotas en medio vaso de agua ANTES de las 3 comidas principales. Total 60 gotas AL DIA
-En caso de sufrir gastritis sería LUEGO de las 3 comidas.
-ℹ️ RECOMENDACION ADICIONAL durante el tratamiento tomar abundante agua para optimizar su efecto.
-🕔Duración del frasco aproximadamente un mes`,c:"blue"},
-{n:7,t:"Pitch LACTIBIANE TOLERANCE",tr:`"lactibiane", "tolerance", "probiótico", "colon irritable", "crohn", "intolerancia alimenticia", "microbiota", "flora intestinal"`,r:`Valor [VARIABLE: precio_lactibiane]
-
-El Lactibiane TOLERANCE (cápsulas) es un producto elaborado a base de probióticos en Francia por Laboratorios PileJe
-Indicado para:
-✅Síndrome del colon irritable
-✅Enfermedad de Crohn
-✅Intolerancia alimenticia
-✅ Hiperpermeabilidad intestinal
-✅Colitis
-✅Enfermedad celiaca
-✅Proteger la microbiota intestinal
-✅Incrementar el sistema inmune
-
-Nuestro producto es libre de lactosa, gluten y azúcar
-
-Composición
-Lactobacillus acidophilus LA 201
-Lactobacillus acidophilus plantarum LA 301
-Lactobacillus salivarius LA 302
-Bifidobacterium lactis LA 303
-Bifidobacterium lactis LA 304
-
-Contenido 30 cápsulas.
-Posología: 1 diaria en las mañanas al despertar con abundante agua (de 1 a 2 vasos)
-
-Le adjunto un enlace con mayor información 👇
-https://escollanos.com.ec/producto/lactibiane-tolerance/`,c:"blue"},
-{n:8,t:"Pitch JARABE DE CALÉNDULA",tr:`"caléndula", "calendula", "gastritis", "úlcera", "reflujo", "acidez estomacal"`,r:`Valor [VARIABLE: precio_calendula] y envío a domicilio GRATIS
-Envío no aplica a Galápagos
-
-Jarabe de Caléndula producto de Laboratorio Labfarve Colombia.
-Le comparto algunos beneficios del jarabe de caléndula
-✅Indicado para la gastritis
-✅Es un antiséptico, antinflamatorio y cicatrizante
-✅Ayuda a tratar úlceras
-✅Ayudan eliminar el reflujo y la acidez estomacal
-✅Alivia el dolor
-
-¿Quién puede tomarlo?
-👉Adultos mayores que se encuentren consumiendo medicamentos farmacológicos
-👉Personas que sufren de gastritis, problemas digestivos o que quieran prevenirlos
-👉Todo grupo etario que quiera cuidar de su salud
-
-Posología: una (1) cucharada antes del almuerzo y una cucharada (1) antes de la cena, todos los días.
-Para más información sobre sus componentes le invitamos a visitar el enlace adjunto 👇
-https://escollanos.com.ec/producto/calendula_jarabe/`,c:"blue"},
-{n:9,t:"Pitch RENOBELLA",tr:`"renobella", "menopausia", "climaterio", "hormonal femenino", "calores", "sofocos"`,r:`Valor *[VARIABLE: precio_renobella]* Y ENVIO GRATIS para todo el país excepto Galápagos
-🌸RENOBELLA💖 es ideal para mujeres que desean apoyar su equilibrio hormonal, bienestar celular y vitalidad diaria.
-✨Ideal para mujeres que atraviesan las etapas de climaterio o menopausia.
-
-🔬 Beneficios principales:
-✅ Apoya la regulación de la actividad hormonal
-✅ Ayuda a reducir el impacto del estrés oxidativo
-✅ Contribuye al bienestar celular y a la vitalidad femenina
-✅ Protege las células frente al daño oxidativo
-
-🧬 Componentes principales:
-✅ Isoflavonas | Resveratrol | Vitamina B6 | Vitamina E
-
-📦 Presentación: frasco de 60 cápsulas, tratamiento para un mes.
-💊 Posología: generalmente 2 cápsulas diarias con un vaso de agua.
-
-Fabricado por laboratorio Quantum Pharm 🇪🇨, bajo altos estándares de calidad.`,c:"blue"},
-{n:10,t:"Pitch COMBO Reset 30 Días (DRENATOX + METAFAT)",tr:`combinar drenatox + metafat, "reset 30 días", "combo desintoxicar + bajar peso"`,r:`Si te sientes con inflamación, poco ánimo o con el metabolismo lento, tu cuerpo necesita apoyo real.
-
-En Escollanos te presentamos el Reset 30 Días con DRENATOX + METAFAT, un acompañamiento natural para quienes quieren:
-✔ Desinflamarse
-✔ Drenar toxinas acumuladas
-✔ Activar el metabolismo
-✔ Sentirse más livianos/as y con mejor energía
-
-🎁 PROMOCIÓN ESPECIAL
-✨ 5% OFF en el combo DRENATOX + METAFAT
-✨ Guía digital GRATIS de 30 días (valorizada en *29*)
-
-Es un proceso real y sostenible 💚
-
-Valor de los dos productos *[VARIABLE: precio_combo_reset]* + ENVÍO SIN COSTO`,c:"violet"},
-{n:11,t:"Objeción precio (genérica)",tr:`"está caro", "es mucho", "me parece alto", "tienen descuento"`,r:`Con mucho gusto, le comento que el precio incluye envío GRATIS a todo el país (excepto Galápagos). Si de pronto se anima a realizar su compra puedo aplicarle 5% de descuento y envío gratis. Adicionalmente por la compra de 3 unidades o más obtiene hasta 15% de descuento. ¿Cuántos frascos desea?`,c:"amber"},
-{n:12,t:"Objeción precio ALCACHOFA (subida importación)",tr:`Cliente alcachofa dice "han subido el precio", "antes era más barato"`,r:`Desde el 01 de enero tenemos nuevos precios ya que las importaciones llegaron con precios más altos. Si de pronto se anima a realizar su compra puedo aplicarle 5% de descuento y envío gratis.`,c:"amber"},
-{n:13,t:`Objeción "¿tiene efecto rebote?" (METAFAT)`,tr:`Cliente metafat pregunta "rebote", "voy a recuperar el peso"`,r:`Buen dia no tiene efecto rebote ☺ Es una fórmula natural a base de L-Carnitina, Alcachofa, Cromo y Vitamina B6 que apoya el metabolismo sin alterar el equilibrio del organismo. ¿Desea iniciar el tratamiento?`,c:"amber"},
-{n:14,t:`Objeción "puedo tomarlo con hipertensión / presión alta"`,tr:`"presión alta", "hipertensión", "soy hipertenso"`,r:`Sin ningún problema. Nuestros productos al ser 100% naturales no tienen contraindicaciones ni efectos secundarios, lo puede tomar con tranquilidad. De hecho, nuestros homeopáticos pueden usarse incluso en pacientes cardíacos.`,c:"amber"},
-{n:15,t:`Objeción "soy diabético / tengo diabetes"`,tr:`"diabetes", "diabético", "azúcar alta"`,r:`Con gusto, nuestros productos son 100% naturales y no tienen contraindicaciones. En el caso específico de METAFAT, el Cromo contribuye a mantener niveles normales de glucosa en sangre. Si tiene una condición médica de base, le recomendamos consultar con su profesional de salud.`,c:"amber"},
-{n:16,t:`Objeción "tengo hipotiroidismo / otra condición"`,tr:`"hipotiroidismo", "tiroides", "tomo levotiroxina"`,r:`En lo absoluto en su caso no tiene contraindicación alguna. Nuestros productos son 100% naturales y no interactúan negativamente con otros medicamentos. Lo ideal es tomarlo en un horario distinto a su medicación habitual (1-2 horas de separación).`,c:"amber"},
-{n:17,t:`Objeción embarazo/lactancia (genérico no-caléndula)`,tr:`"embarazo", "embarazada", "lactancia" en productos distintos a caléndula`,r:`En caso de embarazo y lactancia le recomendamos consultar con su médico antes de iniciar el tratamiento. Nuestros productos son naturales pero siempre es importante que su profesional de salud valore su caso particular.`,c:"rose"},
-{n:18,t:`Objeción embarazo/lactancia CALÉNDULA (derivar a médico)`,tr:`Consulta caléndula + "embarazo" / "lactancia" / "bebé en camino"`,r:`En caso de embarazo y lactancia consultar con su médico antes de iniciar el tratamiento con Jarabe de Caléndula.`,c:"rose"},
-{n:19,t:`Combinación con otros medicamentos / probióticos`,tr:`"puedo combinar", "se puede tomar con", "interactúa con", "junto a mi medicación"`,r:`Claro que sí. Nuestros productos no interactúan negativamente con otros medicamentos. Para mayor comodidad digestiva se recomienda tomarlos en horarios separados (por ejemplo, 1-2 horas de diferencia con su medicación habitual). 🚨No tiene contraindicaciones.`,c:"amber"},
-{n:20,t:`Métodos de pago (global con bifurcación)`,tr:`"cómo pago", "formas de pago", "métodos de pago", "puedo pagar con tarjeta", "contraentrega"`,r:`*MÉTODOS DE PAGO DISPONIBLES*
-
-PREVIA ENTREGA: disponible para todo el país
-1) Depósito
-2) Transferencia
-3) Tarjeta de crédito/ débito (por medio de link de pago)
-
-AL MOMENTO DE LA ENTREGA
-1) Pago en efectivo: disponible solo para Quito, Guayaquil y Cuenca (NO APLICA para fórmulas personalizadas)
-
-Importante: al momento de la entrega solo recibimos EFECTIVO. Si desea pagar con tarjeta, le generamos un link de pago previo.`,c:"emerald"},
-{n:21,t:`Datos bancarios para transferencia`,tr:`"datos para transferir", "número de cuenta", "depósito", "datos bancarios"`,r:`Para realizar su transferencia o depósito contamos con cuenta en:
-
-*BANCO PICHINCHA*
-Cuenta corriente
-Número: *3498119104*
-A nombre de: *Escollanos cia ltda.*
-Ruc: *1792319900001*
-Correo: *contabilidad4@escollanos.com*
-
-✅ Importante una vez realizada su transacción debe enviarnos foto del comprobante para proceder a gestionar su pedido`,c:"emerald"},
-{n:22,t:`Tiempos de envío Quito / Guayaquil / Cuenca`,tr:`Cliente en Quito/Gye/Cuenca + "cuándo llega", "puedo recibir hoy"`,r:`Para Quito, Guayaquil y Cuenca contamos con ruta propia y podemos entregar el mismo día según horario de corte. Manejamos dos rutas: primera ruta en el lapso de 11h00 a 15h00 y segunda ruta de 15h00 a 18h00. El envío es totalmente GRATIS.`,c:"emerald"},
-{n:23,t:`Tiempos de envío resto del país (Servientrega)`,tr:`Cliente fuera de Quito/Gye/Cue + "cuándo llega", "envío a [ciudad]"`,r:`Con mucho gusto para su ciudad trabajamos previo pago y enviamos mediante Servientrega desde la ciudad de Quito. Le llegará en el lapso de 24 a 48 horas laborables, le compartimos número de Guía para rastreo. El envío es totalmente GRATIS (no aplica a Galápagos).`,c:"emerald"},
-{n:24,t:`Cobertura geográfica + excepción Galápagos`,tr:`"hacen envíos a todo el país", "envían a Galápagos", "cobertura"`,r:`Ponemos a su disposición el servicio de entrega a domicilio GRATIS A TODO EL PAÍS, excepto Galápagos. En Quito, Guayaquil y Cuenca con ruta propia (contraentrega disponible). Resto del país por Servientrega previo pago, 24 a 48 horas laborables.`,c:"emerald"},
-{n:25,t:`Posología DRENATOX`,tr:`Cliente drenatox pregunta "cómo se toma", "dosis", "cuántas gotas"`,r:`*Posología Drenatox:*
-Debe colocar 15 gotas de cada frasco (total 60 gotas) en un envase de *mínimo* un litro de agua 🍶 hasta 2 litros.
-
-*Video demostrativo en el siguiente enlace 👇👇*
-https://www.facebook.com/share/r/4CWq61haFugvtpR8/?mibextid=WC7FNe
-
-*Esa preparación debe tomar en su totalidad a lo largo de todo el día* inicia luego del desayuno
-
-Repite el proceso diariamente hasta acabar el tratamiento *(dura cerca de un mes)*`,c:"blue"},
-{n:26,t:`Posología R14 QUIETA`,tr:`Cliente R14 pregunta "cómo se toma", "dosis", "a qué hora"`,r:`¿COMO TOMAR?
-TABLETAS Colocas 2 tabletas bajo la lengua 3 veces al día, 30 minutos antes de cada comida.
-GOTAS viertes 10 gotas en medio vaso de agua y lo tomas 3 veces al día, 30 minutos antes de cada comida.
-
-En la noche se recomienda que sea hasta las 19h00. Si el insomnio no cede, puede duplicar su dosis unos 10 minutos antes de acostarse.`,c:"blue"},
-{n:27,t:`Posología METAFAT`,tr:`Cliente metafat pregunta "cómo se toma"`,r:`*POSOLOGIA METAFAT*
-
-📦 Presentación: frasco de 60 cápsulas, tratamiento para un mes.
-💊 Posología: 2 cápsulas diarias con un vaso de agua 30 minutos despues de su almuerzo !!`,c:"blue"},
-{n:28,t:`Posología ALCACHOFA`,tr:`Cliente alcachofa pregunta "cómo se toma"`,r:`Posología: 20 gotas en medio vaso de agua ANTES de las 3 comidas principales. Total 60 gotas AL DIA.
-En caso de sufrir gastritis sería LUEGO de las 3 comidas.
-ℹ️ Durante el tratamiento tomar abundante agua para optimizar su efecto.
-🕔 Duración del frasco aproximadamente un mes.`,c:"blue"},
-{n:29,t:`Posología LACTIBIANE TOLERANCE`,tr:`Cliente tolerance pregunta "cómo se toma"`,r:`Posología: 1 cápsula diaria en las mañanas al despertar con abundante agua (de 1 a 2 vasos). Se recomienda tomar por 3 meses consecutivos para óptimos resultados; los beneficios se notan desde la primera semana.`,c:"blue"},
-{n:30,t:`Posología JARABE CALÉNDULA por edad`,tr:`Cliente caléndula + "cómo se toma", "para niños", "para bebés", "para adulto mayor"`,r:`Posología Jarabe de Caléndula por edad:
-
-- Bebés de 0-12 meses: ¼ cucharadita mezclada con 3 cucharaditas de leche, hasta un máximo de 4 al día.
-- Niños de 2-5 años: ¼ cucharadita, 3 veces al día.
-- Niños de 6-12 años: ½ cucharadita 3 veces al día.
-- De 12 años hasta 70 años: 1 cucharada 3 veces al día.
-- De 70 años en adelante: ½ cucharadita 3 veces al día.
-
-EN TODOS LOS CASOS AGUDOS SE PUEDE AUMENTAR HASTA 6 VECES AL DIA.
-
-Adultos también pueden tomar: 1 cucharada antes del almuerzo y 1 cucharada antes de la cena, todos los días.`,c:"blue"},
-{n:31,t:`Posología RENOBELLA`,tr:`Cliente renobella pregunta "cómo se toma"`,r:`💊 Posología: 2 cápsulas diarias con un vaso de agua. Frasco de 60 cápsulas rinde para 1 mes de tratamiento.`,c:"blue"},
-{n:32,t:`Pedido de 9 datos para procesar pedido`,tr:`"quiero hacer pedido", "deseo comprar", "me ayudas con el pedido", "lo llevo"`,r:`Para procesar su pedido, por favor, ayúdeme enviando los siguientes datos para poder elaborar su factura y programar su entrega:
-
-✅Nombre
-✅Cédula o Ruc
-✅correo 💊
-✅Celular
-✅Número de teléfono adicional
-✅Ciudad de entrega
-✅Dirección completa de entrega escrita (incluye calle numeración, etc)
-✅Ubicación (maps)
-✅ Medicamentos solicitados`,c:"emerald"},
-{n:33,t:`Pregunta presentación gotas vs tabletas (R14)`,tr:`Cliente R14 + "gotas o tabletas", "cuál me conviene"`,r:`Con mucho gusto. Si el problema principal es el sueño, le recomiendo gotas. Si es uso diurno para ansiedad o nervios, las tabletas sublinguales son más prácticas. ¿Cuál prefiere, gotas o tabletas?`,c:"blue"},
-{n:34,t:`Tratamiento de 3 meses (upsell retención)`,tr:`"cuánto tiempo lo tomo", "cuántos frascos necesito", "tratamiento completo"`,r:`💡 Te comento algo importante 🙌
-
-Desde la primera semana puedes empezar a notar mejoras 👌
-Pero lo más importante es esto 👇
-
-👉 Cuando haces el tratamiento de 3 meses, el cuerpo no solo mejora…
-👉 *También mantiene los resultados en el tiempo*
-
-✔️ Se corrige desde adentro
-✔️ El cuerpo se estabiliza
-✔️ Y evitas que el problema regrese
-
-✨ Promo 1: Llevando el tratamiento de 3 meses (3 productos), obtiene 5% de descuento.
-🎁 Promo 2: Llevando el tratamiento de 3 meses (3 productos), recibe GRATIS una crema a base de caléndula de 90 g.
-🚚 Además, su envío es totalmente GRATIS.
-⏳ Promoción válida hasta agotar stock.`,c:"violet"},
-{n:35,t:`Follow-up 24h sin respuesta`,tr:`Lead sin respuesta 24h después del pitch`,r:`🌟Hola te saludamos nuevamente de ESCOLLANOS!🌟
-Quería preguntarte si tienes alguna pregunta adicional del producto que nos consultaste con la que pueda ayudarte?
-
-Desde el sistema inmunológico hasta el bienestar digestivo y emocional… Tenemos opciones naturales para cada necesidad!
-
-Realiza tu pedido por este medio! ⬇️⬇️⬇️
-¿No le interesa? Toque en «Detener promociones»`,c:"emerald"},
-{n:36,t:`Cross-sell: INFECCIÓN URINARIA / RIÑÓN`,tr:`"infección urinaria", "cistitis", "vías urinarias", "riñón"`,r:`Con gusto puede acompañar con el DRENATOX y adicional el VIRA VIRA, que es nuestro complemento natural para apoyar las vías urinarias. ¿Le comparto la información completa de ambos?`,c:"violet"},
-{n:37,t:`Cross-sell: DESINTOXICAR + BAJAR PESO`,tr:`"quiero bajar de peso", "desintoxicar y adelgazar", "limpiar el organismo y bajar peso"`,r:`Le recomiendo nuestro combo Reset 30 Días: DRENATOX + METAFAT por *[VARIABLE: precio_combo_reset]* (con 5% OFF) + Guía digital de nutrición GRATIS + envío sin costo. Ideal para desinflamar, drenar toxinas y activar el metabolismo. ¿Le ayudo a gestionar el pedido?`,c:"violet"},
-{n:38,t:`Cross-sell: MENOPAUSIA + INSOMNIO`,tr:`"menopausia y no duermo", "premenopausia con insomnio", "calores y nervios"`,r:`En su caso me permito recomendarle R14 QUIETA + RENOBELLA. El R14 QUIETA ayuda con el insomnio, ansiedad y exaltación mental; RENOBELLA apoya el equilibrio hormonal en climaterio y menopausia. Trabajan en sinergia. ¿Desea que le comparta más información?`,c:"violet"},
-{n:39,t:`Cross-sell: COLON IRRITABLE + DIGESTIÓN`,tr:`"colon irritable y digestión pesada", "intestino sensible + hígado"`,r:`Puede combinar LACTIBIANE TOLERANCE con ALCACHOFA, ya que no presentan interacción y se complementan muy bien. La alcachofa apoya el hígado y la digestión, mientras que Lactibiane Tolerance ayuda a equilibrar la flora intestinal y mejorar la tolerancia digestiva. Se recomienda Lactibiane en ayunas o antes de dormir, y la alcachofa después de las comidas.`,c:"violet"},
-{n:40,t:`Cross-sell: GASTRITIS + DIGESTIÓN`,tr:`"gastritis y reflujo", "úlcera y digestión"`,r:`Le recomiendo JARABE DE CALÉNDULA para la gastritis, úlceras, reflujo y acidez. Si además quiere apoyo digestivo y hepático, puede complementar con ALCACHOFA tomada DESPUÉS de las comidas (no antes, por la gastritis). ¿Le comparto la información completa?`,c:"violet"},
-{n:41,t:`"¿Tienen Primosiston?" (producto NO manejado)`,tr:`"Primosiston" u otro producto fuera del catálogo Escollanos`,r:`Con gusto. Por el momento no manejamos ese producto en nuestro catálogo. Le invitamos a revisar nuestras opciones naturales en https://escollanos.com.ec/ o cuénteme qué síntoma o necesidad busca atender y le recomiendo el producto Escollanos más adecuado.`,c:"rose"},
-{n:42,t:`"¿Tienen producto que vi en farmacia?"`,tr:`Cliente pregunta por producto genérico/marca farmacéutica que NO es Escollanos`,r:`En Escollanos manejamos exclusivamente medicamentos biológicos, homeopáticos y suplementos naturales: DRENATOX, R14 QUIETA, METAFAT, ALCACHOFA, LACTIBIANE TOLERANCE, JARABE DE CALÉNDULA, RENOBELLA, VIRA VIRA, entre otros. ¿Qué síntoma o necesidad desea atender y le recomiendo la mejor alternativa natural?`,c:"rose"},
-{n:43,t:`"¿Es adictivo? / ¿Genera dependencia?" (R14)`,tr:`"adictivo", "dependencia", "me voy a acostumbrar"`,r:`No es adictivo, no genera dependencia. La homeopatía trabaja por frecuencia, es decir, por las veces de toma del producto. Por eso se recomienda tomarlo 3 veces al día incluso si el síntoma es leve.`,c:"amber"},
-{n:44,t:`"¿Lo encuentro en farmacia?" (intento offline)`,tr:`"lo venden en farmacia", "lo encuentro en Fybeca/Sana Sana"`,r:`Con gusto, le comento que también puede adquirirlo directamente con nosotros por este medio con envío GRATIS a todo el país (excepto Galápagos). Si prefiere visitar nuestras farmacias físicas, también puedo compartirle un cupón del 5% de descuento. ¿Cómo le ayudo?`,c:"amber"},
-{n:45,t:`"¿Tienen 2x1 / promoción especial?"`,tr:`"2x1", "promoción", "descuento extra"`,r:`Actualmente tenemos promociones activas en productos seleccionados con 10% al 25% de descuento y envío sin costo a todo el país. Adicionalmente por la compra de 3 unidades o más obtiene hasta 15% de descuento. ¿De qué producto está interesado?`,c:"amber"},
-{n:46,t:`Confirmación de pedido (Quito/Gye/Cuenca, ruta propia)`,tr:`Pedido cerrado en Quito/Guayaquil/Cuenca`,r:`Su pedido fue procesado [SO######] será entregado el día [HOY/MAÑANA] en el lapso de [11h00 a 15h00 / 15h00 a 18h00]
-debe cancelar *[VARIABLE: total_pedido]*
-
-Muchas gracias por preferirnos!
-Esperamos poder atenderle nuevamente 🙂
-
-Por favor ayúdenos estando atento de su teléfono ya que el mensajero sólo puede esperar hasta un máximo de 5min caso contrario continuará con su ruta.`,c:"emerald"},
-{n:47,t:`Confirmación de pedido (resto del país, Servientrega)`,tr:`Pedido cerrado fuera de Quito/Gye/Cuenca`,r:`Muchísimas gracias, enviamos su pedido [SO######] *mediante Servientrega*, le llegará en el lapso de 24 a 48 horas laborables *Adjunto su número de Guía* 👇
-Número de Guía asignado: [#########]
-
-Puede realizar el rastreo de su envío en el siguiente link 👇🧐
-https://www.servientrega.com.ec/ en la pestaña que dice RASTREO coloca el número que le compartí y podrá ver el estado de su envío en tiempo real`,c:"emerald"},
-{n:48,t:`Encuesta NPS post-entrega`,tr:`Post-confirmación de entrega`,r:`Gracias por tu tiempo y por confiar en nosotros.
-Para seguir mejorando, te invitamos a calificar esta encuesta con tu opinión.
-¡Tu feedback es muy valioso para nosotros!
-Gracias por confiar en nosotros!`,c:"emerald"},
-{n:49,t:`Cierre cuando cliente declina ("no gracias")`,tr:`"no gracias", "ahora no", "lo pensaré", "más adelante"`,r:`Comprendemos, atentos a su próximo pedido ☺ Estamos siempre a su orden.`,c:"emerald"},
-{n:50,t:`"¿Mensajero acepta tarjeta?"`,tr:`"puedo pagar con tarjeta en la entrega", "datafast", "POS al mensajero"`,r:`Al momento de la entrega solo recibimos EFECTIVO. Si desea pagar con tarjeta de crédito/débito, le generamos un link de pago previo a la entrega. ¿Le genero el link?`,c:"emerald"},
+// ===== Bloque rojo: checkboxes interactivos =====
+const DATA = [
+  { ico:"🩺", title:"Postura clínica / salud", items:[
+    "<b>Niños menores de 12 años:</b> definimos que los productos Dr. Reckeweg son desde los 12 años, pero <b>Jutusin, Pulsatilla y Apetimed</b> tienen dosis para bebés/niños en su ficha. ¿Estos 3 son la excepción para niños? Confírmennos.",
+    "<b>Alcachofa e hipertensión:</b> el asesor dice 'no sube la presión, puede tomarla con su medicación', pero la ficha oficial dice 'usar con precaución en hipertensión'. ¿Qué debe responder el bot?"
+  ]},
+  { ico:"💲", title:"Precios a confirmar", items:[
+    "¿El bot comunica el <b>precio de lista</b> o el <b>precio con 5% de descuento</b>? (hoy los asesores dan el de 5%)",
+    "<b>Jarabe de Caléndula:</b> ¿$17.60 o $18.50? (hay un $16.00 viejo dando vueltas)",
+    "<b>Kit Drenatox + Alcachofa:</b> ¿$54.63 o $55.40?",
+    "<b>Facemed 2x1:</b> ¿$50.60 o $46.00?",
+    "<b>Combo R14 + Tolerance:</b> el valor $42.80 quedó mal. ¿Cuál es el correcto?"
+  ]},
+  { ico:"📦", title:"Productos sin ficha (faltan para el bot)", items:[
+    "Enviarnos ficha (valor, posología, para qué sirve) de: <b>Gripfectan</b> (no publicable), <b>Anginacid</b>, <b>Klimakteran</b>, <b>R49 Rhinopulsan</b> y <b>Gastreu</b>.",
+    "Ficha técnica oficial de <b>Facemed</b> y <b>SkinMed Plus</b>.",
+    "Texto/pitch oficial de <b>CiBiDol gotas (S, M y L)</b>.",
+    "¿<b>Flores de Bach</b> y los componentes <b>R7 / R17 / R27 / R37</b> se venden por separado?"
+  ]},
+  { ico:"💬", title:"Plantillas de WhatsApp (Meta)", items:[
+    "Las <b>gotas de CiBiDol</b> usan por error la plantilla de la crema → crear plantillas propias.",
+    "<b>Apetimed:</b> la plantilla tiene un error en el link (dice <i>/apetimax/</i>, debería ser <i>/apetimed/</i>).",
+    "<b>VitalMen</b> (plantilla inicial) sigue pendiente de aprobación en Meta."
+  ]},
+  { ico:"🛠️", title:"Operativo", items:[
+    "Direcciones de las farmacias físicas + código del <b>cupón del 5%</b>.",
+    "Lista de <b>mensajeros por ciudad</b> + ¿el bot puede compartir su teléfono?",
+    "¿Siguen vigentes? <b>Reto 21 días</b>, <b>sorteos por compras +$30</b>, <b>cliente SILVER</b> y <b>preventa</b> cuando se agota stock."
+  ]}
 ];
 
-const cbrList = document.getElementById('cbr-list');
-const colorPill = {emerald:'pill-emerald',blue:'pill-blue',amber:'pill-amber',violet:'pill-violet',rose:'pill-rose'};
-
-function highlight(text){
-  return text.replace(/\[VARIABLE: ([a-z_]+)\]/g,'<span class="var-token">[VARIABLE: $1]</span>');
-}
-
-CBRS.forEach(cbr => {
-  const det = document.createElement('details');
-  det.className = 'card';
-  det.innerHTML = `
-    <summary class="p-4 flex items-start gap-3">
-      <span class="chev text-[var(--muted)] mt-0.5">▶</span>
-      <span class="pill ${colorPill[cbr.c]} flex-shrink-0">CBR-${String(cbr.n).padStart(2,'0')}</span>
-      <span class="flex-1 text-[15px] font-medium">${cbr.t}</span>
-    </summary>
-    <div class="px-5 pb-5 pt-1 border-t border-[var(--border)] mt-1">
-      <div class="text-xs text-[var(--muted)] mb-2"><strong class="text-[var(--text)]">Trigger:</strong> ${cbr.tr}</div>
-      <pre class="payload"><button class="copy-btn" data-copy>📋 Copiar</button>${highlight(cbr.r)}</pre>
+const groups = document.getElementById('groups');
+let total = 0;
+DATA.forEach((g, gi) => {
+  const card = document.createElement('div');
+  card.className = 'card card-rose p-5';
+  let html = `<div class="flex items-center gap-2 mb-1"><span style="font-size:18px">${g.ico}</span><h3 class="display text-lg font-semibold">${g.title}</h3></div><div>`;
+  g.items.forEach((t, ii) => {
+    total++;
+    html += `<div class="item" data-id="${gi}-${ii}">
+      <span class="chk" role="checkbox" aria-checked="false">✓</span>
+      <div class="txt text-sm leading-relaxed">${t}</div>
     </div>`;
-  cbrList.appendChild(det);
+  });
+  html += `</div>`;
+  card.innerHTML = html;
+  groups.appendChild(card);
 });
 
-// COPY HANDLER
-document.addEventListener('click', e => {
-  const btn = e.target.closest('.copy-btn');
-  if(!btn) return;
-  const pre = btn.parentElement;
-  const text = pre.textContent.replace(/^📋 Copiar/,'').trim();
-  navigator.clipboard.writeText(text).then(()=>{
-    btn.textContent = '✓ Copiado';
-    btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='📋 Copiar';btn.classList.remove('copied');},1500);
+document.getElementById('total').textContent = total;
+const fill = document.getElementById('fill');
+const countEl = document.getElementById('count');
+function refresh(){
+  const done = document.querySelectorAll('.item.done').length;
+  countEl.textContent = done;
+  fill.style.width = (total ? (done/total*100) : 0) + '%';
+}
+document.querySelectorAll('.item').forEach(item => {
+  const chk = item.querySelector('.chk');
+  chk.addEventListener('click', () => {
+    item.classList.toggle('done');
+    chk.classList.toggle('done');
+    chk.setAttribute('aria-checked', item.classList.contains('done'));
+    refresh();
   });
 });
+refresh();
 
-// SCROLL SPY
-const links = document.querySelectorAll('aside nav a');
-const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+// ===== Sidebar scroll-spy =====
+const navLinks = Array.from(document.querySelectorAll('aside nav a'));
+const targets = Array.from(document.querySelectorAll('section[id], h3[id]'));
 function spy(){
-  const y = window.scrollY + 100;
-  let cur = sections[0];
-  for(const s of sections) if(s.offsetTop <= y) cur = s;
-  links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#'+cur.id));
+  const y = window.scrollY + 110;
+  let cur = targets[0];
+  for(const t of targets){ if(t.offsetTop <= y) cur = t; }
+  if(cur) navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+cur.id));
 }
 window.addEventListener('scroll', spy, {passive:true});
 spy();
