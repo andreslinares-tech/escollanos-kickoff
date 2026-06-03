@@ -578,7 +578,10 @@
     <div class="card card-violet mb-8">
       <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-3">Mecanismo de handoff · capa bot</div>
       <p class="text-sm text-zinc-300 leading-relaxed mb-4">
-        Los handoffs (WF 02-06) <span class="text-white">no usan</span> la acción <span class="font-mono">Bot Transfer</span>. Se configuran con la función nativa <span class="text-white">Transferencia a humano</span> (Bot Goals → escenarios). Cada escenario detecta la condición, <span class="text-white">asigna al pool</span>, manda el mensaje final, <span class="text-white">apaga el bot</span> y aplica un tag <span class="font-mono text-rose-200">handoff_*</span>. <span class="text-white">Ese tag dispara el WF</span> que ejecuta la capa operativa (etapa, notificación, derivación). Una sola fuente de verdad, sin gastar acciones del bot (límite de 5).
+        Los handoffs (WF 02-05) <span class="text-white">no usan</span> la acción <span class="font-mono">Bot Transfer</span>. Se configuran con la función nativa <span class="text-white">Transferencia a humano</span> (Bot Goals → escenarios). Cada escenario detecta la condición, <span class="text-white">asigna al pool</span>, manda el mensaje final, <span class="text-white">apaga el bot</span> y aplica un tag <span class="font-mono text-rose-200">handoff_*</span>. <span class="text-white">Ese tag dispara el WF</span> que ejecuta la capa operativa (etapa, notificación, derivación). Una sola fuente de verdad, sin gastar acciones del bot (límite de 5).
+      </p>
+      <p class="text-sm text-zinc-300 leading-relaxed mb-4">
+        <span class="text-rose-200">Excepción · Caso Clínico (WF 06):</span> la función Transferencia a humano <span class="text-white">topa en 6 escenarios</span>, así que Caso Clínico se movió a una acción <span class="font-mono text-violet-200">Trigger Workflow</span> (bot action <span class="font-mono">Handoff Caso Clínico</span>) que enrola el WF directo, sin tag gateway. Esa acción <span class="text-white">no asigna ni apaga el bot</span> — por eso el WF quedó como <span class="text-white">aviso (2 Internal Notifications)</span>. El bot ya entregó la frase ética en la conversación antes de disparar.
       </p>
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
@@ -621,11 +624,11 @@
               <td class="py-2 pr-4"><span class="pill pill-rose">handoff_pedido_humano</span> → WF 05</td>
             </tr>
             <tr>
-              <td class="py-2 pr-4 text-white">Caso Clínico</td>
+              <td class="py-2 pr-4 text-white">Caso Clínico <span class="text-zinc-500">(no es escenario — bot action)</span></td>
               <td class="py-2 pr-4">Quiere dejar/reemplazar psicotrópico o menciona enfermedad puntual e insiste tras la frase ética.</td>
-              <td class="py-2 pr-4">pool</td>
-              <td class="py-2 pr-4 text-rose-300">no reactiva</td>
-              <td class="py-2 pr-4"><span class="pill pill-rose">handoff_caso_clinico</span> → WF 06</td>
+              <td class="py-2 pr-4 text-zinc-500">— solo aviso</td>
+              <td class="py-2 pr-4 text-zinc-500">bot sigue activo</td>
+              <td class="py-2 pr-4"><span class="pill pill-violet">Trigger Workflow</span> → WF 06</td>
             </tr>
           </tbody>
         </table>
@@ -839,32 +842,28 @@ NO incluir Assign User ni Stop Bot — eso ya lo hace el escenario. El escenario
     <!-- WF 06 -->
     <details class="wf">
       <summary>
-        <div class="flex items-center gap-3"><span class="font-mono text-sm text-violet-300">WF 06</span><span class="text-white text-base font-medium">Handoff Caso Clínico</span></div>
-        <div class="flex gap-2 flex-wrap"><span class="pill pill-rose">Tag handoff_caso_clinico</span><span class="pill pill-red">CRÍTICO · ética farmacéutica</span></div>
+        <div class="flex items-center gap-3"><span class="font-mono text-sm text-violet-300">WF 06</span><span class="text-white text-base font-medium">CASO CLINICO - AUTOMATIZACIÓN</span></div>
+        <div class="flex gap-2 flex-wrap"><span class="pill pill-violet">Trigger Workflow (bot action)</span><span class="pill pill-red">CRÍTICO · ética farmacéutica</span></div>
       </summary>
       <div class="wf-body">
         <div>
           <div class="font-mono text-[11px] tracking-widest text-zinc-400 uppercase mb-2">Instrucciones manuales UI</div>
           <ol class="text-sm text-zinc-300 space-y-1.5 leading-relaxed list-decimal pl-5">
-            <li>Trigger: Contact Tag Added · <code>handoff_caso_clinico</code> <span class="text-zinc-500">(escenario "Caso Clínico" — también aplica <code>caso_clinico</code> para auditoría)</span></li>
-            <li>Update Opportunity stage "Caso clínico — handoff"</li>
-            <li>Send Email URGENT · Subject <span class="font-mono">⚠️ [CASO CLÍNICO] atención inmediata</span> · Body con caso_clinico_mencionado + reglas (no afirmar que producto sirve, no dosis, no dejar medicación, derivar al médico)</li>
+            <li>Nombre del WF en GHL: <code>CASO CLINICO - AUTOMATIZACIÓN</code></li>
+            <li>Trigger: <span class="text-white">ninguno en el builder</span> <span class="text-zinc-500">(se deja "Añadir nuevo activador" vacío — lo enrola directo la bot action <code>Handoff Caso Clínico</code> desde Bot Goals)</span></li>
+            <li>Internal Notification #1 → al pool (<code>Asesor base</code>) · caso clínico sensible, atención inmediata</li>
+            <li>Internal Notification #2 → a Gaby / Mela · redundancia por criticidad</li>
           </ol>
-          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">El bot ya dio la frase ética antes de transferir. El escenario "Caso Clínico" asigna al pool, manda el mensaje final y apaga el bot con la <span class="text-rose-300">reactivación desmarcada (no reactivar)</span> por la sensibilidad del caso.</p>
+          <p class="text-xs text-zinc-500 mt-2 leading-relaxed">Quedó como <span class="text-white">aviso nomás</span>: la bot action Trigger Workflow <span class="text-rose-300">no asigna ni apaga el bot</span> (a diferencia de los escenarios de Transferencia a humano). El bot ya entregó la frase ética en la conversación antes de disparar. <span class="text-zinc-400">Si más adelante se quiere endurecer, sumar Stop Bot + Assign User + Update Opportunity dentro de este WF.</span></p>
         </div>
         <div>
-          <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Prompt Workflow AI Builder</div>
+          <div class="font-mono text-[11px] tracking-widest text-violet-300 uppercase mb-2">Trigger Workflow · bot action (Bot Goals)</div>
           <div class="copy-wrap">
             <button class="copy-btn" data-copy>copy</button>
-            <div class="prompt-block">Crea un workflow de handoff crítico para Escollanos que se dispara cuando el bot detecta un caso clínico — el cliente menciona una enfermedad puntual (lupus, embarazo, diabetes, otras) o pide reemplazar un medicamento psicotrópico. Este es el WF más sensible por ética farmacéutica. El bot ya dio la frase ética oficial antes de transferir.
-
-Trigger: Contact Tag Added con el tag handoff_caso_clinico. Ese tag lo aplica el escenario "Caso Clínico" de la función Transferencia a humano del bot, que se activa tras la frase ética (también aplica el tag caso_clinico para auditoría, asigna al pool, manda el mensaje final y apaga el bot sin reactivación). Eliminar cualquier trigger placeholder que la AI Builder agregue.
-
-Paso 1: Update Opportunity stage Caso clínico — handoff.
-
-Paso 2: Send Email marcado URGENT. From y To = custom_values.correo_de_salida. Subject con warning, CASO CLÍNICO + first_name + atención inmediata. Body con datos del cliente, caso clínico mencionado (CF), producto consultado, link al chat, y reglas duras para el asesor humano: el bot ya dio la frase ética, NO afirmar que el producto sirve para la enfermedad, NO recomendar dosis, NO recomendar dejar medicamentos, si el cliente insiste redirigir a su médico.
-
-NO incluir Assign User ni Stop Bot — eso ya lo hace el escenario, que además deja la reactivación del bot desmarcada (no reactivar) por la sensibilidad del caso. El escenario ya mandó el mensaje final, así que NO enviar WhatsApp adicional. Este WF es crítico por compliance farmacéutico — la velocidad de respuesta del pool importa.</div>
+            <div class="prompt-block">Nombre de la acción: Handoff Caso Clínico
+Flujo de trabajo a activar: CASO CLINICO - AUTOMATIZACIÓN (debe estar Publicado)
+Cuándo iniciar el flujo de trabajo:
+El cliente menciona una enfermedad puntual (lupus, embarazo, lactancia, diabetes, hipertensión, hipotiroidismo, cáncer o enfermedad autoinmune) y muestra duda real o insiste después de que ya le di la frase ética; o pide dejar, reducir o reemplazar un medicamento psicotrópico (alprazolam, clonazepam, sertralina, fluoxetina, ansiolítico, antidepresivo, pastilla para dormir o para los nervios). Disparar SOLO después de haber entregado la frase ética oficial.</div>
           </div>
         </div>
       </div>
