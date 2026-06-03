@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Escollanos · Pendientes para el Bot</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#0a0a0b;--surface:#141416;--surface-2:#1c1c20;--border:#26262c;--text:#e8e8ea;--muted:#8a8a92;--rose:#fb7185;--amber:#fbbf24;--emerald:#34d399;--blue:#60a5fa;}
+  html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");opacity:.5;}
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;}
+  .grad-text{background:linear-gradient(120deg,#fb7185 0%,#fbbf24 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .card{background:linear-gradient(180deg,var(--surface) 0%,var(--surface-2) 100%);border:1px solid var(--border);border-radius:14px;}
+  .card-rose{border-color:rgba(251,113,133,.35);box-shadow:0 0 0 1px rgba(251,113,133,.10),0 8px 40px -10px rgba(251,113,133,.20);}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;border:1px solid var(--border);}
+  .pill-rose{color:#fb7185;border-color:rgba(251,113,133,.4);background:rgba(251,113,133,.08);}
+  .item{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--border);}
+  .item:last-child{border-bottom:none;}
+  .chk{flex:0 0 auto;width:22px;height:22px;margin-top:1px;border:2px solid var(--rose);border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:transparent;font-size:14px;font-weight:700;transition:.15s;user-select:none;}
+  .chk.done{background:var(--emerald);border-color:var(--emerald);color:#0a0a0b;}
+  .item.done .txt{opacity:.5;text-decoration:line-through;text-decoration-color:var(--muted);}
+  .txt b{color:#fff;font-weight:600;}
+  .sub{color:var(--muted);font-size:13px;}
+  .tag{font-size:10px;font-weight:700;padding:1px 7px;border-radius:6px;vertical-align:middle;}
+  .tag-rose{background:rgba(251,113,133,.14);color:#fb7185;}
+  .grp-ico{font-size:18px;}
+  .progress-bar{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden;border:1px solid var(--border);}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#34d399,#60a5fa);width:0;transition:width .3s;}
+</style>
+</head>
+<body class="min-h-screen">
+<div class="relative z-10 max-w-3xl mx-auto px-5 py-10 sm:py-14">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <span class="pill pill-rose mb-4">🔴 Acción requerida</span>
+    <h1 class="text-3xl sm:text-4xl font-bold leading-tight">Pendientes para activar el <span class="grad-text">Bot de Escollanos</span></h1>
+    <p class="text-base mt-3" style="color:var(--muted)">Hola Mela y Gaby 👋 — ya armamos toda la base del bot con sus productos, precios y respuestas. Para que el bot dé información <b style="color:#fff">100% correcta</b>, necesitamos que confirmen estos puntos. Pueden ir marcándolos a medida que los resuelvan.</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="card p-4 mb-8">
+    <div class="flex items-center justify-between mb-2">
+      <span class="text-sm font-semibold">Progreso</span>
+      <span class="text-sm" style="color:var(--muted)"><span id="count">0</span> / <span id="total">0</span> resueltos</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
+    <p class="text-xs mt-2" style="color:var(--muted)">El check es solo visual para su control (no se guarda al cerrar la página).</p>
+  </div>
+
+  <!-- Grupos -->
+  <div class="space-y-6" id="groups"></div>
+
+  <footer class="mt-10 pt-6 text-center text-xs" style="color:var(--muted);border-top:1px solid var(--border)">
+    Escollanos · Bot Conversation AI &nbsp;·&nbsp; preparado por AL Consulting · 2026-06-03<br>
+    Cualquier duda sobre un punto, respóndannos por aquí mismo 💚
+  </footer>
+</div>
+
+<script>
+const DATA = [
+  { ico:"🩺", title:"Postura clínica / salud", color:"rose", items:[
+    { t:"<b>Niños menores de 12 años:</b> definimos que los productos Dr. Reckeweg son desde los 12 años, pero <b>Jutussin, Pulsatilla y Apetimed</b> tienen dosis para bebés/niños en su ficha. ¿Estos 3 son la excepción para niños? Confírmennos.", },
+    { t:"<b>Alcachofa e hipertensión:</b> el asesor dice 'no sube la presión, puede tomarla con su medicación', pero la ficha oficial dice 'usar con precaución en hipertensión'. ¿Qué debe responder el bot?" },
+  ]},
+  { ico:"💲", title:"Precios a confirmar", color:"rose", items:[
+    { t:"¿El bot comunica el <b>precio de lista</b> o el <b>precio con 5% de descuento</b>? (hoy los asesores dan el de 5%)" },
+    { t:"<b>Jarabe de Caléndula:</b> ¿$17.60 o $18.50? (hay un $16.00 viejo dando vueltas)" },
+    { t:"<b>Kit Drenatox + Alcachofa:</b> ¿$54.63 o $55.40?" },
+    { t:"<b>Facemed 2x1:</b> ¿$50.60 o $46.00?" },
+    { t:"<b>Combo R14 + Tolerance:</b> el valor $42.80 quedó mal. ¿Cuál es el correcto?" },
+  ]},
+  { ico:"📦", title:"Productos sin ficha (faltan para el bot)", color:"rose", items:[
+    { t:"Enviarnos ficha (valor, posología, para qué sirve) de: <b>Gripfectan</b> <span class='tag tag-rose'>no publicable</span>, <b>Anginacid</b>, <b>Klimakteran</b>, <b>R49 Rhinopulsan</b> y <b>Gastreu</b>." },
+    { t:"Ficha técnica oficial de <b>Facemed</b> y <b>SkinMed Plus</b>." },
+    { t:"Texto/descripción oficial de <b>CiBiDol gotas (S, M y L)</b>." },
+    { t:"¿<b>Flores de Bach</b> y los componentes <b>R7 / R17 / R27 / R37</b> se venden por separado?" },
+  ]},
+  { ico:"💬", title:"Plantillas de WhatsApp (Meta)", color:"rose", items:[
+    { t:"Las <b>gotas de CiBiDol</b> usan por error la plantilla de la crema → crear plantillas propias." },
+    { t:"<b>Apetimed:</b> la plantilla tiene un error en el link (dice <i>/apetimax/</i>, debería ser <i>/apetimed/</i>)." },
+    { t:"<b>VitalMen</b> (plantilla inicial) sigue pendiente de aprobación en Meta." },
+  ]},
+  { ico:"🛠️", title:"Información operativa", color:"rose", items:[
+    { t:"Direcciones de las farmacias físicas + código del <b>cupón del 5%</b>." },
+    { t:"Lista de <b>mensajeros por ciudad</b> + ¿el bot puede compartir su teléfono?" },
+    { t:"¿Siguen vigentes? <b>Reto 21 días</b>, <b>sorteos por compras +$30</b>, <b>cliente SILVER</b> y <b>preventa</b> cuando se agota stock." },
+  ]},
+];
+
+const groups = document.getElementById('groups');
+let total = 0;
+DATA.forEach((g, gi) => {
+  const card = document.createElement('div');
+  card.className = 'card card-rose p-5';
+  let html = `<div class="flex items-center gap-2 mb-1"><span class="grp-ico">${g.ico}</span><h2 class="text-lg font-semibold">${g.title}</h2></div><div>`;
+  g.items.forEach((it, ii) => {
+    total++;
+    html += `<div class="item" data-id="${gi}-${ii}">
+      <span class="chk" role="checkbox" aria-checked="false">✓</span>
+      <div class="txt text-sm leading-relaxed">${it.t}</div>
+    </div>`;
+  });
+  html += `</div>`;
+  card.innerHTML = html;
+  groups.appendChild(card);
+});
+
+document.getElementById('total').textContent = total;
+const fill = document.getElementById('fill');
+const countEl = document.getElementById('count');
+function refresh(){
+  const done = document.querySelectorAll('.item.done').length;
+  countEl.textContent = done;
+  fill.style.width = (total ? (done/total*100) : 0) + '%';
+}
+document.querySelectorAll('.item').forEach(item => {
+  const chk = item.querySelector('.chk');
+  chk.addEventListener('click', () => {
+    item.classList.toggle('done');
+    chk.classList.toggle('done');
+    chk.setAttribute('aria-checked', item.classList.contains('done'));
+    refresh();
+  });
+});
+refresh();
+</script>
+</body>
+</html>
