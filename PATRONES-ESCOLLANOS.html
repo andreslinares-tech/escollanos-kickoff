@@ -64,7 +64,7 @@
     </div>
     <nav>
       <div class="group-title">Acción requerida</div>
-      <a href="#pendientes" style="color:var(--rose)">🔴 Pendiente cliente</a>
+      <a href="#pendientes" style="color:var(--emerald,#34d399)">✅ Respuestas 06-04</a>
       <div class="group-title">Reglas</div>
       <a href="#clinica">Postura clínica oficial</a>
       <a href="#cross-sell">Cross-sell oficial</a>
@@ -90,7 +90,7 @@
     <!-- HERO -->
     <header class="mb-12">
       <div class="flex items-center gap-2 mb-4 flex-wrap">
-        <span class="pill pill-emerald">Actualizado 2026-06-03</span>
+        <span class="pill pill-emerald">Actualizado 2026-06-04 · respuestas del cliente integradas</span>
         <span class="pill pill-violet">GHL Conversation AI</span>
         <span class="pill pill-blue">28 productos · 7 laboratorios</span>
       </div>
@@ -111,15 +111,15 @@
     <!-- ================= PENDIENTE CLIENTE (ROJO, ARRIBA) ================= -->
     <section id="pendientes" class="mb-16">
       <div class="flex items-center gap-2 mb-3 flex-wrap">
-        <span class="pill pill-rose">🔴 Acción requerida</span>
+        <span class="pill pill-emerald">✅ Respuestas procesadas — 2026-06-04</span>
       </div>
-      <h2 class="display text-3xl font-bold mb-2">Necesitamos su confirmación <span class="text-[var(--rose)]">(Mela / Gaby)</span></h2>
-      <p class="text-[var(--muted)] mb-5 max-w-2xl leading-relaxed">Ya armamos toda la base del bot con sus productos, precios y respuestas. Para que dé información <b class="text-white">100% correcta</b>, necesitamos que confirmen estos puntos. Pueden ir marcándolos a medida que los resuelvan (el check es solo visual para su control, no se guarda al cerrar la página).</p>
+      <h2 class="display text-3xl font-bold mb-2">Respuestas del cliente <span class="text-[var(--rose)]">(Mela / Gaby)</span> integradas</h2>
+      <p class="text-[var(--muted)] mb-5 max-w-2xl leading-relaxed">¡Gracias! Procesamos todas sus respuestas y las integramos en la base del bot (precios, postura clínica, fichas de Facemed/SkinMed/CiBiDol, farmacias y cupón). Abajo, en <span style="color:var(--emerald,#34d399)">verde</span> lo ya resuelto y en <span class="text-[var(--accent-2)]">ámbar</span> lo poco que sigue abierto (plantillas de WhatsApp que revisa Mela + fichas que extraemos de la web/cartolas).</p>
 
       <div class="card p-4 mb-6">
         <div class="flex items-center justify-between mb-2">
-          <span class="text-sm font-semibold">Progreso</span>
-          <span class="text-sm text-[var(--muted)]"><span id="count">0</span> / <span id="total">0</span> resueltos</span>
+          <span class="text-sm font-semibold">Resueltos</span>
+          <span class="text-sm text-[var(--muted)]"><span id="count">0</span> / <span id="total">0</span></span>
         </div>
         <div class="progress-bar"><div class="progress-fill" id="fill"></div></div>
       </div>
@@ -147,9 +147,9 @@
             <div class="pill pill-rose">❌ NO farmacodependencia</div>
             <div class="pill pill-rose">❌ NO interactúa con otros medicamentos</div>
           </div>
-          <p class="text-sm text-[var(--muted)] mb-3"><strong class="text-[var(--accent)]">Aptos para todas las condiciones:</strong> hipertensión, diabetes, hipotiroidismo, pacientes cardíacos, adultos mayores, cáncer. <strong class="text-white">Niños desde los 12 años</strong>; antes de esa edad solo por recomendación médica.</p>
-          <div class="p-3 rounded-lg border border-[var(--accent-2)]/30 bg-[var(--accent-2)]/5 mb-3">
-            <p class="text-sm"><strong class="text-[var(--accent-2)]">Excepción pediátrica:</strong> Jutusin, Pulsatilla y Apetimed tienen posología para bebés/niños en su ficha → pueden usarse en menores según la dosis indicada. <span class="pill pill-amber">pendiente confirmar</span></p>
+          <p class="text-sm text-[var(--muted)] mb-3"><strong class="text-[var(--accent)]">Aptos para todas las condiciones:</strong> hipertensión, diabetes, hipotiroidismo, pacientes cardíacos, adultos mayores, cáncer. <strong class="text-white">Niños menores de 12 años:</strong> NO están contraindicados — solo se <strong class="text-white">sugiere</strong> que los recete un médico (no es prohibición).</p>
+          <div class="p-3 rounded-lg border border-[var(--emerald,#34d399)]/30" style="background:rgba(52,211,153,.06)">
+            <p class="text-sm"><strong style="color:var(--emerald,#34d399)">Excepción pediátrica ✅:</strong> Jutusin, Pulsatilla y Apetimed tienen posología para bebés/niños en su ficha → pueden usarse en menores según la dosis indicada. <span class="pill pill-emerald">confirmado 06-04</span></p>
           </div>
           <div class="text-sm text-[var(--muted)] space-y-2">
             <p><strong class="text-white">Regla 1 · cliente con enfermedad:</strong> decirle que es homeopático y no tiene contraindicación, <em>pero que le comente a su médico</em> que incorpora un nuevo producto a su tratamiento habitual.</p>
@@ -167,8 +167,8 @@
           </div>
           <p class="text-sm text-[var(--muted)] mb-3">Alcachofa · Vira Vira · Passiflora · Artrosed · Glunat · Caléndula Crema · Caléndula Jarabe · Calendulin.</p>
           <p class="text-sm text-[var(--muted)] mb-3">Medicamentos fitoterápicos 100% naturales, elaborados con plantas cultivadas para ese fin. <strong class="text-white">Todos los productos Labfarve están CONTRAINDICADOS en embarazo, lactancia y alergia al componente principal.</strong> El bot debe declararlo en esos casos.</p>
-          <div class="p-3 rounded-lg border border-[var(--accent-2)]/30 bg-[var(--accent-2)]/5">
-            <p class="text-sm"><strong class="text-[var(--accent-2)]">Caso Alcachofa + hipertensión:</strong> la ficha oficial dice "usar con precaución en hipertensión" (no afirmar que "no eleva la presión"). <span class="pill pill-amber">pendiente confirmar</span></p>
+          <div class="p-3 rounded-lg border border-[var(--emerald,#34d399)]/30" style="background:rgba(52,211,153,.06)">
+            <p class="text-sm"><strong style="color:var(--emerald,#34d399)">Caso Alcachofa + hipertensión ✅:</strong> el bot NO afirma "no eleva la presión". Responde: <em>"en pacientes con hipertensión, con cualquier medicamento (natural o no), debe estar atento de sus valores y, si suben, suspender."</em> <span class="pill pill-emerald">confirmado 06-04</span></p>
           </div>
         </div>
 
@@ -234,7 +234,7 @@
           </tbody>
         </table>
       </div>
-      <p class="text-xs text-[var(--muted)] mt-3 leading-relaxed">Productos en <span class="text-[var(--accent-2)]">ámbar</span> aún sin ficha oficial. <strong class="text-[var(--rose)]">Gripfectan es no publicable:</strong> solo en conversación 1-a-1, nunca en mensajes salientes ni plantillas Meta. El valor del combo R14 + Tolérance está a confirmar (el histórico $42.80 es incorrecto).</p>
+      <p class="text-xs text-[var(--muted)] mt-3 leading-relaxed">Productos en <span class="text-[var(--accent-2)]">ámbar</span> aún sin ficha oficial (info en web + cartolas Reckeweg → la extraemos). <strong class="text-[var(--rose)]">Gripfectan es no publicable:</strong> solo en conversación 1-a-1, nunca en mensajes salientes ni plantillas Meta. Combo R14 + Tolérance = <strong class="text-white">$57.85</strong> ✅ (confirmado). Estrés/insomnio → R14 + Flores de Bach ($15, se vende suelto).</p>
     </section>
 
     <!-- ================= CATÁLOGO ================= -->
@@ -391,7 +391,7 @@
           <div><strong>Precauciones:</strong> no usar en embarazo ni lactancia. Labfarve — contraindicado embarazo/lactancia/alergia.</div>
           <div><strong>Link:</strong> escollanos.com.ec/producto/calendula_jarabe/</div>
         </div>
-        <div class="mt-3 p-2 rounded-lg" style="background:rgba(251,191,36,.05)"><span class="pill pill-amber">⏳ precio pendiente</span> <span class="text-xs text-[var(--muted)] ml-1">$17.60 vs $18.50 (a confirmar con el cliente).</span></div>
+        <div class="mt-3 p-2 rounded-lg" style="background:rgba(52,211,153,.06)"><span class="pill pill-emerald">$17.60 ✅</span> <span class="text-xs text-[var(--muted)] ml-1">precio confirmado por el cliente (se descarta $18.50 y $16.00).</span></div>
       </article>
 
       <article class="card p-6">
@@ -627,28 +627,31 @@
 
       <article class="card p-6">
         <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-          <div><h4 class="display text-xl font-bold mb-1">Facemed (ampollas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Elena Natural</span><span class="pill pill-amber">ficha pendiente</span></div></div>
-          <span class="pill pill-amber"><span class="var-token">precio_facemed</span></span>
+          <div><h4 class="display text-xl font-bold mb-1">Facemed (ampollas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Elena Natural</span><span class="pill pill-emerald">ficha oficial ✅</span></div></div>
+          <span class="pill pill-emerald">$50.60 · <span class="var-token">precio_facemed</span></span>
         </div>
-        <p class="text-sm text-[var(--text)] mb-3">Ampollas faciales reparadoras y antiedad de uso tópico nocturno (caja x10 de 2 ml). <strong>Nunca inyectar.</strong> Revitaliza, humecta, reduce arrugas, antioxidante, aclara manchas y recupera la piel tras el sol.</p>
+        <p class="text-sm text-[var(--text)] mb-3">FaceMed® — Solución Bifásica Revitalizadora. Ampolla facial bifásica, reparadora y anti edad de uso tópico nocturno. <strong>Nunca inyectar.</strong> Efecto antioxidante e iluminador, atenúa pigmentaciones, rejuvenecimiento facial, coadyuvante antiacné.</p>
         <div class="ficha space-y-1">
-          <div><strong>Modo de empleo (asesor):</strong> aplicar de noche, 2 veces por semana, en rostro, cuello y escote.</div>
-          <div><strong>Presentación:</strong> caja x10 ampollas de 2 ml, uso externo.</div>
-          <div><span class="pill pill-amber">⏳ pendiente ficha cliente</span> composición y registro sanitario; precio 2x1 ($50.60 vs $46.00) a confirmar.</div>
+          <div><strong>Registro Sanitario:</strong> NSOC02148-71EC.</div>
+          <div><strong>Componentes:</strong> Niacinamida (B3) regenera y seborregula · Esqualane emoliente · Glicerina humecta · Argireline reduce arrugas (frente, contorno de ojos, interciliar).</div>
+          <div><strong>Modo de aplicación:</strong> agitar para unificar las dos fases, romper la ampolla y aplicar con masaje circular ascendente. De noche, 2 veces/semana, en rostro, cuello y escote.</div>
+          <div><strong>Presentación:</strong> caja de 10 ampollas de 2 ml (uso profesional). <span class="pill pill-emerald">NO es 2x1</span> precio unitario $50.60.</div>
           <div><strong>Link:</strong> escollanos.com.ec/producto/facemed/</div>
         </div>
       </article>
 
       <article class="card p-6">
         <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-          <div><h4 class="display text-xl font-bold mb-1">SkinMed Plus</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Elena Natural</span><span class="pill pill-violet">profesional</span><span class="pill pill-amber">ficha pendiente</span></div></div>
-          <span class="pill pill-amber"><span class="var-token">precio_skinmed_plus</span></span>
+          <div><h4 class="display text-xl font-bold mb-1">SkinMed Plus</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Elena Natural</span><span class="pill pill-violet">profesional</span><span class="pill pill-emerald">ficha oficial ✅</span></div></div>
+          <span class="pill pill-emerald"><span class="var-token">precio_skinmed_plus</span></span>
         </div>
-        <p class="text-sm text-[var(--text)] mb-3">Producto de medicina estética dirigido a médicos y profesionales. Aplicación mediante trasdermoterapia (no venta al público general).</p>
+        <p class="text-sm text-[var(--text)] mb-3">SkinMed Plus® — Asociación sinérgica de nutrientes. Complejo bioestimulador con <strong>más de 40 ingredientes</strong>; acción sinérgica sobre hidratación, metabolismo celular, síntesis de colágeno y reparación cutánea. Uso profesional (médicos / medicina estética).</p>
         <div class="ficha space-y-1">
           <div><strong>Notificación Sanitaria:</strong> NSOC01421-24EC.</div>
-          <div><strong>Presentación:</strong> viales x 10 ml.</div>
-          <div><span class="pill pill-amber">⏳ pendiente ficha cliente</span> composición y posología.</div>
+          <div><strong>Componentes clave:</strong> Hialuronato de sodio, Glutatión, Ascorbato de sodio (Vit C), aminoácidos, péptidos biomiméticos, NAD+, FAD+, Inositol, Retinil Palmitato (Vit A).</div>
+          <div><strong>Usos:</strong> regeneración tisular, hidratación intensiva, antioxidante, colágeno/elastina, reduce arrugas y manchas, apoya folículo piloso, protección UV.</div>
+          <div><strong>Modo de aplicación:</strong> mesoterapia virtual y transdermoterapia. <strong>Zonas:</strong> rostro, cuello, escote, cabello, manos, glúteos, muslos, abdomen, espalda y brazos.</div>
+          <div><strong>Presentación:</strong> caja de 2 viales de 10 ml (uso profesional).</div>
           <div><strong>Link:</strong> escollanos.com.ec/producto/skinmed-plus/</div>
         </div>
       </article>
@@ -676,48 +679,51 @@
 
       <article class="card p-6">
         <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-          <div><h4 class="display text-xl font-bold mb-1">CiBiDol S (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración baja</span><span class="pill pill-amber">pitch pendiente</span></div></div>
+          <div><h4 class="display text-xl font-bold mb-1">CiBiDol S (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración baja</span><span class="pill pill-emerald">pitch oficial ✅</span></div></div>
           <span class="pill pill-amber"><span class="var-token">precio_cibidol_s</span></span>
         </div>
         <p class="text-sm text-[var(--text)] mb-3">Solución oral de CBD para estados de estrés, insomnio y ansiedad (concentración baja). Vía sublingual.</p>
         <div class="ficha space-y-1">
           <div><strong>Registro Sanitario:</strong> 391-PNE-0623.</div>
           <div><strong>Composición:</strong> 23,75 mg/mL de CBD y &lt; 2 mg/mL de THC (Quimiotipo III).</div>
-          <div><strong>Posología (laboratorio):</strong> iniciar 4-7 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h (1 gota ≈ 0,725 mg CBD).</div>
+          <div><strong>Pitch oficial:</strong> "Control del estrés, ansiedad e insomnio" — $45.00, envío sin costo. 1 gota = 0,725 mg CBD · &lt; 0,058 mg THC.</div>
+          <div><strong>Posología (laboratorio):</strong> iniciar 4-7 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h.</div>
           <div><strong>Precauciones:</strong> no en embarazo/lactancia; fuera del alcance de niños.</div>
-          <div><span class="pill pill-amber">⏳ pendiente pitch cliente</span> plantilla WhatsApp propia (no reutilizar la de la crema).</div>
+          <div><span class="pill pill-amber">🔴 pendiente</span> plantilla WhatsApp propia (no reutilizar la de la crema) — Mela revisa.</div>
           <div><strong>Link:</strong> escollanos.com.ec/producto/cibidol-s/</div>
         </div>
       </article>
 
       <article class="card p-6">
         <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-          <div><h4 class="display text-xl font-bold mb-1">CiBiDol M (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración media</span><span class="pill pill-amber">pitch pendiente</span></div></div>
+          <div><h4 class="display text-xl font-bold mb-1">CiBiDol M (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración media</span><span class="pill pill-emerald">pitch oficial ✅</span></div></div>
           <span class="pill pill-amber"><span class="var-token">precio_cibidol_m</span></span>
         </div>
         <p class="text-sm text-[var(--text)] mb-3">Solución oral de CBD para el dolor con acción neuroprotectora; control de estrés, insomnio y ansiedad (concentración media). Vía sublingual.</p>
         <div class="ficha space-y-1">
           <div><strong>Registro Sanitario:</strong> 390-PNE-0623.</div>
           <div><strong>Composición:</strong> 96 mg/mL de CBD y 2,88 mg/mL de THC (Quimiotipo III).</div>
-          <div><strong>Posología (laboratorio):</strong> iniciar 20-40 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h (1 gota ≈ 2,9 mg CBD).</div>
+          <div><strong>Pitch oficial:</strong> "Manejo del dolor y bienestar integral" (acción neuroprotectora) — $95.00, envío sin costo. 1 gota = 2,9 mg CBD · 0,087 mg THC.</div>
+          <div><strong>Posología (laboratorio):</strong> iniciar 20-40 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h.</div>
           <div><strong>Precauciones:</strong> no en embarazo/lactancia; fuera del alcance de niños.</div>
-          <div><span class="pill pill-amber">⏳ pendiente pitch cliente</span> plantilla WhatsApp propia.</div>
+          <div><span class="pill pill-amber">🔴 pendiente</span> plantilla WhatsApp propia — Mela revisa.</div>
           <div><strong>Link:</strong> escollanos.com.ec/producto/cibidol-m/</div>
         </div>
       </article>
 
       <article class="card p-6">
         <div class="flex items-start justify-between flex-wrap gap-3 mb-3">
-          <div><h4 class="display text-xl font-bold mb-1">CiBiDol L (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración alta</span><span class="pill pill-amber">pitch pendiente</span></div></div>
+          <div><h4 class="display text-xl font-bold mb-1">CiBiDol L (gotas)</h4><div class="flex flex-wrap gap-1.5"><span class="pill pill-blue">Escanabis</span><span class="pill">concentración alta</span><span class="pill pill-emerald">pitch oficial ✅</span></div></div>
           <span class="pill pill-amber"><span class="var-token">precio_cibidol_l</span></span>
         </div>
         <p class="text-sm text-[var(--text)] mb-3">Solución oral de CBD para el dolor, control de náuseas, vómito y mareo; coadyuvante en desórdenes metabólicos (concentración alta). Vía sublingual.</p>
         <div class="ficha space-y-1">
           <div><strong>Registro Sanitario:</strong> 392-PNE-0623.</div>
           <div><strong>Composición:</strong> 192 mg/mL de CBD y &lt; 10 mg/mL de THC (Quimiotipo III).</div>
-          <div><strong>Posología (laboratorio):</strong> iniciar 20-40 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h (1 gota = 6 mg CBD).</div>
+          <div><strong>Pitch oficial:</strong> "Alta concentración para mayor apoyo terapéutico" — dolor, náuseas/vómito, mareo, desorden metabólico — $95.00, envío sin costo. 1 gota = 6 mg CBD · &lt; 0,3 mg THC.</div>
+          <div><strong>Posología (laboratorio):</strong> iniciar 20-40 mg de CBD; máx 200 mg/día. 2-3 gotas cada 8 h.</div>
           <div><strong>Precauciones:</strong> no en embarazo/lactancia; fuera del alcance de niños.</div>
-          <div><span class="pill pill-amber">⏳ pendiente pitch cliente</span> plantilla WhatsApp propia.</div>
+          <div><span class="pill pill-amber">🔴 pendiente</span> plantilla WhatsApp propia — Mela revisa.</div>
           <div><strong>Link:</strong> escollanos.com.ec/producto/cibidol-l/</div>
         </div>
       </article>
@@ -733,8 +739,8 @@
       </article>
 
       <article class="card p-6">
-        <div class="flex items-center gap-2 mb-2 flex-wrap"><h4 class="display text-lg font-semibold">Kit Drenatox + Alcachofa</h4><span class="pill pill-amber"><span class="var-token">precio_kit_drenatox_alcachofa</span></span></div>
-        <p class="text-sm text-[var(--muted)]">Drenatox depura 4 órganos; Alcachofa controla colesterol/triglicéridos y da saciedad. Ideal para bajar de peso y detox. <span class="pill pill-amber">⏳ precio pendiente</span> $54.63 (web) vs $55.40 (snippet).</p>
+        <div class="flex items-center gap-2 mb-2 flex-wrap"><h4 class="display text-lg font-semibold">Kit Drenatox + Alcachofa</h4><span class="pill pill-emerald">$54.63 · <span class="var-token">precio_kit_drenatox_alcachofa</span></span></div>
+        <p class="text-sm text-[var(--muted)]">Drenatox depura 4 órganos; Alcachofa controla colesterol/triglicéridos y da saciedad. Ideal para bajar de peso y detox. <span class="pill pill-emerald">$54.63 ✅</span> precio confirmado por el cliente.</p>
       </article>
 
       <article class="card p-6">
@@ -745,7 +751,7 @@
       <div class="grid md:grid-cols-2 gap-4">
         <article class="card p-5">
           <h4 class="display text-base font-semibold mb-1">R14 Quieta + Lactibiane Tolérance</h4>
-          <p class="text-sm text-[var(--muted)]">Ansiedad + colon irritable simultáneo (eje intestino-cerebro). <span class="pill pill-amber">⏳ precio pendiente</span> el $42.80 histórico es incorrecto.</p>
+          <p class="text-sm text-[var(--muted)]">Ansiedad + colon irritable simultáneo (eje intestino-cerebro). <span class="pill pill-emerald">$57.85 ✅</span> precio confirmado (corrige el $42.80).</p>
         </article>
         <article class="card p-5">
           <h4 class="display text-base font-semibold mb-1">R14 Quieta + Renobella</h4>
@@ -816,11 +822,16 @@ Correo: contabilidad4@escollanos.com</pre>
         </div>
         <p class="text-xs text-[var(--muted)] mt-3"><strong>Corte para entrega mismo día (Quito):</strong> mañana hasta 8:00 am · tarde hasta 12:00 pm.</p>
         <p class="text-xs text-[var(--muted)] mt-1"><strong>Rastreo:</strong> <span class="kbd">servientrega.com.ec → RASTREO → número de guía</span></p>
-        <div class="mt-4 ficha space-y-1">
-          <div><strong>Quito:</strong> Juan de Sosaya OE4-54 y Ruiz de Castilla, Edif. Escollanos. L-V 07h00-18h00, Sáb 08h30-14h00.</div>
-          <div><strong>Guayaquil:</strong> Guayacanes 204 e/ V.E. Estrada y Calle Primera, Edif. Tinacorp, Urdesa. L-V 08h00-18h00, Sáb 09h00-14h00.</div>
-          <div><strong>Cuenca:</strong> Av. El Estadio 435 y Av. Roberto Crespo, Edif. El Estadio. L-V 09h00-13h00 y 14h30-18h00.</div>
+        <div class="mt-4 p-3 rounded-lg" style="background:rgba(52,211,153,.06)">
+          <p class="text-sm mb-2"><strong style="color:var(--emerald,#34d399)">"¿Dónde queda?" ✅</strong> El bot envía primero el mensaje de entrega gratis + pregunta la ciudad, y recién entonces da la dirección de esa farmacia (no las tres juntas).</p>
+          <p class="text-xs text-[var(--muted)] italic">"Ponemos a su disposición el servicio de entrega a domicilio GRATIS A TODO EL PAÍS (excepto Galápagos). Adicional si prefiere acercarse contamos con locales comerciales en Quito, Guayaquil y Cuenca, por favor indíqueme de qué ciudad nos contacta para darle la dirección exacta 😊"</p>
         </div>
+        <div class="mt-3 ficha space-y-1">
+          <div><strong>Quito 📍</strong> Juan de Sosaya OE4-54 y Ruiz de Castilla, Edif. Escollanos. L-V 07h00-18h00, Sáb 08h30-14h00. · <a href="https://maps.app.goo.gl/sUwGtidXpH74ENWJ6" style="color:var(--accent-2)">maps</a></div>
+          <div><strong>Guayaquil 📍</strong> Guayacanes 204 e/ V.E. Estrada y Calle Primera, Edif. Tinacorp, Urdesa. L-V 08h00-18h00, Sáb 09h00-14h00. · <a href="https://maps.app.goo.gl/ALFUnPAjRLgJFh6H9" style="color:var(--accent-2)">maps</a></div>
+          <div><strong>Cuenca 📍</strong> Av. El Estadio 435 y Av. Roberto Crespo, Edif. El Estadio. L-V 09h00-13h00 y 14h30-18h00. · <a href="https://maps.app.goo.gl/UVqDGjqDvqrPGoGy9" style="color:var(--accent-2)">maps</a></div>
+        </div>
+        <p class="text-xs text-[var(--muted)] mt-3"><strong style="color:var(--emerald,#34d399)">Cupón 5% ✅:</strong> al dar una dirección, enviar la imagen del cupón con su texto (debe mostrarlo; solo válido productos OTC). · <strong>Mensajeros / teléfono:</strong> el bot NO comparte. · <strong>Vigentes:</strong> Reto 21 días + sorteos +$30 (SILVER y preventa: no confirmados).</p>
       </div>
     </section>
 
@@ -829,8 +840,8 @@ Correo: contabilidad4@escollanos.com</pre>
       <h2 class="display text-3xl font-bold mb-4">Pendientes y próximos pasos</h2>
       <div class="card p-6 leading-relaxed">
         <ol class="text-sm text-[var(--muted)] space-y-3 list-decimal list-inside">
-          <li><strong class="text-white">Confirmar el bloque rojo de arriba</strong> (postura clínica, precios, fichas faltantes, plantillas WhatsApp y operativo). Es el bloqueante para que el bot dé información 100% correcta.</li>
-          <li><strong class="text-white">Enviar fichas faltantes:</strong> Gripfectan (no publicable), Anginacid, Klimakteran, R49 Rhinopulsan, Gastreu, Facemed, SkinMed Plus, y el pitch oficial de las gotas CiBiDol (S/M/L).</li>
+          <li><strong style="color:var(--emerald,#34d399)">✅ Respuestas del cliente procesadas (2026-06-04):</strong> postura clínica (niños + alcachofa), precios (jarabe $17.60, kit $54.63, R14+Tolerance $57.85, Facemed sin 2x1), fichas Facemed/SkinMed/CiBiDol gotas, Flores de Bach/R sueltos, farmacias + cupón. Todo integrado en esta base.</li>
+          <li><strong class="text-white">Sigue abierto:</strong> (a) fichas de Gripfectan (no publicable), Anginacid, Klimakteran, R49 Rhinopulsan, Gastreu → las extraemos de la web + cartolas Reckeweg; (b) plantillas WhatsApp (gotas CiBiDol propias, typo Apetimed, aprobación VitalMen) → Mela revisa.</li>
           <li><strong class="text-white">Cargar en GHL:</strong> esta base como Doc de la Knowledge Base + Custom Bot Responses para precios y términos clave.</li>
           <li><strong class="text-white">Validar precios vigentes</strong> y dejarlos en Custom Values (<span class="kbd">precio_&lt;producto&gt;</span>) para que el bot nunca dé un valor desactualizado.</li>
           <li><strong class="text-white">Pruebas pre-launch</strong> con casos reales por laboratorio antes de activar.</li>
@@ -846,48 +857,55 @@ Correo: contabilidad4@escollanos.com</pre>
 </div>
 
 <script>
-// ===== Bloque rojo: checkboxes interactivos =====
+// ===== Bloque: respuestas del cliente procesadas (2026-06-04) =====
+// a = respuesta del cliente (resuelto). Si a es null → sigue abierto.
 const DATA = [
   { ico:"🩺", title:"Postura clínica / salud", items:[
-    "<b>Niños menores de 12 años:</b> definimos que los productos Dr. Reckeweg son desde los 12 años, pero <b>Jutusin, Pulsatilla y Apetimed</b> tienen dosis para bebés/niños en su ficha. ¿Estos 3 son la excepción para niños? Confírmennos.",
-    "<b>Alcachofa e hipertensión:</b> el asesor dice 'no sube la presión, puede tomarla con su medicación', pero la ficha oficial dice 'usar con precaución en hipertensión'. ¿Qué debe responder el bot?"
+    { t:"<b>Niños menores de 12 años</b> (Dr. Reckeweg).", a:"<b>Jutusin, Pulsatilla y Apetimed</b> son la excepción pediátrica. Los demás <b>no están contraindicados</b> en niños — solo se <b>sugiere</b> que los recete un médico (no es prohibición)." },
+    { t:"<b>Alcachofa e hipertensión:</b> ¿qué responde el bot?", a:"No decir \"no sube la presión\". Respuesta oficial: <i>\"En pacientes con hipertensión, con cualquier medicamento (natural o no), debe estar atento de sus valores y, si suben, suspender.\"</i>" }
   ]},
-  { ico:"💲", title:"Precios a confirmar", items:[
-    "¿El bot comunica el <b>precio de lista</b> o el <b>precio con 5% de descuento</b>? (hoy los asesores dan el de 5%)",
-    "<b>Jarabe de Caléndula:</b> ¿$17.60 o $18.50? (hay un $16.00 viejo dando vueltas)",
-    "<b>Kit Drenatox + Alcachofa:</b> ¿$54.63 o $55.40?",
-    "<b>Facemed 2x1:</b> ¿$50.60 o $46.00?",
-    "<b>Combo R14 + Tolerance:</b> el valor $42.80 quedó mal. ¿Cuál es el correcto?"
+  { ico:"💲", title:"Precios", items:[
+    { t:"¿Precio de lista o con 5% de descuento?", a:"Los descuentos cambian → el cliente necesita <b>poder editarlos</b>. Se manejan en campos editables (Custom Values) y el bot refleja la promo vigente." },
+    { t:"<b>Jarabe de Caléndula</b>", a:"<b>$17.60</b> ✅" },
+    { t:"<b>Kit Drenatox + Alcachofa</b>", a:"<b>$54.63</b> ✅" },
+    { t:"<b>Facemed 2x1</b>", a:"<b>No está en 2x1</b> → precio unitario $50.60 ✅" },
+    { t:"<b>Combo R14 + Tolerance</b>", a:"<b>$57.85</b> ✅ (corrige el $42.80)" }
   ]},
-  { ico:"📦", title:"Productos sin ficha (faltan para el bot)", items:[
-    "Enviarnos ficha (valor, posología, para qué sirve) de: <b>Gripfectan</b> (no publicable), <b>Anginacid</b>, <b>Klimakteran</b>, <b>R49 Rhinopulsan</b> y <b>Gastreu</b>.",
-    "Ficha técnica oficial de <b>Facemed</b> y <b>SkinMed Plus</b>.",
-    "Texto/pitch oficial de <b>CiBiDol gotas (S, M y L)</b>.",
-    "¿<b>Flores de Bach</b> y los componentes <b>R7 / R17 / R27 / R37</b> se venden por separado?"
+  { ico:"📦", title:"Productos / fichas", items:[
+    { t:"Fichas de <b>Gripfectan</b> (no publicable), <b>Anginacid</b>, <b>Klimakteran</b>, <b>R49 Rhinopulsan</b>, <b>Gastreu</b>.", a:null, note:"En proceso: la info está en la web (escollanos.com.ec) y en las cartolas de Dr. Reckeweg → la extraemos nosotros." },
+    { t:"Ficha técnica oficial de <b>Facemed</b> y <b>SkinMed Plus</b>.", a:"Recibidas (Elena Natural Cosmetics) e integradas ✅" },
+    { t:"Texto/pitch oficial de <b>CiBiDol gotas (S, M y L)</b>.", a:"Recibido e integrado ✅ (S $45 · M $95 · L $95)" },
+    { t:"¿<b>Flores de Bach</b> y los frascos <b>R7/R17/R27/R37</b> se venden por separado?", a:"Sí ✅ — Flores de Bach <b>$15</b>; frascos R (gotas o tabletas) <b>$21</b> c/u." }
   ]},
   { ico:"💬", title:"Plantillas de WhatsApp (Meta)", items:[
-    "Las <b>gotas de CiBiDol</b> usan por error la plantilla de la crema → crear plantillas propias.",
-    "<b>Apetimed:</b> la plantilla tiene un error en el link (dice <i>/apetimax/</i>, debería ser <i>/apetimed/</i>).",
-    "<b>VitalMen</b> (plantilla inicial) sigue pendiente de aprobación en Meta."
+    { t:"<b>Gotas de CiBiDol</b> usan por error la plantilla de la crema → crear plantillas propias.", a:null, note:"Mela lo revisa." },
+    { t:"<b>Apetimed:</b> typo en el link (<i>/apetimax/</i> → <i>/apetimed/</i>).", a:null, note:"Mela lo revisa." },
+    { t:"<b>VitalMen</b> (plantilla inicial) pendiente de aprobación en Meta.", a:null, note:"Mela lo revisa." }
   ]},
   { ico:"🛠️", title:"Operativo", items:[
-    "Direcciones de las farmacias físicas + código del <b>cupón del 5%</b>.",
-    "Lista de <b>mensajeros por ciudad</b> + ¿el bot puede compartir su teléfono?",
-    "¿Siguen vigentes? <b>Reto 21 días</b>, <b>sorteos por compras +$30</b>, <b>cliente SILVER</b> y <b>preventa</b> cuando se agota stock."
+    { t:"Direcciones de farmacias + <b>cupón 5%</b>.", a:"Recibidas (Quito, Guayaquil, Cuenca) e integradas ✅. Regla: al dar la dirección, enviar la imagen del cupón (debe mostrarlo; solo válido OTC)." },
+    { t:"<b>Mensajeros por ciudad</b> + ¿el bot comparte su teléfono?", a:"<b>No</b> ✅" },
+    { t:"¿Vigentes? Reto 21 días, sorteos +$30, cliente SILVER, preventa.", a:"Vigentes: <b>Reto 21 días</b> y <b>sorteos +$30</b> ✅. SILVER y preventa: no confirmados." }
   ]}
 ];
 
 const groups = document.getElementById('groups');
-let total = 0;
+let total = 0, doneCount = 0;
 DATA.forEach((g, gi) => {
   const card = document.createElement('div');
-  card.className = 'card card-rose p-5';
+  const allDone = g.items.every(it => it.a);
+  card.className = 'card p-5' + (allDone ? '' : ' card-rose');
   let html = `<div class="flex items-center gap-2 mb-1"><span style="font-size:18px">${g.ico}</span><h3 class="display text-lg font-semibold">${g.title}</h3></div><div>`;
-  g.items.forEach((t, ii) => {
+  g.items.forEach((it) => {
     total++;
-    html += `<div class="item" data-id="${gi}-${ii}">
-      <span class="chk" role="checkbox" aria-checked="false">✓</span>
-      <div class="txt text-sm leading-relaxed">${t}</div>
+    const resolved = !!it.a;
+    if (resolved) doneCount++;
+    const ans = resolved
+      ? `<div class="text-sm mt-1" style="color:var(--emerald,#34d399)">→ ${it.a}</div>`
+      : `<div class="text-sm mt-1 text-[var(--accent-2)]">⏳ ${it.note||'pendiente'}</div>`;
+    html += `<div class="item${resolved?' done':''}">
+      <span class="chk${resolved?' done':''}" aria-checked="${resolved}">✓</span>
+      <div class="txt text-sm leading-relaxed">${it.t}${ans}</div>
     </div>`;
   });
   html += `</div>`;
@@ -896,23 +914,9 @@ DATA.forEach((g, gi) => {
 });
 
 document.getElementById('total').textContent = total;
+document.getElementById('count').textContent = doneCount;
 const fill = document.getElementById('fill');
-const countEl = document.getElementById('count');
-function refresh(){
-  const done = document.querySelectorAll('.item.done').length;
-  countEl.textContent = done;
-  fill.style.width = (total ? (done/total*100) : 0) + '%';
-}
-document.querySelectorAll('.item').forEach(item => {
-  const chk = item.querySelector('.chk');
-  chk.addEventListener('click', () => {
-    item.classList.toggle('done');
-    chk.classList.toggle('done');
-    chk.setAttribute('aria-checked', item.classList.contains('done'));
-    refresh();
-  });
-});
-refresh();
+if (fill) fill.style.width = (total ? (doneCount/total*100) : 0) + '%';
 
 // ===== Sidebar scroll-spy =====
 const navLinks = Array.from(document.querySelectorAll('aside nav a'));
