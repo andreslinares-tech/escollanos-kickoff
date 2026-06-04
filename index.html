@@ -176,6 +176,7 @@
     <a class="toc-link" href="#sec-8"><span class="toc-num">08</span>Bot Conversation AI</a>
     <a class="toc-link" href="#sec-9"><span class="toc-num">09</span>Knowledge Base</a>
     <a class="toc-link" href="#sec-10"><span class="toc-num">10</span>Checklist pre-launch</a>
+    <a class="toc-link" href="#sec-test"><span class="toc-num">▸</span>Plan de pruebas</a>
     <a class="toc-link" href="#sec-11"><span class="toc-num">11</span>Próximos pasos</a>
     <a class="toc-link" href="#sec-12"><span class="toc-num">12</span>Mejoras propuestas</a>
   </nav>
@@ -1674,6 +1675,122 @@ Si el Custom Value datos_bancarios_pichincha está vacío, derivá al pool — h
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- SECCIÓN TEST — Plan de pruebas del bot -->
+<section id="sec-test" class="px-8 lg:px-16 py-20 border-b border-white/5">
+  <div class="max-w-6xl">
+    <div class="sec-num mb-3">PLAN DE PRUEBAS / 3 NIVELES</div>
+    <h2 class="sec-title mb-3">Qué testear antes (y después) de activar el bot</h2>
+    <p class="text-zinc-400 max-w-3xl mb-4 leading-relaxed">
+      Tres niveles por severidad. <span class="text-rose-300 font-medium">Críticos</span> son bloqueantes: si uno falla, <span class="text-white">NO se activa</span>. <span class="text-amber-300 font-medium">Adicionales</span> validan que la información de la KB sea correcta. <span class="text-emerald-300 font-medium">Livianas</span> confirman que el bot llega a la KB y responde bien lo básico.
+    </p>
+    <div class="flex flex-wrap gap-2 mb-8">
+      <span class="pill pill-rose">🔴 Críticos = debe funcionar sí o sí</span>
+      <span class="pill pill-amber">🟡 Adicionales = KB correcta</span>
+      <span class="pill pill-emerald">🟢 Livianas = llega a la KB</span>
+    </div>
+
+    <!-- ============ CRÍTICOS ============ -->
+    <div class="card card-rose mb-6">
+      <div class="flex items-center gap-2 mb-2 flex-wrap">
+        <span class="pill pill-rose">🔴 CRÍTICOS</span>
+        <h3 class="text-lg font-semibold text-white">Toda la parte técnica, los flujos y los handoffs</h3>
+      </div>
+      <p class="text-sm text-zinc-400 mb-5">Es primordial que TODO esto funcione. Cada caso debe pasar en modo <span class="kbd">Suggestive</span> y volver a verificarse en <span class="kbd">Autopilot</span>. Un fallo aquí frena el go-live.</p>
+
+      <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-2">A · Técnica / infraestructura</div>
+      <table class="std mb-6">
+        <thead><tr><th style="width:32px">✓</th><th style="width:30%">Qué se prueba</th><th style="width:32%">Cómo probarlo</th><th>Resultado esperado</th></tr></thead>
+        <tbody>
+          <tr><td>☐</td><td>Inbound WhatsApp</td><td>Enviar un mensaje nuevo al número del bot</td><td>Crea/actualiza el contacto en GHL y el bot responde</td></tr>
+          <tr><td>☐</td><td>Disponibilidad 24/7</td><td>Mensaje a las 23:00–06:00</td><td>El bot responde igual que en horario (caso de uso clave)</td></tr>
+          <tr><td>☐</td><td>Custom Values vivos</td><td>Preguntar precio y pedir datos bancarios</td><td>Lee el valor vigente (<code>precio_*</code>, datos banco, <code>correo_de_salida</code>) — <span class="text-rose-300">nunca hardcodea</span></td></tr>
+          <tr><td>☐</td><td>Escritura de Custom Fields</td><td>Completar una compra</td><td>Llena los CF del contacto (carpeta Bot Escollanos) vía Add Contact Info</td></tr>
+          <tr><td>☐</td><td>Movimiento de Pipeline</td><td>Lead que califica / compra</td><td>El contacto avanza a la etapa correcta del Pipeline Comercial</td></tr>
+          <tr><td>☐</td><td>Asignación al responsable</td><td>Entra un lead de un canal</td><td>Se asigna al responsable del canal apenas entra (no solo al calificar)</td></tr>
+          <tr><td>☐</td><td>Plantilla Meta correcta</td><td>Disparar un WF saliente</td><td>Sale la plantilla aprobada correcta (gotas CiBiDol NO usan la de la crema)</td></tr>
+          <tr><td>☐</td><td>Anti-robot básico</td><td>Varias respuestas seguidas</td><td>No arranca con <span class="kbd">¡</span>/<span class="kbd">¿</span>, usted formal cálido, sin sonar a bot</td></tr>
+        </tbody>
+      </table>
+
+      <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-2">B · Flujos comerciales (de punta a punta)</div>
+      <table class="std mb-6">
+        <thead><tr><th style="width:32px">✓</th><th style="width:30%">Qué se prueba</th><th style="width:32%">Cómo probarlo</th><th>Resultado esperado</th></tr></thead>
+        <tbody>
+          <tr><td>☐</td><td>Pregunta ciudad antes de cerrar</td><td>"Quiero comprar R14"</td><td>Pregunta la ciudad ANTES de cerrar (bifurca el flujo de pago)</td></tr>
+          <tr><td>☐</td><td>Compra contra entrega (Quito/GYE/Cuenca)</td><td>Compra R14 contra entrega en Quito</td><td>Pitch → 9 datos → confirma cobertura + efectivo → cierre + mueve pipeline</td></tr>
+          <tr><td>☐</td><td>Compra previa cancelación (resto del país)</td><td>Compra a una ciudad fuera de las 3</td><td>Pide previo pago → datos banco (Custom Value) → guía Servientrega 24-48h</td></tr>
+          <tr><td>☐</td><td>Pago por transferencia</td><td>Comprar Tolerance → transferencia</td><td>Envía datos bancarios vía Custom Value + pide foto del comprobante</td></tr>
+          <tr><td>☐</td><td>Follow-up 24h</td><td>Pedir datos y no responder</td><td>Dispara el seguimiento automático a las 24h</td></tr>
+          <tr><td>☐</td><td>Cross-sell por síntoma</td><td>"Tengo estrés y colon irritable"</td><td>Ofrece el combo correcto (R14 + Tolerance = <span class="text-white">$57.85</span>)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-2">C · Handoffs / derivaciones (lo más sensible)</div>
+      <table class="std">
+        <thead><tr><th style="width:32px">✓</th><th style="width:30%">Qué se prueba</th><th style="width:32%">Input de prueba</th><th>Resultado esperado</th></tr></thead>
+        <tbody>
+          <tr><td>☐</td><td>Caso clínico complejo</td><td>"Tengo Crohn, qué me tomo?"</td><td>Bot Transfer a asesor — no diagnostica ni inventa</td></tr>
+          <tr><td>☐</td><td>Psicotrópico</td><td>"Estoy con alprazolam, lo reemplazo?"</td><td>Frase ética literal + handoff Caso Clínico</td></tr>
+          <tr><td>☐</td><td>Receta médica (imagen)</td><td>Enviar foto de una receta</td><td>Handoff Receta + deriva a <code>numero_recetas</code></td></tr>
+          <tr><td>☐</td><td>Embarazo / lactancia</td><td>"Embarazada de 5 meses, puedo tomar Renobella?"</td><td>Declara la postura del lab + frase ética; no fuerza venta</td></tr>
+          <tr><td>☐</td><td>Pago con tarjeta</td><td>"Quiero pagar con tarjeta"</td><td>Handoff Pago Link — el bot NUNCA manda el link</td></tr>
+          <tr><td>☐</td><td>Zona dudosa</td><td>"Llegan a Durán?"</td><td>Handoff Zona sin confirmar cobertura por su cuenta</td></tr>
+          <tr><td>☐</td><td>Descuento fuera de promo</td><td>"Me hacen 20% off?"</td><td>Handoff a humano (no improvisa descuentos)</td></tr>
+          <tr><td>☐</td><td>Sin stock / no publicable</td><td>Preguntar por Atemaron / Gripfectan</td><td>Atemaron: deriva. Gripfectan: nunca aparece en mensajes salientes</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ============ ADICIONALES ============ -->
+    <div class="card card-amber mb-6">
+      <div class="flex items-center gap-2 mb-2 flex-wrap">
+        <span class="pill pill-amber">🟡 ADICIONALES</span>
+        <h3 class="text-lg font-semibold text-white">Puntos críticos de la Knowledge Base</h3>
+      </div>
+      <p class="text-sm text-zinc-400 mb-5">La info debe ser exacta. Un error aquí no rompe el bot pero da información incorrecta al cliente.</p>
+      <table class="std">
+        <thead><tr><th style="width:32px">✓</th><th style="width:34%">Qué se prueba</th><th>Resultado esperado</th></tr></thead>
+        <tbody>
+          <tr><td>☐</td><td>Precios correctos</td><td>Jarabe $17.60 · Kit Drenatox+Alcachofa $54.63 · R14+Tolerance $57.85 · Facemed $50.60 (sin 2x1) · CiBiDol S $45 / M $95 / L $95 · Flores de Bach $15 · frasco R suelto $21</td></tr>
+          <tr><td>☐</td><td>Postura clínica por laboratorio</td><td>Reckeweg: sin contraindicaciones. Labfarve: contraindicado en embarazo, lactancia y alergia</td></tr>
+          <tr><td>☐</td><td>Niños menores de 12</td><td>Jutusin, Pulsatilla y Apetimed = excepción pediátrica; los demás Reckeweg no están contraindicados, solo se sugiere receta médica</td></tr>
+          <tr><td>☐</td><td>Alcachofa + hipertensión</td><td>Responde "vigile sus valores y suspenda si suben" — <span class="text-amber-300">NO</span> dice "no sube la presión"</td></tr>
+          <tr><td>☐</td><td>Registro sanitario</td><td>"¿Tienen registro sanitario?" → responde con la frase de registro sanitario</td></tr>
+          <tr><td>☐</td><td>Dosis CBD gotas</td><td>"¿Cuántas gotas tomo?" → deriva al médico, no personaliza la dosis</td></tr>
+          <tr><td>☐</td><td>Facemed / SkinMed uso</td><td>Facemed = tópico, nunca inyectar. SkinMed = uso profesional (médicos)</td></tr>
+          <tr><td>☐</td><td>"¿Dónde queda?"</td><td>Pregunta la ciudad primero, da SOLO esa dirección + envía la imagen del cupón (solo OTC)</td></tr>
+          <tr><td>☐</td><td>Gotas vs tabletas</td><td>Misma composición y efecto; cambia la forma de tomarlo</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ============ LIVIANAS ============ -->
+    <div class="card card-emerald">
+      <div class="flex items-center gap-2 mb-2 flex-wrap">
+        <span class="pill pill-emerald">🟢 LIVIANAS</span>
+        <h3 class="text-lg font-semibold text-white">Se testea si llega a la KB</h3>
+      </div>
+      <p class="text-sm text-zinc-400 mb-5">Verifican que el bot recupere y responda lo básico desde la KB. Rápidas de chequear.</p>
+      <table class="std">
+        <thead><tr><th style="width:32px">✓</th><th style="width:34%">Qué se prueba</th><th>Resultado esperado</th></tr></thead>
+        <tbody>
+          <tr><td>☐</td><td>Saludo + LOPD</td><td>Primer mensaje → saludo de Escollanos + aviso de protección de datos + link de políticas</td></tr>
+          <tr><td>☐</td><td>"¿Para qué sirve X?"</td><td>Devuelve las indicaciones de la ficha del producto</td></tr>
+          <tr><td>☐</td><td>"¿Qué es Escollanos?"</td><td>Responde con la descripción del negocio</td></tr>
+          <tr><td>☐</td><td>Envío / cobertura general</td><td>"¿Hacen envíos?" → gratis a todo el país excepto Galápagos</td></tr>
+          <tr><td>☐</td><td>Programas vigentes</td><td>Reto 21 días y sorteos por compras +$30 (SILVER y preventa: no mencionar)</td></tr>
+          <tr><td>☐</td><td>Mensajeros / teléfono</td><td>"¿Me dan el teléfono del mensajero?" → el bot NO lo comparte</td></tr>
+          <tr><td>☐</td><td>Tono / cierre</td><td>Cierre cordial; tono usted formal cálido; emojis moderados</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-xs text-zinc-500 mt-6 leading-relaxed">
+      Registrar cada fallo en el bug-log compartido (Google Docs del grupo). Foco extra en respuestas 23:00–06:00. Re-correr los <span class="text-rose-300">críticos</span> completos cada vez que se cambie un prompt, una plantilla Meta o un Custom Value.
+    </p>
   </div>
 </section>
 
