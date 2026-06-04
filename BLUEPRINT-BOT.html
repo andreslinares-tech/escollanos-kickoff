@@ -149,6 +149,61 @@
   .checklist li { padding: 8px 0 8px 28px; position: relative; border-bottom: 1px solid rgba(255,255,255,.04); }
   .checklist li::before { content: '○'; position: absolute; left: 8px; top: 8px; color: #71717a; font-family: 'Geist Mono', monospace; }
   .checklist li.done::before { content: '●'; color: #10b981; }
+
+  /* ===== Plan de pruebas · case cards (formato Propiedades Ecuador) ===== */
+  .case-card { background: rgba(9,9,11,.5); border: 1px solid rgba(255,255,255,.06); border-radius: 18px; padding: 24px; position: relative; overflow: hidden; }
+  .case-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; transition: width .2s; }
+  .case-card[data-tier="critico"]::before { background: #f43f5e; }
+  .case-card[data-tier="adicional"]::before { background: #f59e0b; }
+  .case-card[data-tier="liviana"]::before { background: #10b981; }
+  .case-card[data-status="passed"] { border-color: rgba(16,185,129,.35); }
+  .case-card[data-status="passed"]::before { width: 6px; background: #10b981; }
+  .case-card[data-status="failed"] { border-color: rgba(244,63,94,.35); }
+  .case-card[data-status="failed"]::before { width: 6px; background: #f43f5e; }
+
+  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 9px; border-radius: 999px; font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: .04em; }
+  .badge-critico { background: rgba(244,63,94,.16); color: #fda4af; border: 1px solid rgba(244,63,94,.35); }
+  .badge-adicional { background: rgba(245,158,11,.16); color: #fcd34d; border: 1px solid rgba(245,158,11,.35); }
+  .badge-liviana { background: rgba(16,185,129,.16); color: #6ee7b7; border: 1px solid rgba(16,185,129,.32); }
+
+  .turn-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+  .turn-table th { text-align: left; padding: 9px 12px; font-family: 'Geist Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #71717a; border-bottom: 1px solid rgba(255,255,255,.06); font-weight: 500; }
+  .turn-table td { padding: 11px 12px; vertical-align: top; border-bottom: 1px solid rgba(255,255,255,.04); }
+  .turn-table tr:last-child td { border-bottom: none; }
+  .turn-table .turn-num { font-family: 'Geist Mono', monospace; font-size: 11px; color: #71717a; width: 32px; }
+  .turn-table .actor-bot { color: #6ee7b7; font-weight: 500; font-size: 12px; }
+  .turn-table .actor-lead { color: #fcd34d; font-weight: 500; font-size: 12px; }
+  .turn-table .actor-system { color: #94a3b8; font-style: italic; font-size: 12px; }
+  .turn-table .msg-lead { color: #fde68a; }
+  .turn-table .msg-system { color: #71717a; font-style: italic; font-size: 12px; }
+  .turn-table .msg-bot { color: #e4e4e7; }
+  .turn-table .msg-bot .hint { font-size: 11px; color: #71717a; }
+
+  .check-item { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 8px; transition: background .15s; cursor: pointer; }
+  .check-item:hover { background: rgba(255,255,255,.02); }
+  .check-item input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; border: 1.5px solid rgba(255,255,255,.2); border-radius: 5px; flex-shrink: 0; margin-top: 1px; cursor: pointer; transition: all .15s; position: relative; background: rgba(0,0,0,.2); }
+  .check-item input[type="checkbox"]:checked { background: #10b981; border-color: #10b981; }
+  .check-item input[type="checkbox"]:checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); color: #052e16; font-size: 12px; font-weight: 700; line-height: 1; }
+  .check-item input[type="checkbox"]:checked + .check-label { color: #71717a; text-decoration: line-through; text-decoration-color: rgba(16,185,129,.5); }
+  .check-label { color: #d4d4d8; font-size: 13px; line-height: 1.55; transition: color .15s; }
+  .check-label code { font-family: 'Geist Mono', monospace; font-size: 11px; background: rgba(255,255,255,.06); padding: 1px 6px; border-radius: 4px; color: #d4d4d8; }
+
+  .status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font-family: 'Geist Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+  .status-pending { background: rgba(113,113,122,.2); color: #a1a1aa; }
+  .status-passed { background: rgba(16,185,129,.18); color: #6ee7b7; }
+  .status-failed { background: rgba(244,63,94,.18); color: #fda4af; }
+
+  .case-actions { display: flex; gap: 8px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.05); flex-wrap: wrap; }
+  .btn { font-family: 'Geist', sans-serif; font-size: 12px; padding: 7px 13px; border-radius: 8px; border: 1px solid; cursor: pointer; transition: all .15s; font-weight: 500; }
+  .btn-pass { background: rgba(16,185,129,.1); border-color: rgba(16,185,129,.3); color: #6ee7b7; }
+  .btn-pass:hover { background: rgba(16,185,129,.2); }
+  .btn-fail { background: rgba(244,63,94,.1); border-color: rgba(244,63,94,.3); color: #fda4af; }
+  .btn-fail:hover { background: rgba(244,63,94,.2); }
+  .btn-reset { background: transparent; border-color: rgba(255,255,255,.1); color: #a1a1aa; }
+  .btn-reset:hover { background: rgba(255,255,255,.04); color: #e4e4e7; }
+  .note-lateral { background: rgba(99,102,241,.06); border-left: 3px solid rgba(139,92,246,.5); padding: 11px 15px; border-radius: 0 8px 8px 0; margin-top: 14px; font-size: 12.5px; color: #c7d2fe; line-height: 1.55; }
+  .progress-track { height: 8px; border-radius: 999px; background: rgba(255,255,255,.06); overflow: hidden; }
+  .progress-track > div { height: 100%; background: linear-gradient(90deg,#10b981,#3b82f6); width: 0; transition: width .3s; }
 </style>
 </head>
 <body class="grain">
@@ -1682,116 +1737,679 @@ Si el Custom Value datos_bancarios_pichincha está vacío, derivá al pool — h
 <section id="sec-test" class="px-8 lg:px-16 py-20 border-b border-white/5">
   <div class="max-w-6xl">
     <div class="sec-num mb-3">PLAN DE PRUEBAS / 3 NIVELES</div>
-    <h2 class="sec-title mb-3">Qué testear antes (y después) de activar el bot</h2>
+    <h2 class="sec-title mb-3">Casos de prueba del bot</h2>
     <p class="text-zinc-400 max-w-3xl mb-4 leading-relaxed">
-      Tres niveles por severidad. <span class="text-rose-300 font-medium">Críticos</span> son bloqueantes: si uno falla, <span class="text-white">NO se activa</span>. <span class="text-amber-300 font-medium">Adicionales</span> validan que la información de la KB sea correcta. <span class="text-emerald-300 font-medium">Livianas</span> confirman que el bot llega a la KB y responde bien lo básico.
+      Cada caso es una conversación simulada turn-by-turn + su checklist de validación. Probar en modo <span class="kbd">Suggestive</span> y re-verificar en <span class="kbd">Autopilot</span>. Marcá cada check; usá <span class="text-emerald-300">Pasado</span> / <span class="text-rose-300">Fallido</span> por caso (se guarda en este navegador).
     </p>
-    <div class="flex flex-wrap gap-2 mb-8">
-      <span class="pill pill-rose">🔴 Críticos = debe funcionar sí o sí</span>
-      <span class="pill pill-amber">🟡 Adicionales = KB correcta</span>
-      <span class="pill pill-emerald">🟢 Livianas = llega a la KB</span>
+    <div class="flex flex-wrap gap-2 mb-6">
+      <span class="badge badge-critico">🔴 Críticos · técnica + flujos + handoffs · debe funcionar sí o sí</span>
+      <span class="badge badge-adicional">🟡 Adicionales · puntos críticos de la KB</span>
+      <span class="badge badge-liviana">🟢 Livianas · llega a la KB</span>
     </div>
 
-    <!-- ============ CRÍTICOS ============ -->
-    <div class="card card-rose mb-6">
-      <div class="flex items-center gap-2 mb-2 flex-wrap">
-        <span class="pill pill-rose">🔴 CRÍTICOS</span>
-        <h3 class="text-lg font-semibold text-white">Toda la parte técnica, los flujos y los handoffs</h3>
+    <!-- Progreso -->
+    <div class="card mb-10">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-3">
+        <div class="flex items-center gap-4 flex-wrap text-sm">
+          <span><span class="font-mono text-emerald-300" id="tp-passed">0</span> <span class="text-zinc-500">pasados</span></span>
+          <span><span class="font-mono text-rose-300" id="tp-failed">0</span> <span class="text-zinc-500">fallidos</span></span>
+          <span><span class="font-mono text-zinc-300" id="tp-pending">0</span> <span class="text-zinc-500">pendientes</span></span>
+          <span class="text-zinc-600">·</span>
+          <span class="text-zinc-500"><span class="font-mono text-zinc-300" id="tp-total">0</span> casos</span>
+        </div>
+        <button class="btn btn-reset" onclick="tpResetAll()">Reset todo</button>
       </div>
-      <p class="text-sm text-zinc-400 mb-5">Es primordial que TODO esto funcione. Cada caso debe pasar en modo <span class="kbd">Suggestive</span> y volver a verificarse en <span class="kbd">Autopilot</span>. Un fallo aquí frena el go-live.</p>
-
-      <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-2">A · Técnica / infraestructura</div>
-      <table class="std mb-6">
-        <thead><tr><th style="width:32px">✓</th><th style="width:30%">Qué se prueba</th><th style="width:32%">Cómo probarlo</th><th>Resultado esperado</th></tr></thead>
-        <tbody>
-          <tr><td>☐</td><td>Inbound WhatsApp</td><td>Enviar un mensaje nuevo al número del bot</td><td>Crea/actualiza el contacto en GHL y el bot responde</td></tr>
-          <tr><td>☐</td><td>Disponibilidad 24/7</td><td>Mensaje a las 23:00–06:00</td><td>El bot responde igual que en horario (caso de uso clave)</td></tr>
-          <tr><td>☐</td><td>Custom Values vivos</td><td>Preguntar precio y pedir datos bancarios</td><td>Lee el valor vigente (<code>precio_*</code>, datos banco, <code>correo_de_salida</code>) — <span class="text-rose-300">nunca hardcodea</span></td></tr>
-          <tr><td>☐</td><td>Escritura de Custom Fields</td><td>Completar una compra</td><td>Llena los CF del contacto (carpeta Bot Escollanos) vía Add Contact Info</td></tr>
-          <tr><td>☐</td><td>Movimiento de Pipeline</td><td>Lead que califica / compra</td><td>El contacto avanza a la etapa correcta del Pipeline Comercial</td></tr>
-          <tr><td>☐</td><td>Asignación al responsable</td><td>Entra un lead de un canal</td><td>Se asigna al responsable del canal apenas entra (no solo al calificar)</td></tr>
-          <tr><td>☐</td><td>Plantilla Meta correcta</td><td>Disparar un WF saliente</td><td>Sale la plantilla aprobada correcta (gotas CiBiDol NO usan la de la crema)</td></tr>
-          <tr><td>☐</td><td>Anti-robot básico</td><td>Varias respuestas seguidas</td><td>No arranca con <span class="kbd">¡</span>/<span class="kbd">¿</span>, usted formal cálido, sin sonar a bot</td></tr>
-        </tbody>
-      </table>
-
-      <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-2">B · Flujos comerciales (de punta a punta)</div>
-      <table class="std mb-6">
-        <thead><tr><th style="width:32px">✓</th><th style="width:30%">Qué se prueba</th><th style="width:32%">Cómo probarlo</th><th>Resultado esperado</th></tr></thead>
-        <tbody>
-          <tr><td>☐</td><td>Pregunta ciudad antes de cerrar</td><td>"Quiero comprar R14"</td><td>Pregunta la ciudad ANTES de cerrar (bifurca el flujo de pago)</td></tr>
-          <tr><td>☐</td><td>Compra contra entrega (Quito/GYE/Cuenca)</td><td>Compra R14 contra entrega en Quito</td><td>Pitch → 9 datos → confirma cobertura + efectivo → cierre + mueve pipeline</td></tr>
-          <tr><td>☐</td><td>Compra previa cancelación (resto del país)</td><td>Compra a una ciudad fuera de las 3</td><td>Pide previo pago → datos banco (Custom Value) → guía Servientrega 24-48h</td></tr>
-          <tr><td>☐</td><td>Pago por transferencia</td><td>Comprar Tolerance → transferencia</td><td>Envía datos bancarios vía Custom Value + pide foto del comprobante</td></tr>
-          <tr><td>☐</td><td>Follow-up 24h</td><td>Pedir datos y no responder</td><td>Dispara el seguimiento automático a las 24h</td></tr>
-          <tr><td>☐</td><td>Cross-sell por síntoma</td><td>"Tengo estrés y colon irritable"</td><td>Ofrece el combo correcto (R14 + Tolerance = <span class="text-white">$57.85</span>)</td></tr>
-        </tbody>
-      </table>
-
-      <div class="font-mono text-[11px] tracking-widest text-rose-300 uppercase mb-2">C · Handoffs / derivaciones (lo más sensible)</div>
-      <table class="std">
-        <thead><tr><th style="width:32px">✓</th><th style="width:30%">Qué se prueba</th><th style="width:32%">Input de prueba</th><th>Resultado esperado</th></tr></thead>
-        <tbody>
-          <tr><td>☐</td><td>Caso clínico complejo</td><td>"Tengo Crohn, qué me tomo?"</td><td>Bot Transfer a asesor — no diagnostica ni inventa</td></tr>
-          <tr><td>☐</td><td>Psicotrópico</td><td>"Estoy con alprazolam, lo reemplazo?"</td><td>Frase ética literal + handoff Caso Clínico</td></tr>
-          <tr><td>☐</td><td>Receta médica (imagen)</td><td>Enviar foto de una receta</td><td>Handoff Receta + deriva a <code>numero_recetas</code></td></tr>
-          <tr><td>☐</td><td>Embarazo / lactancia</td><td>"Embarazada de 5 meses, puedo tomar Renobella?"</td><td>Declara la postura del lab + frase ética; no fuerza venta</td></tr>
-          <tr><td>☐</td><td>Pago con tarjeta</td><td>"Quiero pagar con tarjeta"</td><td>Handoff Pago Link — el bot NUNCA manda el link</td></tr>
-          <tr><td>☐</td><td>Zona dudosa</td><td>"Llegan a Durán?"</td><td>Handoff Zona sin confirmar cobertura por su cuenta</td></tr>
-          <tr><td>☐</td><td>Descuento fuera de promo</td><td>"Me hacen 20% off?"</td><td>Handoff a humano (no improvisa descuentos)</td></tr>
-          <tr><td>☐</td><td>Sin stock / no publicable</td><td>Preguntar por Atemaron / Gripfectan</td><td>Atemaron: deriva. Gripfectan: nunca aparece en mensajes salientes</td></tr>
-        </tbody>
-      </table>
+      <div class="progress-track"><div id="tp-bar"></div></div>
     </div>
 
-    <!-- ============ ADICIONALES ============ -->
-    <div class="card card-amber mb-6">
-      <div class="flex items-center gap-2 mb-2 flex-wrap">
-        <span class="pill pill-amber">🟡 ADICIONALES</span>
-        <h3 class="text-lg font-semibold text-white">Puntos críticos de la Knowledge Base</h3>
+    <!-- ════════════ NIVEL 1 · CRÍTICOS ════════════ -->
+    <div class="flex items-center gap-3 mb-5">
+      <span class="badge badge-critico">🔴 CRÍTICOS</span>
+      <h3 class="text-lg font-semibold text-white">Toda la parte técnica, los flujos y los handoffs</h3>
+    </div>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C1">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C1</span><span class="badge badge-critico">🔴 Crítico · flujo + técnica</span><span class="status-pill status-pending" data-status-for="C1">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Compra contra entrega en Quito (end-to-end)</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Flujo completo de venta + escritura técnica: lead de campaña → pitch → ciudad → 9 datos → cierre.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Hola, vi el R14 en Instagram</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-system">Bot (auto)</span></td><td class="msg-system">saludo de Escollanos + aviso de protección de datos (LOPD)</td></tr>
+            <tr><td class="turn-num">3</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">pitch R14 + precio <span class="hint">(leído de precio_r14)</span></td></tr>
+            <tr><td class="turn-num">4</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Quiero comprarlo</td></tr>
+            <tr><td class="turn-num">5</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">¿De qué ciudad nos contacta?</td></tr>
+            <tr><td class="turn-num">6</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Quito</td></tr>
+            <tr><td class="turn-num">7</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Confirma cobertura Quito (contraentrega en efectivo) + pide los 9 datos</td></tr>
+            <tr><td class="turn-num">8</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">(envía nombre, cédula, dirección, etc.)</td></tr>
+            <tr><td class="turn-num">9</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Confirma pedido SO###, ruta y monto a cancelar</td></tr>
+          </tbody>
+        </table></div>
       </div>
-      <p class="text-sm text-zinc-400 mb-5">La info debe ser exacta. Un error aquí no rompe el bot pero da información incorrecta al cliente.</p>
-      <table class="std">
-        <thead><tr><th style="width:32px">✓</th><th style="width:34%">Qué se prueba</th><th>Resultado esperado</th></tr></thead>
-        <tbody>
-          <tr><td>☐</td><td>Precios correctos</td><td>Jarabe $17.60 · Kit Drenatox+Alcachofa $54.63 · R14+Tolerance $57.85 · Facemed $50.60 (sin 2x1) · CiBiDol S $45 / M $95 / L $95 · Flores de Bach $15 · frasco R suelto $21</td></tr>
-          <tr><td>☐</td><td>Postura clínica por laboratorio</td><td>Reckeweg: sin contraindicaciones. Labfarve: contraindicado en embarazo, lactancia y alergia</td></tr>
-          <tr><td>☐</td><td>Niños menores de 12</td><td>Jutusin, Pulsatilla y Apetimed = excepción pediátrica; los demás Reckeweg no están contraindicados, solo se sugiere receta médica</td></tr>
-          <tr><td>☐</td><td>Alcachofa + hipertensión</td><td>Responde "vigile sus valores y suspenda si suben" — <span class="text-amber-300">NO</span> dice "no sube la presión"</td></tr>
-          <tr><td>☐</td><td>Registro sanitario</td><td>"¿Tienen registro sanitario?" → responde con la frase de registro sanitario</td></tr>
-          <tr><td>☐</td><td>Dosis CBD gotas</td><td>"¿Cuántas gotas tomo?" → deriva al médico, no personaliza la dosis</td></tr>
-          <tr><td>☐</td><td>Facemed / SkinMed uso</td><td>Facemed = tópico, nunca inyectar. SkinMed = uso profesional (médicos)</td></tr>
-          <tr><td>☐</td><td>"¿Dónde queda?"</td><td>Pregunta la ciudad primero, da SOLO esa dirección + envía la imagen del cupón (solo OTC)</td></tr>
-          <tr><td>☐</td><td>Gotas vs tabletas</td><td>Misma composición y efecto; cambia la forma de tomarlo</td></tr>
-        </tbody>
-      </table>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C1-1"><span class="check-label">Saludo + LOPD en el primer mensaje</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C1-2"><span class="check-label">Precio leído de <code>precio_r14</code> (Custom Value) — no hardcodeado</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C1-3"><span class="check-label">Preguntó la ciudad ANTES de cerrar</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C1-4"><span class="check-label">Flujo Quito = contraentrega en efectivo (NO tarjeta en entrega)</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C1-5"><span class="check-label">Capturó los 9 datos → Custom Fields (carpeta Bot Escollanos) vía Add Contact Info</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C1-6"><span class="check-label">Oportunidad movida a la etapa correcta del pipeline</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C1-7"><span class="check-label">Contacto asignado al responsable del canal</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C1-8"><span class="check-label">Confirmación de pedido con número SO###</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C1','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C1','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C1','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C2">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C2</span><span class="badge badge-critico">🔴 Crítico · flujo</span><span class="status-pill status-pending" data-status-for="C2">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Compra previa cancelación (resto del país)</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Ciudad fuera de Quito/GYE/Cuenca → previo pago + datos banco (Custom Value) + Servientrega.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Quiero el Drenatox, vivo en Ambato</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Para su ciudad enviamos mediante Servientrega con previo pago</td></tr>
+            <tr><td class="turn-num">3</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Ok, ¿cómo pago?</td></tr>
+            <tr><td class="turn-num">4</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Datos bancarios <span class="hint">(Custom Value)</span> + pide foto del comprobante</td></tr>
+            <tr><td class="turn-num">5</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">(envía comprobante)</td></tr>
+            <tr><td class="turn-num">6</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Confirma pedido + número de guía Servientrega (24-48h) + link de rastreo</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C2-1"><span class="check-label">Detecta ciudad fuera de Quito/GYE/Cuenca → previo pago</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C2-2"><span class="check-label">Datos bancarios vía Custom Value — <strong>NUNCA</strong> hardcodeados</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C2-3"><span class="check-label">Pide foto del comprobante antes de procesar</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C2-4"><span class="check-label">Entrega guía Servientrega + link de rastreo</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C2','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C2','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C2','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C3">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C3</span><span class="badge badge-critico">🔴 Crítico · handoff</span><span class="status-pill status-pending" data-status-for="C3">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Caso clínico complejo → handoff a asesor</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Patología diagnosticada: el bot NO diagnostica ni recomienda tratamiento, deriva a humano.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Tengo Crohn, ¿qué me tomo?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Por su caso lo derivo con un asesor que le orienta mejor <span class="hint">(Bot Transfer / handoff Caso Clínico)</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C3-1"><span class="check-label">NO da diagnóstico ni recomienda tratamiento</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C3-2"><span class="check-label">Ejecuta handoff / Bot Transfer a asesor humano</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C3-3"><span class="check-label">No inventa información clínica</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C3','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C3','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C3','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C4">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C4</span><span class="badge badge-critico">🔴 Crítico · handoff + ética</span><span class="status-pill status-pending" data-status-for="C4">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Psicotrópico → frase ética + handoff</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">El lead quiere reemplazar un psicotrópico. El bot usa la frase ética literal y deriva.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Estoy tomando alprazolam, ¿lo puedo reemplazar por el R14?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Frase ética de psicotrópico (literal) + lo derivo con un asesor</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C4-1"><span class="check-label">Entrega la frase ética de psicotrópico literal</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C4-2"><span class="check-label">NO afirma que el producto reemplaza el medicamento</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C4-3"><span class="check-label">Handoff a asesor / Caso Clínico</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C4','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C4','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C4','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C5">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C5</span><span class="badge badge-critico">🔴 Crítico · handoff</span><span class="status-pill status-pending" data-status-for="C5">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Receta médica (imagen) → handoff Receta</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">El lead manda foto de una receta. El bot deriva a recetas, no la interpreta.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">(envía foto de una receta médica)</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Handoff Receta Médica → deriva a <span class="hint">numero_recetas</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C5-1"><span class="check-label">Reconoce la imagen como receta</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C5-2"><span class="check-label">Handoff Receta + deriva a <code>numero_recetas</code></span></label>
+          <label class="check-item"><input type="checkbox" data-key="C5-3"><span class="check-label">NO interpreta la receta por su cuenta</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C5','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C5','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C5','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C6">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C6</span><span class="badge badge-critico">🔴 Crítico · handoff</span><span class="status-pill status-pending" data-status-for="C6">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Pago con tarjeta → handoff Pago Link</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">El bot nunca genera ni manda el link de pago; deriva a un asesor.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Puedo pagar con tarjeta?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Sí, con link de pago; un asesor se lo genera <span class="hint">(handoff Pago Link)</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C6-1"><span class="check-label">El bot NO genera ni manda el link de pago</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C6-2"><span class="check-label">Handoff Pago Link a asesor</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C6-3"><span class="check-label">Aclara que en la entrega solo se recibe efectivo</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C6','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C6','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C6','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C7">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C7</span><span class="badge badge-critico">🔴 Crítico · handoff</span><span class="status-pill status-pending" data-status-for="C7">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Zona de cobertura dudosa → handoff</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">El bot no confirma cobertura de una zona dudosa por su cuenta; deriva para confirmar.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Llegan a Durán?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Lo verifico con un asesor para confirmarle la cobertura <span class="hint">(handoff Zona)</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C7-1"><span class="check-label">NO confirma cobertura de zona dudosa por su cuenta</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C7-2"><span class="check-label">Handoff a asesor para confirmar la zona</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C7','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C7','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C7','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C8">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C8</span><span class="badge badge-critico">🔴 Crítico · compliance</span><span class="status-pill status-pending" data-status-for="C8">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Embarazo + producto Labfarve → declara contraindicación</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Producto fitoterápico Labfarve contraindicado en embarazo/lactancia/alergia.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Estoy embarazada, ¿puedo tomar la Alcachofa?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Declara que es Labfarve y está contraindicado en embarazo; sugiere consultar al médico / ofrece alternativa</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C8-1"><span class="check-label">Declara la contraindicación (embarazo/lactancia/alergia) para Labfarve</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C8-2"><span class="check-label">NO fuerza la venta</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C8-3"><span class="check-label">Sugiere consultar al médico u ofrece alternativa</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C8','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C8','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C8','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C9">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C9</span><span class="badge badge-critico">🔴 Crítico · flujo + KB</span><span class="status-pill status-pending" data-status-for="C9">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Cross-sell por síntoma (combo correcto + precio)</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Detecta intent secundaria y ofrece el combo oficial con el precio correcto.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Tengo mucho estrés y además colon irritable</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Ofrece combo R14 + Tolerance por $57.85 <span class="hint">(precio_combo_r14_tolerance)</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C9-1"><span class="check-label">Detecta la intent secundaria (estrés + colon)</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C9-2"><span class="check-label">Ofrece el combo correcto (R14 + Tolerance)</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C9-3"><span class="check-label">Precio combo = <strong>$57.85</strong> (NO el $42.80 viejo)</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C9','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C9','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C9','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C10">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C10</span><span class="badge badge-critico">🔴 Crítico · técnica</span><span class="status-pill status-pending" data-status-for="C10">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Follow-up 24h automático</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Lead que no responde tras pedir datos → seguimiento automático sin intervención humana.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Pidió los 9 datos para procesar el pedido</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">(no responde en 24h)</td></tr>
+            <tr><td class="turn-num">3</td><td><span class="actor-system">Workflow (auto)</span></td><td class="msg-system">dispara el follow-up canónico de seguimiento</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C10-1"><span class="check-label">A las 24h sin respuesta dispara el follow-up automático</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C10-2"><span class="check-label">Usa el mensaje canónico de seguimiento</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C10-3"><span class="check-label">No requiere intervención humana</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C10','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C10','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C10','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="critico" data-case="C11">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso C11</span><span class="badge badge-critico">🔴 Crítico · técnica</span><span class="status-pill status-pending" data-status-for="C11">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Disponibilidad 24/7 + precio vigente (madrugada)</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Caso de uso clave: responde igual entre 23:00 y 06:00 y con el precio del Custom Value vigente.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-system">Hora</span></td><td class="msg-system">03:00 am</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Cuánto cuesta el jarabe de caléndula?</td></tr>
+            <tr><td class="turn-num">3</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Responde $17.60 <span class="hint">(precio_jarabe_calendula)</span> igual que en horario</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="C11-1"><span class="check-label">Responde en horario nocturno (23:00–06:00)</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C11-2"><span class="check-label">Precio leído del Custom Value vigente ($17.60)</span></label>
+          <label class="check-item"><input type="checkbox" data-key="C11-3"><span class="check-label">Tiempo de respuesta aceptable</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('C11','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('C11','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('C11','pending')">Reset</button></div>
+    </article>
+
+    <!-- ════════════ NIVEL 2 · ADICIONALES ════════════ -->
+    <div class="flex items-center gap-3 mb-5 mt-12">
+      <span class="badge badge-adicional">🟡 ADICIONALES</span>
+      <h3 class="text-lg font-semibold text-white">Puntos críticos de la Knowledge Base</h3>
     </div>
 
-    <!-- ============ LIVIANAS ============ -->
-    <div class="card card-emerald">
-      <div class="flex items-center gap-2 mb-2 flex-wrap">
-        <span class="pill pill-emerald">🟢 LIVIANAS</span>
-        <h3 class="text-lg font-semibold text-white">Se testea si llega a la KB</h3>
+    <article class="case-card mb-6" data-tier="adicional" data-case="A1">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso A1</span><span class="badge badge-adicional">🟡 Adicional · KB</span><span class="status-pill status-pending" data-status-for="A1">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Niños menores de 12 años (postura correcta)</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">No es prohibición: se sugiere receta médica. Excepción pediátrica: Jutusin, Pulsatilla, Apetimed.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿El R14 sirve para mi hijo de 8 años?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">No está contraindicado; en menores se sugiere que lo recete un médico</td></tr>
+          </tbody>
+        </table></div>
       </div>
-      <p class="text-sm text-zinc-400 mb-5">Verifican que el bot recupere y responda lo básico desde la KB. Rápidas de chequear.</p>
-      <table class="std">
-        <thead><tr><th style="width:32px">✓</th><th style="width:34%">Qué se prueba</th><th>Resultado esperado</th></tr></thead>
-        <tbody>
-          <tr><td>☐</td><td>Saludo + LOPD</td><td>Primer mensaje → saludo de Escollanos + aviso de protección de datos + link de políticas</td></tr>
-          <tr><td>☐</td><td>"¿Para qué sirve X?"</td><td>Devuelve las indicaciones de la ficha del producto</td></tr>
-          <tr><td>☐</td><td>"¿Qué es Escollanos?"</td><td>Responde con la descripción del negocio</td></tr>
-          <tr><td>☐</td><td>Envío / cobertura general</td><td>"¿Hacen envíos?" → gratis a todo el país excepto Galápagos</td></tr>
-          <tr><td>☐</td><td>Programas vigentes</td><td>Reto 21 días y sorteos por compras +$30 (SILVER y preventa: no mencionar)</td></tr>
-          <tr><td>☐</td><td>Mensajeros / teléfono</td><td>"¿Me dan el teléfono del mensajero?" → el bot NO lo comparte</td></tr>
-          <tr><td>☐</td><td>Tono / cierre</td><td>Cierre cordial; tono usted formal cálido; emojis moderados</td></tr>
-        </tbody>
-      </table>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="A1-1"><span class="check-label">NO dice "no se puede en niños"</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A1-2"><span class="check-label">Dice que se <strong>sugiere</strong> receta médica (no prohibición)</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A1-3"><span class="check-label">Para Jutusin/Pulsatilla/Apetimed sí da dosis pediátrica</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('A1','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('A1','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('A1','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="adicional" data-case="A2">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso A2</span><span class="badge badge-adicional">🟡 Adicional · KB</span><span class="status-pill status-pending" data-status-for="A2">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Alcachofa + hipertensión (respuesta correcta)</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">El bot NO afirma "no sube la presión".</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Soy hipertenso, ¿puedo tomar la alcachofa?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Esté atento a sus valores y, si suben, suspenda; tómela en horario separado de su medicación</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="A2-1"><span class="check-label"><strong>NO</strong> dice "no sube la presión"</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A2-2"><span class="check-label">Dice vigilar valores y suspender si suben</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A2-3"><span class="check-label">Sugiere horario separado de su medicación</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('A2','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('A2','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('A2','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="adicional" data-case="A3">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso A3</span><span class="badge badge-adicional">🟡 Adicional · KB</span><span class="status-pill status-pending" data-status-for="A3">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Facemed: precio correcto y SIN 2x1</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Facemed no está en 2x1 — precio unitario $50.60.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿El Facemed está en 2x1?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Se vende por unidad a $50.60 con envío gratis <span class="hint">(precio_facemed)</span></td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="A3-1"><span class="check-label">Facemed precio $50.60</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A3-2"><span class="check-label"><strong>NO</strong> ofrece 2x1</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A3-3"><span class="check-label">Precio leído de Custom Value</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('A3','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('A3','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('A3','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="adicional" data-case="A4">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso A4</span><span class="badge badge-adicional">🟡 Adicional · KB</span><span class="status-pill status-pending" data-status-for="A4">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Registro sanitario</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Responde con la frase de registro sanitario y cita el R.S. del producto.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Sus productos tienen registro sanitario?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Sí, cuentan con registro sanitario (cita el R.S. del producto consultado)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="A4-1"><span class="check-label">Responde con la frase de registro sanitario</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A4-2"><span class="check-label">Cita el R.S. correcto del producto si aplica</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('A4','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('A4','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('A4','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="adicional" data-case="A5">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso A5</span><span class="badge badge-adicional">🟡 Adicional · KB + ética</span><span class="status-pill status-pending" data-status-for="A5">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Dosis de CBD gotas → deriva al médico</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">El bot no personaliza dosis terapéutica de CBD; deriva al médico.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Cuántas gotas de CiBiDol tomo?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Cita el modo de empleo de la ficha y recomienda confirmar la dosis con su médico</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="A5-1"><span class="check-label">NO personaliza la dosis terapéutica</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A5-2"><span class="check-label">Deriva al médico</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A5-3"><span class="check-label">Puede citar el modo de empleo de la ficha</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('A5','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('A5','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('A5','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="adicional" data-case="A6">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso A6</span><span class="badge badge-adicional">🟡 Adicional · KB + operativo</span><span class="status-pill status-pending" data-status-for="A6">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">"¿Dónde queda?" → pregunta ciudad + cupón</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Primero pregunta la ciudad, da SOLO esa dirección y envía la imagen del cupón (solo OTC).</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Dónde quedan?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Entrega gratis a todo el país + ¿de qué ciudad nos contacta?</td></tr>
+            <tr><td class="turn-num">3</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Guayaquil</td></tr>
+            <tr><td class="turn-num">4</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Da SOLO la dirección de Guayaquil + maps + envía la imagen del cupón 5%</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="A6-1"><span class="check-label">Pregunta la ciudad primero (no da las 3 direcciones de golpe)</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A6-2"><span class="check-label">Da SOLO la dirección de esa ciudad + ubicación maps</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A6-3"><span class="check-label">Envía la imagen del cupón 5% (válido solo OTC, debe mostrarlo)</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('A6','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('A6','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('A6','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="adicional" data-case="A7">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso A7</span><span class="badge badge-adicional">🟡 Adicional · KB + seguridad</span><span class="status-pill status-pending" data-status-for="A7">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Facemed / SkinMed: uso correcto</h3>
+      <p class="text-sm text-zinc-400 mt-2 mb-5">Facemed = tópico, nunca inyectar. SkinMed = uso profesional.</p>
+      <div class="mb-5">
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">📜 Conversación turn-by-turn</p>
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">El Facemed, ¿me lo inyecto?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">No, Facemed es de uso tópico exclusivamente, NUNCA se inyecta</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="A7-1"><span class="check-label">Facemed = tópico, declara que NUNCA se inyecta</span></label>
+          <label class="check-item"><input type="checkbox" data-key="A7-2"><span class="check-label">SkinMed Plus se comunica como uso profesional (médicos)</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('A7','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('A7','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('A7','pending')">Reset</button></div>
+    </article>
+
+    <!-- ════════════ NIVEL 3 · LIVIANAS ════════════ -->
+    <div class="flex items-center gap-3 mb-5 mt-12">
+      <span class="badge badge-liviana">🟢 LIVIANAS</span>
+      <h3 class="text-lg font-semibold text-white">Se testea si llega a la KB</h3>
     </div>
+
+    <article class="case-card mb-6" data-tier="liviana" data-case="L1">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso L1</span><span class="badge badge-liviana">🟢 Liviana</span><span class="status-pill status-pending" data-status-for="L1">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Saludo + LOPD en el primer mensaje</h3>
+      <div class="mb-5 mt-4">
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">Hola</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Saludo de Escollanos + aviso de protección de datos + link de políticas</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="L1-1"><span class="check-label">Saludo de Escollanos en el primer mensaje</span></label>
+          <label class="check-item"><input type="checkbox" data-key="L1-2"><span class="check-label">Aviso de protección de datos + link de políticas</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('L1','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('L1','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('L1','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="liviana" data-case="L2">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso L2</span><span class="badge badge-liviana">🟢 Liviana</span><span class="status-pill status-pending" data-status-for="L2">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">"¿Para qué sirve X?" → indicaciones de ficha</h3>
+      <div class="mb-5 mt-4">
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Para qué sirve el Drenatox?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Devuelve las indicaciones de la ficha (detox / drenaje) sin prometer cura</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="L2-1"><span class="check-label">Devuelve las indicaciones de la ficha del producto</span></label>
+          <label class="check-item"><input type="checkbox" data-key="L2-2"><span class="check-label">No promete cura (usa "apoyo / coadyuvante / ayuda a")</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('L2','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('L2','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('L2','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="liviana" data-case="L3">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso L3</span><span class="badge badge-liviana">🟢 Liviana</span><span class="status-pill status-pending" data-status-for="L3">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Envío / cobertura general</h3>
+      <div class="mb-5 mt-4">
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Hacen envíos?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Envío gratis a todo el país excepto Galápagos</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="L3-1"><span class="check-label">Envío gratis a todo el país excepto Galápagos</span></label>
+          <label class="check-item"><input type="checkbox" data-key="L3-2"><span class="check-label">Menciona ruta propia en Quito/Guayaquil/Cuenca</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('L3','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('L3','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('L3','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="liviana" data-case="L4">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso L4</span><span class="badge badge-liviana">🟢 Liviana</span><span class="status-pill status-pending" data-status-for="L4">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">Programas vigentes</h3>
+      <div class="mb-5 mt-4">
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Tienen promociones o premios?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">Reto 21 días + sorteos por compras desde $30</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="L4-1"><span class="check-label">Menciona Reto 21 días + sorteos +$30</span></label>
+          <label class="check-item"><input type="checkbox" data-key="L4-2"><span class="check-label"><strong>NO</strong> menciona cliente SILVER ni preventa (no confirmados)</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('L4','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('L4','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('L4','pending')">Reset</button></div>
+    </article>
+
+    <article class="case-card mb-6" data-tier="liviana" data-case="L5">
+      <div class="flex items-center gap-2 mb-2 flex-wrap"><span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">Caso L5</span><span class="badge badge-liviana">🟢 Liviana</span><span class="status-pill status-pending" data-status-for="L5">Pendiente</span></div>
+      <h3 class="text-xl font-semibold tracking-tight">No comparte el teléfono del mensajero</h3>
+      <div class="mb-5 mt-4">
+        <div class="rounded-lg overflow-hidden border border-white/5"><table class="turn-table">
+          <thead><tr><th>#</th><th>Quién</th><th>Mensaje</th></tr></thead>
+          <tbody>
+            <tr><td class="turn-num">1</td><td><span class="actor-lead">Lead</span></td><td class="msg-lead">¿Me dan el número del mensajero?</td></tr>
+            <tr><td class="turn-num">2</td><td><span class="actor-bot">Asesora (bot)</span></td><td class="msg-bot">No comparte el número; coordina todo por el chat</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 mb-2">✅ Checklist de validación</p>
+        <div class="space-y-1">
+          <label class="check-item"><input type="checkbox" data-key="L5-1"><span class="check-label">NO comparte el teléfono del mensajero</span></label>
+          <label class="check-item"><input type="checkbox" data-key="L5-2"><span class="check-label">Ofrece coordinar por el chat</span></label>
+        </div>
+      </div>
+      <div class="case-actions no-print"><button class="btn btn-pass" onclick="tpMark('L5','passed')">✓ Marcar pasado</button><button class="btn btn-fail" onclick="tpMark('L5','failed')">✗ Marcar fallido</button><button class="btn btn-reset" onclick="tpMark('L5','pending')">Reset</button></div>
+    </article>
 
     <p class="text-xs text-zinc-500 mt-6 leading-relaxed">
-      Registrar cada fallo en el bug-log compartido (Google Docs del grupo). Foco extra en respuestas 23:00–06:00. Re-correr los <span class="text-rose-300">críticos</span> completos cada vez que se cambie un prompt, una plantilla Meta o un Custom Value.
+      El estado (checks y pasado/fallido) se guarda en este navegador. Registrar cada fallo en el bug-log compartido del grupo. Re-correr los <span class="text-rose-300">críticos</span> completos cada vez que se cambie un prompt, una plantilla Meta o un Custom Value.
     </p>
   </div>
+
+  <script>
+  (function(){
+    const KEY = 'escollanos_testplan_v1';
+    let st = {};
+    try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ st = {}; }
+    st.checks = st.checks || {};
+    st.cases = st.cases || {};
+    const scope = document.getElementById('sec-test');
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e){} };
+
+    function applyStatus(id){
+      const card = scope.querySelector('.case-card[data-case="'+id+'"]');
+      const pill = scope.querySelector('[data-status-for="'+id+'"]');
+      const status = st.cases[id] || 'pending';
+      if(card) card.setAttribute('data-status', status);
+      if(pill){
+        pill.className = 'status-pill status-' + status;
+        pill.textContent = status === 'passed' ? 'Pasado' : status === 'failed' ? 'Fallido' : 'Pendiente';
+      }
+    }
+    function updateProgress(){
+      const cards = scope.querySelectorAll('.case-card[data-case]');
+      let passed=0, failed=0, pending=0;
+      cards.forEach(c => { const s = st.cases[c.getAttribute('data-case')] || 'pending'; if(s==='passed')passed++; else if(s==='failed')failed++; else pending++; });
+      const total = cards.length;
+      const set = (id,v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+      set('tp-passed',passed); set('tp-failed',failed); set('tp-pending',pending); set('tp-total',total);
+      const bar = document.getElementById('tp-bar'); if(bar) bar.style.width = total ? (passed/total*100)+'%' : '0%';
+    }
+    window.tpMark = function(id,status){ st.cases[id] = status; save(); applyStatus(id); updateProgress(); };
+    window.tpResetAll = function(){
+      if(!confirm('Esto borra todo el progreso del plan de pruebas en este navegador. ¿Seguro?')) return;
+      st = { checks:{}, cases:{} }; save();
+      scope.querySelectorAll('.case-card[data-case]').forEach(c => applyStatus(c.getAttribute('data-case')));
+      scope.querySelectorAll('input[type="checkbox"][data-key]').forEach(cb => cb.checked = false);
+      updateProgress();
+    };
+
+    scope.querySelectorAll('input[type="checkbox"][data-key]').forEach(cb => {
+      const k = cb.getAttribute('data-key');
+      if(st.checks[k]) cb.checked = true;
+      cb.addEventListener('change', () => { st.checks[k] = cb.checked; save(); });
+    });
+    scope.querySelectorAll('.case-card[data-case]').forEach(c => applyStatus(c.getAttribute('data-case')));
+    updateProgress();
+  })();
+  </script>
 </section>
 
 <!-- SECCIÓN 11 — Próximos pasos -->
