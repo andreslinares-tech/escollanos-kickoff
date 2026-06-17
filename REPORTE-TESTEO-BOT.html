@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Testeo — Bot Escollanos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+  .grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); }
+  .pass { background: #f0fdf4; border-left: 3px solid #22c55e; }
+  .fail { background: #fef2f2; border-left: 3px solid #ef4444; }
+  .warn { background: #fffbeb; border-left: 3px solid #f59e0b; }
+  .skip { background: #f8fafc; border-left: 3px solid #94a3b8; }
+  .badge-pass { background:#dcfce7; color:#15803d; }
+  .badge-fail { background:#fee2e2; color:#b91c1c; }
+  .badge-warn { background:#fef3c7; color:#92400e; }
+  .badge-skip { background:#f1f5f9; color:#475569; }
+  .msg-bot { background:#1e293b; color:#e2e8f0; border-radius:0 12px 12px 12px; }
+  .msg-user { background:#0ea5e9; color:#fff; border-radius:12px 0 12px 12px; }
+  .stat-card { transition: transform 0.15s; }
+  .stat-card:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body class="min-h-screen py-10 px-4 grain">
+
+<!-- Header -->
+<div class="max-w-5xl mx-auto mb-10">
+  <div class="bg-gradient-to-br from-emerald-700 to-teal-800 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+    <div class="absolute inset-0 grain opacity-30"></div>
+    <div class="relative z-10">
+      <div class="flex items-center gap-3 mb-2">
+        <span class="text-3xl">🌿</span>
+        <span class="text-sm font-medium tracking-widest uppercase opacity-70">AL Consulting × Escollanos</span>
+      </div>
+      <h1 class="text-3xl font-bold mb-1">Reporte de Testeo — Bot Escollanos</h1>
+      <p class="opacity-70 text-sm">Testeo completo del Bot de Conversation AI · GHL SHARP CRM · 17 Jun 2026</p>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <span class="bg-white/10 rounded-lg px-3 py-1">Canal: WhatsApp + Panel "Pruebe su bot"</span>
+        <span class="bg-white/10 rounded-lg px-3 py-1">Bot ID: 475aDuzvsV4zAoP9sS1i</span>
+        <span class="bg-white/10 rounded-lg px-3 py-1">Location: G2337yViJeyv4qV2nxV6</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stats -->
+<div class="max-w-5xl mx-auto mb-10 grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="stat-card bg-white rounded-xl p-5 shadow-sm border border-slate-100 text-center">
+    <div class="text-4xl font-bold text-emerald-600 mb-1">13</div>
+    <div class="text-xs font-semibold text-emerald-700 uppercase tracking-wide">Correctos ✅</div>
+  </div>
+  <div class="stat-card bg-white rounded-xl p-5 shadow-sm border border-slate-100 text-center">
+    <div class="text-4xl font-bold text-red-500 mb-1">4</div>
+    <div class="text-xs font-semibold text-red-600 uppercase tracking-wide">Errores 🔴</div>
+  </div>
+  <div class="stat-card bg-white rounded-xl p-5 shadow-sm border border-slate-100 text-center">
+    <div class="text-4xl font-bold text-amber-500 mb-1">2</div>
+    <div class="text-xs font-semibold text-amber-600 uppercase tracking-wide">Incompletos 🟡</div>
+  </div>
+  <div class="stat-card bg-white rounded-xl p-5 shadow-sm border border-slate-100 text-center">
+    <div class="text-4xl font-bold text-slate-400 mb-1">1</div>
+    <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Sin Probar ⚠️</div>
+  </div>
+</div>
+
+<!-- Section 1: Transversales -->
+<div class="max-w-5xl mx-auto mb-10">
+  <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+    <span class="bg-emerald-100 text-emerald-700 rounded-lg px-3 py-1 text-sm">Parte 1</span>
+    Casos Transversales Críticos
+  </h2>
+
+  <div class="space-y-3">
+
+    <!-- T1 Cross-sell menopausia -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-01</span>
+            <span class="font-semibold text-slate-800">Cross-sell menopausia</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"busco algo para la menopausia"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Renobella es ideal para el equilibrio hormonal en menopausia. Como complemento, puede considerar R14 Quieta para el estrés y Klimakteran para síntomas más intensos. ¿Le gustaría saber precios o cómo se toman?
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Principal: Renobella ✅</div>
+          <div>Complemento: R14 + Klimakteran ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T2 Cross-sell tos -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-02</span>
+            <span class="font-semibold text-slate-800">Cross-sell tos / resfrío</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"tengo tos, ¿qué me recomienda?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Le recomiendo Jutussin (R8) para la tos + CurcuZin-C para fortalecer las defensas. Pulsatilla puede ayudar si tiene secreciones. ¿Desea saber precios o cómo tomarlos?
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Principal: Jutussin + CurcuZin-C ✅</div>
+          <div>No menciona Gripfektan ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T3 Envío Guayaquil -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-03</span>
+            <span class="font-semibold text-slate-800">Envío Guayaquil</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿hacen envíos a Guayaquil, al norte de la ciudad?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Sí, realizamos envíos gratis al norte de Guayaquil con mensajero propio. La entrega puede ser el mismo día o al día siguiente, según la hora del pedido. ¿Desea avanzar con su compra?
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Valida zona ✅</div>
+          <div>Mensajero propio ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T4 Envío resto país -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-04</span>
+            <span class="font-semibold text-slate-800">Envío resto del país (Ambato / Loja)</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿llegan a Ambato? ¿y a Loja?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Sí, realizamos envíos gratis a Ambato y Loja por Servientrega. El tiempo de entrega es de 24 a 48 horas laborables. ¿Desea que le ayude con su pedido?
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Servientrega ✅</div>
+          <div>Envío gratis ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T5 Pago tarjeta -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-05</span>
+            <span class="font-semibold text-slate-800">Pago con tarjeta / link</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"quiero pagar con tarjeta de crédito, ¿me pueden mandar un link de pago?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Perfecto… le derivo con un asesor que le arma el link de pago enseguida.
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Deriva a asesor ✅</div>
+          <div>No intenta mandar link ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T6 Contra entrega -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-06</span>
+            <span class="font-semibold text-slate-800">Pago contra entrega</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿aceptan pago contra entrega?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Aceptamos pago contra entrega únicamente en efectivo y solo en Quito, Guayaquil (zonas cubiertas) y Cuenca. En el resto del país, el pago debe hacerse antes del envío. ¿En qué ciudad desea recibir su pedido?
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Quito / GYE / Cuenca ✅</div>
+          <div>Resto: pago previo ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T7 Psicotrópico -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-07</span>
+            <span class="font-semibold text-slate-800">Psicotrópico (alprazolam)</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿puedo dejar mi alprazolam y reemplazarlo por algo natural?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Para dejar un medicamento debe hacerlo de la mano con su médico, siempre bajo su supervisión. Nuestro producto puede acompañar su tratamiento como adyuvante. Le derivo enseguida al asesor que sigue por ahí…
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Frase ética ✅</div>
+          <div>Deriva asesor ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T8 Receta médica -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-08</span>
+            <span class="font-semibold text-slate-800">Receta médica</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"tengo una receta médica, ¿me venden lo que dice?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Para recetas tenemos un número específico que las maneja. Le derivo enseguida al asesor que sigue por ahí…
+            <div class="mt-1 text-slate-400 text-xs italic">Human Handover condition triggered — Receta médica</div>
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Deriva asesor ✅</div>
+          <div>No lee receta ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- T9 Imagen rara -->
+    <div class="skip bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-center gap-2">
+        <span class="badge-skip text-xs font-semibold px-2 py-0.5 rounded-full">⚠️ SIN PROBAR</span>
+        <span class="text-xs text-slate-400 font-mono">T-09</span>
+        <span class="font-semibold text-slate-800">Imagen rara (foto aleatoria)</span>
+        <span class="text-xs text-slate-400 ml-2">— Solo testeable desde WhatsApp. Enviar foto manual y verificar derivación a asesor.</span>
+      </div>
+    </div>
+
+    <!-- T10 Registro sanitario -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">T-10</span>
+            <span class="font-semibold text-slate-800">Registro sanitario</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿tienen registro sanitario? ¿son legales?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            Todos nuestros productos cuentan con registro sanitario en Ecuador. Somos distribuidores exclusivos de las líneas que comercializamos. Si tiene alguna otra consulta sobre nuestros productos, con gusto le ayudo…
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Confirma registro ✅</div>
+          <div>Distribuidores exclusivos ✅</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Section 2: Productos -->
+<div class="max-w-5xl mx-auto mb-10">
+  <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+    <span class="bg-blue-100 text-blue-700 rounded-lg px-3 py-1 text-sm">Parte 2</span>
+    Productos Prioritarios 🟢
+  </h2>
+
+  <div class="space-y-3">
+
+    <!-- P1 R14 gotas vs tabletas -->
+    <div class="warn bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-warn text-xs font-semibold px-2 py-0.5 rounded-full">🟡 INCOMPLETO</span>
+            <span class="text-xs text-slate-400 font-mono">P-01</span>
+            <span class="font-semibold text-slate-800">R14 Quieta — gotas vs tabletas</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿cuál es la diferencia entre R14 gotas y R14 tabletas?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            La diferencia principal es la forma de administración. R14 gotas se toma disuelta en agua, mientras que las tabletas son sublinguales. Ambas sirven para insomnio, estrés y ansiedad. ¿Le gustaría saber cuál se adapta mejor a su caso?
+          </div>
+          <div class="mt-2 bg-amber-50 border border-amber-200 rounded-lg p-2 text-xs text-amber-800">
+            ⚠️ <strong>Falta:</strong> gotas = "sabor alicorado en agua" · tabletas = "bajo la lengua, sin sabor"
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Distinción base ✅</div>
+          <div>Sabor/sensación ❌</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P2 Lactibiane Tolerance -->
+    <div class="fail bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-fail text-xs font-semibold px-2 py-0.5 rounded-full">🔴 ERROR</span>
+            <span class="text-xs text-slate-400 font-mono">P-02</span>
+            <span class="font-semibold text-slate-800">Lactibiane Tolérance — precio + uso + contraindicaciones</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Preguntas: precio · para qué sirve · contraindicaciones</p>
+          <div class="space-y-2">
+            <div class="msg-bot text-xs p-3 max-w-xl">
+              <span class="text-slate-400 text-xs">Precio →</span> Lactibiane Tolérance tiene un valor de $36.85, pero actualmente está en oferta a <strong>$35.01</strong>, con envío gratis a nivel nacional.
+            </div>
+            <div class="msg-bot text-xs p-3 max-w-xl">
+              <span class="text-slate-400 text-xs">Uso →</span> Probiótico para colon irritable, enfermedad de Crohn, colitis, intolerancias alimenticias y protección de la microbiota intestinal. También ayuda a reforzar el sistema inmune.
+            </div>
+            <div class="msg-bot text-xs p-3 max-w-xl border border-red-500/30">
+              <span class="text-slate-400 text-xs">Contraindicaciones →</span> <span class="text-red-300">No tengo información específica sobre contraindicaciones de Lactibiane Tolérance. Si tiene alguna condición especial o está tomando otros medicamentos, le sugiero consultar con su médico.</span>
+            </div>
+          </div>
+          <div class="mt-2 bg-red-50 border border-red-200 rounded-lg p-2 text-xs text-red-800">
+            🔴 <strong>Error crítico:</strong> Lactibiane es de <strong>Pileje</strong> — SÍ tiene contraindicaciones: <em>embarazo, lactancia y alergia al componente</em>. El bot responde como si no las tuviera.
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Precio $35.01 ✅</div>
+          <div>Uso ✅</div>
+          <div>Contraindicaciones ❌</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P3 Drenatox -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">P-03</span>
+            <span class="font-semibold text-slate-800">Drenatox — precio + uso + combo Alcachofa</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Preguntas: precio · uso · combo Alcachofa</p>
+          <div class="space-y-2">
+            <div class="msg-bot text-xs p-3 max-w-xl">
+              <span class="text-slate-400 text-xs">Precio →</span> El Drenatox tiene un precio de <strong>$40.00</strong> e incluye envío gratis a nivel nacional, excepto Galápagos.
+            </div>
+            <div class="msg-bot text-xs p-3 max-w-xl">
+              <span class="text-slate-400 text-xs">Uso + combo →</span> Drenatox es un kit homeopático para desintoxicar y depurar el organismo, ideal para detox, colesterol alto o bajar de peso. Sí, existe el <strong>Kit Drenatox + Alcachofa</strong>, que potencia el efecto detox y ayuda con saciedad.
+            </div>
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Precio $40 ✅</div>
+          <div>Uso ✅</div>
+          <div>Kit Alcachofa ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P4 Metafat -->
+    <div class="fail bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-fail text-xs font-semibold px-2 py-0.5 rounded-full">🔴 ERROR</span>
+            <span class="text-xs text-slate-400 font-mono">P-04</span>
+            <span class="font-semibold text-slate-800">Metafat — precio + uso</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿cuánto cuesta el Metafat y para qué sirve?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl border border-red-500/30">
+            Metafat es ideal para apoyar la pérdida de peso, activar el metabolismo de las grasas y mejorar la digestión. Incluye L-carnitina, alcachofa, cromo y vitamina B6. <span class="text-red-300">El precio se lo confirmo enseguida.</span> ¿Desea que le ayude con el proceso de compra o tiene otra consulta?
+          </div>
+          <div class="mt-2 bg-red-50 border border-red-200 rounded-lg p-2 text-xs text-red-800">
+            🔴 <strong>El bot evade el precio</strong> — responde "se lo confirmo enseguida" en lugar de dar el valor. El precio no está cargado en la KB o el campo está vacío.
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Precio ❌ (evasivo)</div>
+          <div>Uso ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P5 VitalMen -->
+    <div class="fail bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-fail text-xs font-semibold px-2 py-0.5 rounded-full">🔴 ERROR</span>
+            <span class="text-xs text-slate-400 font-mono">P-05</span>
+            <span class="font-semibold text-slate-800">VitalMen — precio ($15) + uso + combo Vita-C</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿cuánto cuesta el VitalMen y para qué sirve? ¿hay combo con Vita-C?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl border border-red-500/30">
+            VitalMen es un suplemento para la salud hormonal masculina, energía y bienestar reproductivo (zinc, selenio, maca negra, vitamina E, L-arginina). <span class="text-red-300">El precio se lo confirmo enseguida. No tenemos combo directo con Vita-C</span>, pero puede complementar con CurcuZin-C para defensas.
+          </div>
+          <div class="mt-2 bg-red-50 border border-red-200 rounded-lg p-2 text-xs text-red-800">
+            🔴 <strong>Dos errores:</strong> (1) evade precio (esperado <strong>$15</strong>) · (2) niega combo Vita-C, que según catálogo sí existe
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Precio ❌ (evade)</div>
+          <div>Uso ✅</div>
+          <div>Combo Vita-C ❌</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P6 Renobella -->
+    <div class="fail bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-fail text-xs font-semibold px-2 py-0.5 rounded-full">🔴 ERROR</span>
+            <span class="text-xs text-slate-400 font-mono">P-06</span>
+            <span class="font-semibold text-slate-800">Renobella — precio ($15) + menopausia + combo R14/Klimakteran</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿cuánto cuesta la Renobella? ¿sirve para la menopausia? ¿qué complementos hay?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl border border-red-500/30">
+            Renobella es ideal para apoyar el equilibrio hormonal y la vitalidad femenina, especialmente en menopausia. <span class="text-red-300">El precio incluye envío gratis a todo el país.</span> Como complemento, puede considerar CurcuZin-C para defensas o el combo R14 Quieta + Renobella si hay insomnio o ansiedad. <span class="text-amber-300">¿Le gustaría saber más sobre algún complemento en particular?</span>
+          </div>
+          <div class="mt-2 bg-red-50 border border-red-200 rounded-lg p-2 text-xs text-red-800">
+            🔴 Evade precio (esperado <strong>$15</strong>) · 🟡 Falta <strong>Klimakteran</strong> como complemento (menciona CurcuZin-C pero no Klimakteran)
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Precio ❌ (evade)</div>
+          <div>Menopausia ✅</div>
+          <div>Klimakteran ❌</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P7 CurcuZin-C -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">P-07</span>
+            <span class="font-semibold text-slate-800">CurcuZin-C — precio + uso</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿cuánto cuesta CurcuZin-C y para qué sirve?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            CurcuZin-C está en promoción a <strong>$15</strong> (precio habitual $20), incluye envío gratis a todo el país. Sirve para fortalecer el sistema inmunológico y ayudar a prevenir infecciones.
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>Precio $15 ✅</div>
+          <div>Sistema inmune ✅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- P8 Combo R14 + Tolerance -->
+    <div class="pass bg-white rounded-xl p-4 shadow-sm">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="badge-pass text-xs font-semibold px-2 py-0.5 rounded-full">✅ CORRECTO</span>
+            <span class="text-xs text-slate-400 font-mono">P-08</span>
+            <span class="font-semibold text-slate-800">Combo R14 + Lactibiane Tolérance — precio exacto</span>
+          </div>
+          <p class="text-xs text-slate-500 mb-2">Pregunta: <em>"¿cuánto cuesta el combo R14 + Lactibiane Tolérance?"</em></p>
+          <div class="msg-bot text-xs p-3 max-w-xl">
+            El combo R14 Quieta + Lactibiane Tolérance tiene un valor de <strong>$57.85</strong>. El envío es gratis a nivel nacional. ¿Desea que le cuente más sobre cómo funciona cada producto o le ayudo con el proceso de compra?
+          </div>
+        </div>
+        <div class="text-right text-xs text-slate-400 shrink-0">
+          <div>$57.85 exacto ✅</div>
+          <div>(no $36) ✅</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Acciones correctivas -->
+<div class="max-w-5xl mx-auto mb-10">
+  <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+    <span class="bg-red-100 text-red-700 rounded-lg px-3 py-1 text-sm">Acciones</span>
+    Correctivas Prioritarias para Gaby / Mela
+  </h2>
+
+  <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 border-b border-slate-100">
+        <tr>
+          <th class="text-left p-4 text-xs font-semibold text-slate-500 uppercase tracking-wide w-8">#</th>
+          <th class="text-left p-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">Problema</th>
+          <th class="text-left p-4 text-xs font-semibold text-slate-500 uppercase tracking-wide">Qué hacer</th>
+          <th class="text-left p-4 text-xs font-semibold text-slate-500 uppercase tracking-wide w-28">Prioridad</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-50">
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 text-slate-400 font-mono text-xs">1</td>
+          <td class="p-4"><strong>Precios de Metafat, VitalMen y Renobella</strong> — bot responde "se lo confirmo enseguida" en lugar del valor</td>
+          <td class="p-4 text-slate-600">Abrir <em>Entrenamiento del bot → Knowledge Base</em> y cargar el precio de cada producto. O editarlos en el prompt de "Información adicional".</td>
+          <td class="p-4"><span class="badge-fail text-xs px-2 py-0.5 rounded-full">🔴 Urgente</span></td>
+        </tr>
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 text-slate-400 font-mono text-xs">2</td>
+          <td class="p-4"><strong>VitalMen + Vita-C combo</strong> — bot dice explícitamente "no tenemos combo directo"</td>
+          <td class="p-4 text-slate-600">Entrenar con: "VitalMen se complementa con Vita-C 15 Forte para mayor energía y defensas (combo disponible)".</td>
+          <td class="p-4"><span class="badge-fail text-xs px-2 py-0.5 rounded-full">🔴 Urgente</span></td>
+        </tr>
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 text-slate-400 font-mono text-xs">3</td>
+          <td class="p-4"><strong>Lactibiane Tolérance contraindicaciones</strong> — bot no las conoce (Pileje SÍ tiene)</td>
+          <td class="p-4 text-slate-600">Entrenar: "Lactibiane (Pileje): contraindicado en embarazo, lactancia y alergia al componente". Distinguir de Dr. Reckeweg (sin contraindicaciones).</td>
+          <td class="p-4"><span class="badge-fail text-xs px-2 py-0.5 rounded-full">🔴 Urgente</span></td>
+        </tr>
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 text-slate-400 font-mono text-xs">4</td>
+          <td class="p-4"><strong>Renobella complementos</strong> — falta Klimakteran (solo menciona R14 y CurcuZin-C)</td>
+          <td class="p-4 text-slate-600">Agregar al cross-sell de menopausia: Renobella → R14 Quieta + Klimakteran.</td>
+          <td class="p-4"><span class="badge-warn text-xs px-2 py-0.5 rounded-full">🟡 Media</span></td>
+        </tr>
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 text-slate-400 font-mono text-xs">5</td>
+          <td class="p-4"><strong>R14 gotas vs tabletas — detalle sabor</strong> — describe la diferencia pero falta el detalle de experiencia</td>
+          <td class="p-4 text-slate-600">Entrenar: "Gotas: sabor alicorado, se disuelven en agua · Tabletas: sin sabor, bajo la lengua (sublingual)".</td>
+          <td class="p-4"><span class="badge-warn text-xs px-2 py-0.5 rounded-full">🟡 Media</span></td>
+        </tr>
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 text-slate-400 font-mono text-xs">6</td>
+          <td class="p-4"><strong>Imagen rara (foto aleatoria)</strong> — no testeable en panel GHL</td>
+          <td class="p-4 text-slate-600">Enviar una foto cualquiera por WhatsApp y verificar que el bot derive al asesor sin intentar interpretar la imagen.</td>
+          <td class="p-4"><span class="badge-skip text-xs px-2 py-0.5 rounded-full">⚠️ Manual</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="max-w-5xl mx-auto text-center text-xs text-slate-400 pb-8">
+  Generado por AL Consulting · Testeo automatizado vía WhatsApp + GHL "Pruebe su bot" · 17 Jun 2026
+</div>
+
+</body>
+</html>
