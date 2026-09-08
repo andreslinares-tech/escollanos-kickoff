@@ -1,0 +1,324 @@
+<title>Escollanos · Embudo garantía</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--bd:#30363d;--tx:#e6edf3;--mut:#8b949e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;padding:40px 24px 80px}
+.wrap{max-width:1100px;margin:0 auto}
+h1{font-size:28px;margin:0 0 6px;letter-spacing:-.5px}
+.sub{color:var(--mut);margin:0 0 28px;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:32px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px 18px}
+.kpi .n{font-size:30px;font-weight:700;letter-spacing:-1px}
+.kpi .l{color:var(--mut);font-size:12.5px;margin-top:4px;line-height:1.5}
+h2{font-size:19px;margin:38px 0 12px;letter-spacing:-.3px}
+h3{font-size:15.5px;margin:22px 0 10px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--bd);border-radius:11px;overflow:hidden}
+th,td{text-align:left;padding:9px 12px;font-size:13.5px;border-bottom:1px solid #21262d}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+tr:last-child td{border-bottom:none}
+.mut{color:var(--mut);font-size:12px}
+.warn{color:#fbbf24;font-size:11.5px}
+.tag{font-size:10.5px;border:1px solid var(--bd);border-radius:20px;padding:1px 7px;margin-left:6px}
+.wk-row{display:grid;grid-template-columns:190px 1fr 220px;gap:12px;align-items:center;padding:5px 0;font-size:12.5px}
+.wk-bar-wrap{background:#0d1117;border:1px solid var(--bd);border-radius:6px;height:16px;overflow:hidden}
+.wk-bar{height:100%}
+.finding{background:var(--card);border:1px solid var(--bd);border-left:3px solid #f87171;border-radius:10px;padding:16px 18px;margin-bottom:12px}
+.finding.w{border-left-color:#fbbf24} .finding.g{border-left-color:#34d399}
+.finding h4{margin:0 0 6px;font-size:14.5px}
+.finding p{margin:0;color:var(--mut);font-size:13.5px}
+.abgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.abcard{background:var(--card);border:1px solid var(--bd);border-radius:11px;padding:16px 18px}
+.abcard h4{margin:0 0 10px}
+.abcard .n{font-size:26px;font-weight:700}
+code{background:#0d1117;border:1px solid var(--bd);border-radius:4px;padding:1px 5px;font-size:12.5px}
+@media(max-width:760px){.wk-row{grid-template-columns:1fr} .abgrid{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<h1>Escollanos · embudo con números por período</h1>
+<p class="sub">Fuente: GHL Conversations API, 28339 contactos con inbound de WhatsApp entre 01-abr y hoy · generado 2026-09-08T09:49:50.083301-05:00</p>
+<p class="mut" style="color:#a78bfa">El Agente IA Pro está apagado desde el 5-sep-2026 17:35 a pedido de la clienta (no reactivar). P3 mide solo la ventana en que corrió activo (31-ago 16:49 → 5-sep 17:35); P4 mide el período posterior, sin bot.</p>
+
+<div class="kpis">
+<div class="kpi">
+  <div class="n" style="color:#8b949e">6.33%</div>
+  <div class="l">P0 · Pre-bot<br>01-abr → 23-jun<br>13101 leads · 829 ventas</div>
+</div>
+<div class="kpi">
+  <div class="n" style="color:#60a5fa">6.09%</div>
+  <div class="l">P1 · Bot GHL<br>24-jun → apagado<br>10797 leads · 658 ventas</div>
+</div>
+<div class="kpi">
+  <div class="n" style="color:#f87171">10.22%</div>
+  <div class="l">P2 · Sin bot<br>apagado → 31-ago 16:49<br>2417 leads · 247 ventas</div>
+</div>
+<div class="kpi">
+  <div class="n" style="color:#34d399">7.88%</div>
+  <div class="l">P3 · Agente IA Pro<br>31-ago 16:49 → 5-sep 17:35<br>1269 leads · 100 ventas</div>
+</div>
+<div class="kpi">
+  <div class="n" style="color:#a78bfa">6.36%</div>
+  <div class="l">P4 · Post-apagado<br>5-sep 17:35 → hoy (sin bot)<br>755 leads · 48 ventas</div>
+</div>
+</div>
+
+<h2>Tasa de cierre por período</h2>
+<p class="mut">Unidad = contacto con ≥1 mensaje entrante de WhatsApp en el período. Venta = mensaje saliente de un asesor humano con número de orden o frase de confirmación de pedido. Períodos con pocos leads están marcados.</p>
+<table>
+<tr><th>Período</th><th>Leads</th><th>Leads de campaña</th><th>Ventas</th><th>Monto (ref.)</th><th>Tasa de cierre</th><th>Tasa s/ leads de campaña</th></tr>
+<tr>
+  <td><b>P0</b> · Pre-bot<br><span class="mut">01-abr → 23-jun</span></td>
+  <td>13101</td>
+  <td>12386</td>
+  <td>829</td>
+  <td>$4,073.70</td>
+  <td><b>6.33%</b></td>
+  <td>6.69%</td>
+</tr>
+<tr>
+  <td><b>P1</b> · Bot GHL<br><span class="mut">24-jun → apagado</span></td>
+  <td>10797</td>
+  <td>10342</td>
+  <td>658</td>
+  <td>$3,850.22</td>
+  <td><b>6.09%</b></td>
+  <td>6.36%</td>
+</tr>
+<tr>
+  <td><b>P2</b> · Sin bot<br><span class="mut">apagado → 31-ago 16:49</span></td>
+  <td>2417</td>
+  <td>2033</td>
+  <td>247</td>
+  <td>$1,203.13</td>
+  <td><b>10.22%</b></td>
+  <td>12.15%</td>
+</tr>
+<tr>
+  <td><b>P3</b> · Agente IA Pro<br><span class="mut">31-ago 16:49 → 5-sep 17:35</span></td>
+  <td>1269</td>
+  <td>1119</td>
+  <td>100</td>
+  <td>$264.98</td>
+  <td><b>7.88%</b></td>
+  <td>8.94%</td>
+</tr>
+<tr>
+  <td><b>P4</b> · Post-apagado<br><span class="mut">5-sep 17:35 → hoy (sin bot)</span></td>
+  <td>755</td>
+  <td>615</td>
+  <td>48</td>
+  <td>$0.00</td>
+  <td><b>6.36%</b></td>
+  <td>7.8%</td>
+</tr>
+</table>
+
+<h2>Fecha de apagado del bot GHL (P1 → P2)</h2>
+<p>Derivada del dato: último mensaje saliente clasificado como <b>BOT</b> (enviado por API sin usuario humano asociado, <code>source=app/api</code> y <code>userId</code> vacío) en conversaciones sin el tag <code>agente-ia-pro</code>, anterior al 31-ago-2026 16:49 (arranque documentado de Agente IA Pro, ver chat grupal).</p>
+<p style="font-size:20px;font-weight:700;color:#60a5fa">2026-08-12T11:57:44.854000-05:00</p>
+
+<h2>Serie semanal</h2>
+<p class="mut">Barra proporcional a leads de la semana. Color = período.</p>
+<div class="wk-row">
+  <div class="wk-label">2026-03-30 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:3%;background:#8b949e"></div></div>
+  <div class="wk-val">91 leads · 29 ventas · <b>31.87%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-04-06 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:46%;background:#8b949e"></div></div>
+  <div class="wk-val">1642 leads · 142 ventas · <b>8.65%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-04-13 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:42%;background:#8b949e"></div></div>
+  <div class="wk-val">1522 leads · 146 ventas · <b>9.59%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-04-20 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:39%;background:#8b949e"></div></div>
+  <div class="wk-val">1395 leads · 101 ventas · <b>7.24%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-04-27 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:21%;background:#8b949e"></div></div>
+  <div class="wk-val">757 leads · 46 ventas · <b>6.08%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-05-04 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:39%;background:#8b949e"></div></div>
+  <div class="wk-val">1415 leads · 66 ventas · <b>4.66%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-05-11 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:37%;background:#8b949e"></div></div>
+  <div class="wk-val">1324 leads · 76 ventas · <b>5.74%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-05-18 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:34%;background:#8b949e"></div></div>
+  <div class="wk-val">1243 leads · 59 ventas · <b>4.75%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-05-25 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:12%;background:#8b949e"></div></div>
+  <div class="wk-val">418 leads · 18 ventas · <b>4.31%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-06-01 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:26%;background:#8b949e"></div></div>
+  <div class="wk-val">925 leads · 53 ventas · <b>5.73%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-06-08 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:28%;background:#8b949e"></div></div>
+  <div class="wk-val">1014 leads · 40 ventas · <b>3.94%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-06-15 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:26%;background:#8b949e"></div></div>
+  <div class="wk-val">927 leads · 41 ventas · <b>4.42%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-06-22 <span class="tag" style="border-color:#60a5fa66;color:#60a5fa">P1</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:44%;background:#60a5fa"></div></div>
+  <div class="wk-val">1584 leads · 125 ventas · <b>7.89%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-06-22 <span class="tag" style="border-color:#8b949e66;color:#8b949e">P0</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:12%;background:#8b949e"></div></div>
+  <div class="wk-val">428 leads · 12 ventas · <b>2.8%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-06-29 <span class="tag" style="border-color:#60a5fa66;color:#60a5fa">P1</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:100%;background:#60a5fa"></div></div>
+  <div class="wk-val">3607 leads · 146 ventas · <b>4.05%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-07-06 <span class="tag" style="border-color:#60a5fa66;color:#60a5fa">P1</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:41%;background:#60a5fa"></div></div>
+  <div class="wk-val">1464 leads · 94 ventas · <b>6.42%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-07-13 <span class="tag" style="border-color:#60a5fa66;color:#60a5fa">P1</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:41%;background:#60a5fa"></div></div>
+  <div class="wk-val">1471 leads · 108 ventas · <b>7.34%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-07-20 <span class="tag" style="border-color:#60a5fa66;color:#60a5fa">P1</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:26%;background:#60a5fa"></div></div>
+  <div class="wk-val">928 leads · 75 ventas · <b>8.08%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-07-27 <span class="tag" style="border-color:#60a5fa66;color:#60a5fa">P1</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:14%;background:#60a5fa"></div></div>
+  <div class="wk-val">516 leads · 39 ventas · <b>7.56%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-08-03 <span class="tag" style="border-color:#60a5fa66;color:#60a5fa">P1</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:26%;background:#60a5fa"></div></div>
+  <div class="wk-val">930 leads · 58 ventas · <b>6.24%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-08-10 <span class="tag" style="border-color:#60a5fa66;color:#60a5fa">P1</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:8%;background:#60a5fa"></div></div>
+  <div class="wk-val">297 leads · 13 ventas · <b>4.38%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-08-10 <span class="tag" style="border-color:#f8717166;color:#f87171">P2</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:8%;background:#f87171"></div></div>
+  <div class="wk-val">290 leads · 54 ventas · <b>18.62%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-08-17 <span class="tag" style="border-color:#f8717166;color:#f87171">P2</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:28%;background:#f87171"></div></div>
+  <div class="wk-val">1021 leads · 115 ventas · <b>11.26%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-08-24 <span class="tag" style="border-color:#f8717166;color:#f87171">P2</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:29%;background:#f87171"></div></div>
+  <div class="wk-val">1055 leads · 75 ventas · <b>7.11%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-08-31 <span class="tag" style="border-color:#34d39966;color:#34d399">P3</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:35%;background:#34d399"></div></div>
+  <div class="wk-val">1269 leads · 100 ventas · <b>7.88%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-08-31 <span class="tag" style="border-color:#a78bfa66;color:#a78bfa">P4</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:11%;background:#a78bfa"></div></div>
+  <div class="wk-val">396 leads · 29 ventas · <b>7.32%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-08-31 <span class="tag" style="border-color:#f8717166;color:#f87171">P2</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:2%;background:#f87171"></div></div>
+  <div class="wk-val">51 leads · 3 ventas · <b>5.88%</b></div>
+</div>
+<div class="wk-row">
+  <div class="wk-label">2026-09-07 <span class="tag" style="border-color:#a78bfa66;color:#a78bfa">P4</span></div>
+  <div class="wk-bar-wrap"><div class="wk-bar" style="width:10%;background:#a78bfa"></div></div>
+  <div class="wk-val">359 leads · 19 ventas · <b>5.29%</b></div>
+</div>
+
+
+<h2>Primera respuesta por autor (todo el período)</h2>
+<p class="mut">Clasificación verificada contra datos reales: WORKFLOW = <code>source=workflow</code> (plantilla automática) · BOT = <code>source=app/api</code> sin <code>userId</code> (API sin humano) · HUMANO = <code>source=app/api</code> con <code>userId</code> de un asesor real. No depende de a quién esté asignada la conversación en la UI de GHL.</p>
+<table>
+<tr><th>Autor</th><th>N° de casos</th><th>Mediana de demora</th><th>% respondidos &lt;5 min</th></tr>
+<tr><td>WORKFLOW</td><td>27330</td>
+<td>0.6 min</td>
+<td>99.3%</td></tr>
+<tr><td>BOT</td><td>3</td>
+<td>0.2 min</td>
+<td>100.0%</td></tr>
+<tr><td>HUMANO</td><td>984</td>
+<td>22.2 min</td>
+<td>34.1%</td></tr>
+</table>
+<p class="mut">Nota: WORKFLOW domina como "primera respuesta" (la plantilla automática de saludo dispara casi siempre a los segundos del inbound). BOT y HUMANO casi nunca ganan la carrera por ser los primeros en contestar — su respuesta suele ser la segunda o tercera del hilo, no la primera. Esto es esperable dado el diseño (workflow siempre corre antes), no un error de conteo.</p>
+
+<h2>Comparación A/B — ventana real Agente IA Pro (31-ago 16:49 → 5-sep 17:35), con tag <code>agente-ia-pro</code> vs sin tag</h2>
+<p class="mut">Recalculada dentro de P3 únicamente (la ventana real en que el bot corrió activo, 6 días). Mismo canal, mismas campañas. Es la comparación más limpia que hay en los datos.</p>
+<div class="abgrid">
+<div class="abcard">
+<h4 style="color:#34d399">Con tag agente-ia-pro (n=120)</h4>
+<div class="n">12.5%</div>
+<p class="mut">tasa de cierre · 15 ventas</p>
+<p class="mut">intención de compra: 21.67% · mediana 1ª respuesta: 0.6 min</p>
+</div>
+<div class="abcard">
+<h4 style="color:#f87171">Sin tag agente-ia-pro (n=1149)</h4>
+<div class="n">7.4%</div>
+<p class="mut">tasa de cierre · 85 ventas</p>
+<p class="mut">intención de compra: 13.32% · mediana 1ª respuesta: 0.6 min</p>
+</div>
+</div>
+<p class="mut">Contactos con tag <code>agente-ia-pro</code> que escribieron en P4 (post-apagado, 5-sep 17:35 → hoy): <b>69</b> de 755 leads de P4. Esos 69 no recibieron respuesta del bot pese al tag — el bot ya estaba apagado — y quedan excluidos del A/B de arriba (que solo usa P3).</p>
+
+<h2>Handoff y conversaciones muertas</h2>
+<table>
+<tr><th>Métrica</th><th>Valor</th></tr>
+<tr><td>Contactos con handoff (tag <code>handoff_*</code>)</td><td>97 de 28339</td></tr>
+<tr><td>Conversaciones muertas (último mensaje inbound, &gt;24h sin respuesta)</td><td>488 de 28339</td></tr>
+</table>
+
+<h2>Tablero "REDES SOCIALES" de la cuenta</h2>
+<p>Ver <code>_work/embudo-garantia/tablero-redes-sociales.md</code> para el detalle completo. Resumen: el pipeline de oportunidades <b>dejó de recibir registros nuevos desde el 10-jun-2026</b> — por eso septiembre marca $0 en ventas cerradas, no porque falte el monto. El cliente no tiene medición propia de conversión desde antes del cambio de bot.</p>
+
+<h2>Lectura honesta de los datos</h2>
+<div class="finding w">
+<h4>P0 y P2 son los dos períodos sin bot — y no se parecen entre sí</h4>
+<p>Si "sin bot" explicara la diferencia, P0 (pre-bot, 6.33%) y P2 (sin bot, 10.22%) deberían dar tasas de cierre parecidas — no lo hacen. La brecha entre los dos períodos sin bot es más grande que la brecha entre cualquier período con bot y cualquier período sin bot. Eso apunta a que estacionalidad, campañas o el equipo humano pesan más que la presencia del bot en la tasa de cierre — hay que decirlo aunque no ayude a la narrativa de "el bot no perjudica".</p>
+</div>
+<div class="finding">
+<h4>Esto NO es un baseline limpio</h4>
+<p>Nunca se midió conversión antes de esta reconstrucción. Los números de P0 (pre-bot) salen de reconstruir después de los hechos con la misma regla que P1-P3, así que son comparables entre sí, pero no fueron diseñados como experimento controlado — hay estacionalidad, cambios de campaña y de precios que no están aislados acá.</p>
+</div>
+<div class="finding w">
+<h4>El pipeline de GHL no sirve como fuente de verdad de ventas</h4>
+<p>Dejó de recibir oportunidades nuevas el 10-jun-2026. Toda venta de este reporte sale de leer los mensajes de WhatsApp (número de orden o frase de confirmación de un asesor humano), no del pipeline. Si el cliente muestra el pipeline como evidencia de que "no hay ventas", el pipeline está desactualizado desde antes del cambio de bot — no mide nada desde junio.</p>
+</div>
+<div class="finding">
+<h4>Ticket promedio: dato de referencia, no auditado</h4>
+<p>El monto se extrae con una expresión regular sobre el mensaje de confirmación de pedido cuando aparece un monto con signo $. No todos los mensajes de confirmación traen el monto en ese formato, así que el promedio de <code>resumen-semanal.csv</code> es un piso, no el número real — está marcado como referencial en el HTML y no debería citarse como cifra auditada sin revisión manual de una muestra.</p>
+</div>
+</div>
